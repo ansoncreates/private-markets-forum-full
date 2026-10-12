@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bar chart variants — The Private Markets Forum</title>
+<meta name="description" content="Checking page: ranked bar variants at the reading-column width with scroll reveal.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- the system, unforked -->
+<link rel="stylesheet" href="../Brand%20Foundations/brand.css">
+</head>
+<body>
+
+<!-- brand.js expects a nav to exist; this is the minimum it needs -->
+<header class="nav" id="site-nav" style="display:none">
+  <div class="nav__inner">
+    <nav class="nav__links" aria-label="Sections"><a class="nav__link" href="#top">Top</a></nav>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
+      <span class="nav__bar"></span><span class="nav__bar"></span><span class="nav__bar"></span>
+    </button>
+  </div>
+  <div class="nav__panel" id="nav-panel"><div class="nav__panel-inner"></div></div>
+</header>
+
+<main id="top">
+
+  <!-- A — the current ranked bar, now at the reading-column width with reveal -->
+  <section class="forces">
+    <div class="forces__inner">
+
+      <div class="forces__intro">
+        <span class="pill pill--ice pill--md">Variant A</span>
+        <h2 class="forces__title">Ranked bar, label inline.</h2>
+        <div class="forces__prose">
+          <p>The existing <code>.chart__rows</code>, unchanged except for the two new opt-in classes: <code>is-narrow</code> for the centred reading column (<code>--measure-prose</code>, 335 → 960), <code>chart--reveal</code> for the scroll animation. Scroll down and back up — the reveal runs once per chart and does not re-trigger.</p>
+        </div>
+      </div>
+
+      <div class="chart chart--reveal is-narrow">
+        <div class="chart__head">
+          <h3 class="chart__title">Where manual work concentrates</h3>
+          <p class="chart__note">Weighted score, top ten areas. Valuation and data ingestion carry the heaviest manual burden.</p>
+        </div>
+        <div class="chart__rows">
+          <div class="chart__row"><span class="chart__row-label">Valuation / mark-to-market</span><div class="chart__track"><div class="chart__fill" style="--v:100" tabindex="0" data-tip="<b>Valuation / mark-to-market</b> · 40"></div></div><span class="chart__row-value">40</span></div>
+          <div class="chart__row"><span class="chart__row-label">Data ingestion / spreading</span><div class="chart__track"><div class="chart__fill" style="--v:95" tabindex="0" data-tip="<b>Data ingestion / spreading</b> · 38"></div></div><span class="chart__row-value">38</span></div>
+          <div class="chart__row"><span class="chart__row-label">Cross-system integrations</span><div class="chart__track"><div class="chart__fill" style="--v:78" tabindex="0" data-tip="<b>Cross-system integrations</b> · 31"></div></div><span class="chart__row-value">31</span></div>
+          <div class="chart__row"><span class="chart__row-label">LP reporting / ODD response</span><div class="chart__track"><div class="chart__fill" style="--v:75" tabindex="0" data-tip="<b>LP reporting / ODD response</b> · 30"></div></div><span class="chart__row-value">30</span></div>
+          <div class="chart__row"><span class="chart__row-label">Reconciliation</span><div class="chart__track"><div class="chart__fill" style="--v:55" tabindex="0" data-tip="<b>Reconciliation</b> · 22"></div></div><span class="chart__row-value">22</span></div>
+          <div class="chart__row"><span class="chart__row-label">Due diligence / IC memo</span><div class="chart__track"><div class="chart__fill" style="--v:42" tabindex="0" data-tip="<b>Due diligence / IC memo</b> · 17"></div></div><span class="chart__row-value">17</span></div>
+          <div class="chart__row"><span class="chart__row-label">Covenant compliance</span><div class="chart__track"><div class="chart__fill" style="--v:35" tabindex="0" data-tip="<b>Covenant compliance</b> · 14"></div></div><span class="chart__row-value">14</span></div>
+          <div class="chart__row"><span class="chart__row-label">Deal pipeline / CRM</span><div class="chart__track"><div class="chart__fill" style="--v:32" tabindex="0" data-tip="<b>Deal pipeline / CRM</b> · 13"></div></div><span class="chart__row-value">13</span></div>
+          <div class="chart__row"><span class="chart__row-label">Monitoring / alerts</span><div class="chart__track"><div class="chart__fill" style="--v:30" tabindex="0" data-tip="<b>Monitoring / alerts</b> · 12"></div></div><span class="chart__row-value">12</span></div>
+          <div class="chart__row"><span class="chart__row-label">Portfolio accounting / ABOR</span><div class="chart__track"><div class="chart__fill" style="--v:28" tabindex="0" data-tip="<b>Portfolio accounting / ABOR</b> · 11"></div></div><span class="chart__row-value">11</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- B — the new variant: label above, serif figure, thin pill bar -->
+  <section class="intro">
+    <div class="intro__content">
+      <span class="pill pill--ice pill--md">Variant B</span>
+      <h2 class="intro__title">Ranked bar, label above.</h2>
+      <div class="intro__body-group">
+        <p class="intro__lead">Same markup as variant A. The only change is <code>chart__rows--stacked</code> on the rows container, so tooltips, focus order and the reveal all carry over untouched.</p>
+        <div class="intro__body">
+          <p>Label sits above the bar at body size. The figure takes the display serif at 24/32, right-aligned on the label's baseline. The bar drops to 6px with pill caps, filled with <code>--data-1</code> — <code>#133EEC</code> on light plates — over the lightest step of the same hue, <code>--data-s1</code>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="forces">
+    <div class="forces__inner">
+
+      <div class="chart chart--reveal is-narrow">
+        <div class="chart__head">
+          <h3 class="chart__title">Where manual work concentrates</h3>
+          <p class="chart__note">Weighted score, top ten areas. Same data as variant A.</p>
+        </div>
+        <div class="chart__rows chart__rows--stacked">
+          <div class="chart__row"><span class="chart__row-label">Valuation / mark-to-market process</span><div class="chart__track"><div class="chart__fill" style="--v:100" tabindex="0" data-tip="<b>Valuation / mark-to-market process</b> · 40"></div></div><span class="chart__row-value">40</span></div>
+          <div class="chart__row"><span class="chart__row-label">Data ingestion / spreading / extraction</span><div class="chart__track"><div class="chart__fill" style="--v:95" tabindex="0" data-tip="<b>Data ingestion / spreading / extraction</b> · 38"></div></div><span class="chart__row-value">38</span></div>
+          <div class="chart__row"><span class="chart__row-label">Cross-system integrations / data stitching</span><div class="chart__track"><div class="chart__fill" style="--v:78" tabindex="0" data-tip="<b>Cross-system integrations / data stitching</b> · 31"></div></div><span class="chart__row-value">31</span></div>
+          <div class="chart__row"><span class="chart__row-label">LP reporting / ODD response process</span><div class="chart__track"><div class="chart__fill" style="--v:75" tabindex="0" data-tip="<b>LP reporting / ODD response process</b> · 30"></div></div><span class="chart__row-value">30</span></div>
+          <div class="chart__row"><span class="chart__row-label">Reconciliation (cash, payments, positions)</span><div class="chart__track"><div class="chart__fill" style="--v:55" tabindex="0" data-tip="<b>Reconciliation (cash, payments, positions)</b> · 22"></div></div><span class="chart__row-value">22</span></div>
+          <div class="chart__row"><span class="chart__row-label">Due diligence / IC memo workflow</span><div class="chart__track"><div class="chart__fill" style="--v:42" tabindex="0" data-tip="<b>Due diligence / IC memo workflow</b> · 17"></div></div><span class="chart__row-value">17</span></div>
+          <div class="chart__row"><span class="chart__row-label">Covenant compliance workflow</span><div class="chart__track"><div class="chart__fill" style="--v:35" tabindex="0" data-tip="<b>Covenant compliance workflow</b> · 14"></div></div><span class="chart__row-value">14</span></div>
+          <div class="chart__row"><span class="chart__row-label">Deal pipeline / CRM / coverage tracking</span><div class="chart__track"><div class="chart__fill" style="--v:32" tabindex="0" data-tip="<b>Deal pipeline / CRM / coverage tracking</b> · 13"></div></div><span class="chart__row-value">13</span></div>
+          <div class="chart__row"><span class="chart__row-label">Monitoring / alerts / exceptions</span><div class="chart__track"><div class="chart__fill" style="--v:30" tabindex="0" data-tip="<b>Monitoring / alerts / exceptions</b> · 12"></div></div><span class="chart__row-value">12</span></div>
+          <div class="chart__row"><span class="chart__row-label">Portfolio accounting / ABOR</span><div class="chart__track"><div class="chart__fill" style="--v:28" tabindex="0" data-tip="<b>Portfolio accounting / ABOR</b> · 11"></div></div><span class="chart__row-value">11</span></div>
+        </div>
+        <p class="chart__source">Weighted score assigns 3 points for a #1 ranking, 2 for #2 and 1 for #3.</p>
+      </div>
+
+      <div class="chart chart--reveal is-narrow">
+        <div class="chart__head">
+          <h3 class="chart__title">Percentages and decimals count too</h3>
+          <p class="chart__note">The count-up keeps whatever trails the number, so suffixes and ratios survive the animation.</p>
+        </div>
+        <div class="chart__rows chart__rows--stacked">
+          <div class="chart__row"><span class="chart__row-label">Document extraction / spreading</span><div class="chart__track"><div class="chart__fill" style="--v:100" tabindex="0" data-tip="<b>Document extraction / spreading</b> · 68% of firms"></div></div><span class="chart__row-value">68%</span></div>
+          <div class="chart__row"><span class="chart__row-label">Investment memo drafting</span><div class="chart__track"><div class="chart__fill" style="--v:66" tabindex="0" data-tip="<b>Investment memo drafting</b> · 45% of firms"></div></div><span class="chart__row-value">45%</span></div>
+          <div class="chart__row"><span class="chart__row-label">Core loan / portfolio system satisfaction</span><div class="chart__track"><div class="chart__fill" style="--v:56" tabindex="0" data-tip="<b>Core loan / portfolio system satisfaction</b> · 2.8 out of 5"></div></div><span class="chart__row-value">2.8 / 5</span></div>
+          <div class="chart__row"><span class="chart__row-label">Pipeline / CRM system satisfaction</span><div class="chart__track"><div class="chart__fill" style="--v:64" tabindex="0" data-tip="<b>Pipeline / CRM system satisfaction</b> · 3.2 out of 5"></div></div><span class="chart__row-value">3.2 / 5</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- C — the other two blocks at the reading-column width, for the same check -->
+  <section class="forces">
+    <div class="forces__inner">
+
+      <div class="forces__intro">
+        <span class="pill pill--ice pill--md">Also at column width</span>
+        <h2 class="forces__title">Table and navy box.</h2>
+        <div class="forces__prose">
+          <p><code>is-narrow</code> on <code>.table-wrap</code> and <code>.callout</code>. Below 900px both stand down to full width — a tablet-width reading column would put most tables into horizontal scroll.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Deployment approach</caption>
+          <thead>
+            <tr><th scope="col">Approach</th><th scope="col" class="is-num">Firms</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Hybrid (vendor + internal customization)</th><td class="is-num">15</td><td class="is-num">39%</td></tr>
+            <tr><th scope="row">Built in-house using enterprise LLM APIs</th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">Purchased vendor solution with AI built in</th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">Haven't successfully deployed yet</th><td class="is-num">2</td><td class="is-num">5%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+      <div class="callout callout--auto is-narrow">
+        <span class="callout__label">An inch wide, a mile deep</span>
+        <p class="callout__body">“The companies that have done successful AI implementation go an inch wide and a mile deep. They fully automate one specific workflow that they've already mastered manually.” — Product &amp; Strategy Leader, $50B+ platform</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="closing">
+  <div class="closing__thanks">
+    <p class="closing__thanks-text">Checking page — variants A and B share identical markup and data.</p>
+    <p class="closing__note">Not for publication. Delete once a variant is chosen.</p>
+  </div>
+</footer>
+
+<script src="../Brand%20Foundations/brand.js"></script>
+</body>
+</html>

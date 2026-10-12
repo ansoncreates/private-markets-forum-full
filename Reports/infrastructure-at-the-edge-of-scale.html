@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Infrastructure at the edge of scale — The Private Markets Forum</title>
+<meta name="description" content="What private credit needs to build next. Private Credit Infrastructure Survey, March 2026.">
+
+<!-- Fonts: self-hosted Zodiak and Inter, the same files as the homepage and the PDF view —
+     nothing render-blocking from a third-party origin, cached once for the whole site,
+     and they work from file:// and offline. -->
+<link rel="stylesheet" href="../Brand%20Foundations/fonts.css">
+
+<!-- the system, unforked -->
+<link rel="stylesheet" href="../Brand%20Foundations/brand.css">
+</head>
+<body>
+
+<!-- logo sprite — referenced by the nav, the hero and the colophon -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="pmf-logo" viewBox="0 0 191 34">
+    <path d="M36.684 30.1912C37.0959 30.1915 37.4379 30.5291 37.3574 30.9331C37.0127 32.6619 35.4866 33.9645 33.6566 33.9649H9.43554C7.60527 33.9649 6.07878 32.6621 5.73405 30.9331C5.65351 30.5289 5.99602 30.1912 6.40818 30.1912H36.684ZM3.03319 5.73405C3.43717 5.65389 3.77436 5.99547 3.77436 6.40745V27.5582C3.77421 27.97 3.43703 28.3116 3.03319 28.2315C1.30424 27.887 0.000246846 26.361 0 24.5308V9.43481C8.55901e-05 7.60448 1.30413 6.07862 3.03319 5.73405ZM39.317 6.40745C39.317 5.99529 39.6547 5.6535 40.0589 5.73405C41.7877 6.07886 43.0906 7.6047 43.0907 9.43481V24.5308C43.0904 26.3608 41.7876 27.8868 40.0589 28.2315C39.6548 28.3121 39.3172 27.9702 39.317 27.5582V6.40745ZM33.6566 0C35.4867 0.000327397 37.0128 1.30359 37.3574 3.03246C37.4377 3.43639 37.0958 3.77412 36.684 3.77436H6.40818C5.99608 3.77436 5.65362 3.4366 5.73405 3.03246C6.07863 1.30334 7.60513 2.66903e-08 9.43554 0H33.6566Z" fill="currentColor"/>
+    <path d="M187.627 31.9077V27.614C187.627 26.2131 187.499 25.2488 185.935 25.2488C184.879 25.2488 183.842 25.7582 182.896 27.2501C182.896 27.3774 182.896 27.4866 182.896 27.614V31.9077C182.896 32.6536 183.351 32.9811 183.988 32.9811H184.297V33.6179H179.967V32.9811H180.258C180.913 32.9811 181.35 32.6536 181.35 31.9077V27.614C181.35 26.2131 181.223 25.2488 179.658 25.2488C178.603 25.2488 177.566 25.7582 176.601 27.2865V31.9077C176.601 32.6536 177.038 32.9811 177.693 32.9811H178.002V33.6179H173.654V32.9811H173.963C174.6 32.9811 175.055 32.6536 175.055 31.9077V26.2313C175.055 25.4853 174.6 25.1578 173.963 25.1578H173.654V24.5211H176.601V26.5587C177.475 25.2488 178.694 24.3391 180.258 24.3391C181.859 24.3391 182.605 25.0851 182.824 26.5405C183.697 25.2852 185.007 24.3391 186.553 24.3391C188.5 24.3391 189.173 25.4489 189.173 27.614V31.9077C189.173 32.6536 189.628 32.9811 190.265 32.9811H190.574V33.6179H186.244V32.9811H186.553C187.19 32.9811 187.627 32.6536 187.627 31.9077Z" fill="currentColor"/>
+    <path d="M168.413 24.5211H171.343V31.9077C171.343 32.6536 171.779 32.9811 172.434 32.9811H172.744V33.6179H169.796V31.5802C168.923 32.8719 167.813 33.7816 166.194 33.7816C164.52 33.7816 163.483 32.781 163.483 30.7797V26.2313C163.483 25.4853 163.028 25.1579 162.391 25.1579H162.082V24.5211H165.029V30.7797C165.029 32.126 165.466 32.8719 166.74 32.8719C167.831 32.8719 168.832 32.3807 169.796 30.8525V26.0675C169.742 25.4308 169.305 25.1579 168.705 25.1579H168.413V24.5211Z" fill="currentColor"/>
+    <path d="M159.06 25.6854C159.06 25.4125 159.151 25.176 159.315 24.9759C157.859 24.9759 157.168 26.0129 156.531 27.1955V31.9076C156.531 32.6536 156.968 32.981 157.623 32.981H158.66V33.6178H153.584V32.981H153.893C154.53 32.981 154.985 32.6536 154.985 31.9076V26.2312C154.985 25.4853 154.53 25.1578 153.893 25.1578H153.584V24.521H156.531V27.1955V26.4677C157.405 24.8849 158.514 24.1572 159.406 24.1572C160.679 24.1572 161.244 24.8485 161.244 25.6854C161.244 26.2858 160.752 26.777 160.152 26.777C159.551 26.777 159.06 26.2858 159.06 25.6854Z" fill="currentColor"/>
+    <path d="M148.001 24.2118C150.767 24.2118 152.641 26.1404 152.641 29.1059C152.641 32.0715 150.767 34 148.001 34C145.218 34 143.362 32.0715 143.362 29.1059C143.362 26.1404 145.218 24.2118 148.001 24.2118ZM145.09 29.1059C145.09 31.6166 146.2 33.3632 148.001 33.3632C149.803 33.3632 150.912 31.6166 150.912 29.1059C150.912 26.577 149.803 24.8486 148.001 24.8486C146.2 24.8486 145.09 26.577 145.09 29.1059Z" fill="currentColor"/>
+    <path d="M134.666 27.1774V31.9077C134.666 32.6536 135.121 32.9811 135.757 32.9811H136.667V33.6179H131.009V32.9811H131.918C132.555 32.9811 132.992 32.6536 132.992 31.9077V21.9558C132.992 21.2099 132.555 20.8824 131.918 20.8824H131.009V20.2456H142.744L142.926 25.1215H142.198C142.016 21.9558 141.015 21.1553 138.432 21.1553H134.666V26.2677H137.14C138.068 26.2677 138.541 25.831 138.541 24.703V23.7388H139.269V29.6881H138.541V28.7238C138.541 27.614 138.068 27.1774 137.14 27.1774H134.666Z" fill="currentColor"/>
+    <path d="M126.029 27.4138C125.556 25.9765 124.719 24.703 122.973 24.703C122.063 24.703 121.226 25.267 121.226 26.2312C121.226 28.9603 127.266 28.2325 127.266 31.2709C127.266 33.1266 125.465 33.9817 123.919 33.9817C122.281 33.9817 120.99 33.072 120.99 33.072L120.153 33.9089H119.698V30.252H120.153L120.189 30.3794C120.626 31.7075 121.863 33.4359 123.81 33.4359C125.029 33.4359 125.811 32.7081 125.811 31.7257C125.811 29.1786 119.771 30.1792 119.771 26.4495C119.771 24.9031 121.153 24.1572 122.736 24.1572C124.374 24.1572 125.393 24.8485 125.393 24.8485L126.084 24.2481H126.502V27.523H126.066L126.029 27.4138Z" fill="currentColor"/>
+    <path d="M118.937 30.9617C118.937 32.6355 118.136 33.8909 116.535 33.8909C114.898 33.8909 114.024 32.6901 114.024 31.3256V25.2489H112.332V24.5212C114.006 24.5212 114.916 22.6108 114.916 21.2281H115.571V24.5212H118.937V25.2489H115.571V31.3256C115.571 32.5081 115.898 33.1631 116.972 33.1631C118.045 33.1631 118.482 32.0351 118.482 30.9617H118.937Z" fill="currentColor"/>
+    <path d="M111.637 28.9603H105.105C105.16 30.9434 105.742 33.072 108.126 33.072C109.344 33.072 110.382 32.4898 111.109 31.6711L111.51 32.0896C110.673 32.981 109.545 33.7998 107.816 33.7998C104.832 33.7998 103.377 31.1799 103.377 28.6692C103.377 26.2312 104.905 24.1572 107.834 24.1572C110.654 24.1572 111.637 26.6315 111.637 28.9603ZM107.834 24.8849C106.051 24.8849 105.233 26.5769 105.124 28.2325H109.254C109.708 28.2325 109.781 27.9778 109.781 27.6321C109.781 26.3222 109.344 24.8849 107.834 24.8849Z" fill="currentColor"/>
+    <path d="M98.9707 26.2859L97.0785 27.9961L100.153 31.7804C100.717 32.4717 101.481 33.0175 102.136 33.0175H102.427V33.6179H97.8609V32.9811H98.1702C98.6614 32.9811 98.8797 32.5263 98.5158 32.0533L96.0051 28.9786L94.8225 30.052V31.9077C94.8225 32.6537 95.2774 32.9811 95.9141 32.9811H96.2234V33.6179H91.8752V32.9811H92.1844C92.8394 32.9811 93.2761 32.6537 93.2761 31.9077V21.9376C93.2761 21.1553 92.4574 21.0643 91.7842 21.0643V20.4276L94.5496 19.9181H94.8225V29.0877L97.9518 26.2313C98.7523 25.5036 98.6614 25.1579 97.6971 25.1579H97.0603V24.5211H101.736V25.1579H101.409C100.408 25.1579 99.9531 25.3762 98.9707 26.2859Z" fill="currentColor"/>
+    <path d="M88.9447 25.6854C88.9447 25.4125 89.0357 25.176 89.1994 24.9759C87.7439 24.9759 87.0526 26.0129 86.4158 27.1955V31.9076C86.4158 32.6536 86.8524 32.981 87.5074 32.981H88.5445V33.6178H83.4684V32.981H83.7777C84.4145 32.981 84.8693 32.6536 84.8693 31.9076V26.2312C84.8693 25.4853 84.4145 25.1578 83.7777 25.1578H83.4684V24.521H86.4158V27.1955V26.4677C87.2891 24.8849 88.3989 24.1572 89.2904 24.1572C90.5639 24.1572 91.1279 24.8485 91.1279 25.6854C91.1279 26.2858 90.6367 26.777 90.0363 26.777C89.4359 26.777 88.9447 26.2858 88.9447 25.6854Z" fill="currentColor"/>
+    <path d="M74.207 26.2676C74.2252 24.703 76.2265 24.1572 77.4637 24.1572C79.3922 24.1572 81.0842 25.0123 81.0842 26.9044V32.035C81.0842 32.6172 81.2116 32.9992 81.721 32.9992C82.0667 32.9992 82.2668 32.8901 82.4851 32.6899L82.7762 33.0902C82.4305 33.4723 81.9029 33.7998 81.248 33.7998C80.4656 33.7998 79.7561 33.2176 79.5741 32.3625C79.0465 33.0174 78.1187 33.7998 76.7723 33.7998C74.8256 33.7998 73.5339 32.6718 73.5339 31.1799C73.5339 29.1422 75.3168 28.4326 77.5546 28.4326C78.1914 28.4326 78.8646 28.4872 79.5378 28.5964V27.1773C79.5378 25.74 79.1921 24.7939 77.4091 24.7939C76.5176 24.7939 75.99 24.9759 75.6807 25.2488C76.0992 25.3943 76.3903 25.7946 76.3903 26.2676C76.3903 26.868 75.899 27.3592 75.2986 27.3592C74.6983 27.3592 74.207 26.868 74.207 26.2676ZM75.2623 31.2163C75.2623 32.1805 75.9354 32.9629 77.0816 32.9629C78.2824 32.9629 79.0829 32.3625 79.5378 31.8167V29.1422C79.0647 29.0694 78.6281 29.033 78.2278 29.033C76.3903 29.033 75.2623 29.779 75.2623 31.2163Z" fill="currentColor"/>
+    <path d="M68.7476 31.9078V21.2827H68.6202L64.5448 33.8909V33.8181L64.5266 33.8909H63.6352L59.6144 21.2827H59.5598V31.7076C59.6326 32.6901 60.2329 32.9812 61.0335 32.9812H61.5611V33.618H56.667V32.9812H57.2128C58.0497 32.9812 58.6501 32.6537 58.6501 31.5439V21.9559C58.6501 21.2099 58.2135 20.8824 57.5767 20.8824H56.667V20.2457H61.088L64.5266 31.0163L68.0016 20.2457H68.7476L69.7664 20.2275H72.4227V20.8824H71.4948C70.8944 20.8824 70.4759 21.1553 70.4214 21.7921V32.0715C70.4759 32.7083 70.8944 32.9812 71.4948 32.9812H72.4227V33.618H66.7463V32.9812H67.6559C68.3109 32.9812 68.7476 32.6537 68.7476 31.9078Z" fill="currentColor"/>
+    <path d="M156.831 9.04213H150.299C150.354 11.0252 150.936 13.1539 153.32 13.1539C154.538 13.1539 155.576 12.5717 156.303 11.753L156.704 12.1714C155.867 13.0629 154.739 13.8816 153.01 13.8816C150.026 13.8816 148.571 11.2617 148.571 8.75103C148.571 6.31309 150.099 4.23901 153.028 4.23901C155.848 4.23901 156.831 6.71335 156.831 9.04213ZM153.028 4.96676C151.245 4.96676 150.427 6.65876 150.318 8.31438H154.448C154.902 8.31438 154.975 8.05967 154.975 7.71399C154.975 6.40405 154.538 4.96676 153.028 4.96676Z" fill="currentColor"/>
+    <path d="M147.846 11.0436C147.846 12.7174 147.045 13.9727 145.444 13.9727C143.807 13.9727 142.934 12.772 142.934 11.4074V5.33077H141.242V4.60302C142.915 4.60302 143.825 2.69269 143.825 1.30998H144.48V4.60302H147.846V5.33077H144.48V11.4074C144.48 12.59 144.807 13.245 145.881 13.245C146.954 13.245 147.391 12.117 147.391 11.0436H147.846Z" fill="currentColor"/>
+    <path d="M132.199 6.34947C132.217 4.78482 134.218 4.23901 135.455 4.23901C137.384 4.23901 139.076 5.09411 139.076 6.98625V12.1168C139.076 12.699 139.203 13.0811 139.713 13.0811C140.058 13.0811 140.258 12.9719 140.477 12.7718L140.768 13.1721C140.422 13.5541 139.894 13.8816 139.24 13.8816C138.457 13.8816 137.748 13.2994 137.566 12.4443C137.038 13.0993 136.11 13.8816 134.764 13.8816C132.817 13.8816 131.525 12.7536 131.525 11.2617C131.525 9.22406 133.308 8.51451 135.546 8.51451C136.183 8.51451 136.856 8.56909 137.529 8.67825V7.25915C137.529 5.82186 137.184 4.87579 135.401 4.87579C134.509 4.87579 133.982 5.05773 133.672 5.33063C134.091 5.47618 134.382 5.87644 134.382 6.34947C134.382 6.94986 133.891 7.44109 133.29 7.44109C132.69 7.44109 132.199 6.94986 132.199 6.34947ZM133.254 11.2981C133.254 12.2624 133.927 13.0447 135.073 13.0447C136.274 13.0447 137.074 12.4443 137.529 11.8985V9.22406C137.056 9.15129 136.62 9.1149 136.219 9.1149C134.382 9.1149 133.254 9.86084 133.254 11.2981Z" fill="currentColor"/>
+    <path d="M131.027 5.23972H130.572C129.79 5.23972 129.517 5.78553 129.281 6.31315L126.06 13.6816L125.151 13.6997L122.222 6.31315C121.839 5.36708 121.548 5.23972 120.766 5.23972H120.311V4.60295H125.151V5.23972H124.514C123.695 5.23972 123.495 5.5854 123.75 6.22218L126.042 11.9714L128.462 6.36773C128.717 5.76734 128.698 5.23972 127.862 5.23972H127.225V4.60295H131.027V5.23972Z" fill="currentColor"/>
+    <path d="M119.926 13.6998H115.577V13.063H115.887C116.524 13.063 116.978 12.7355 116.978 11.9896V6.31321C116.978 5.56727 116.524 5.23978 115.887 5.23978H115.577V4.60301H118.525V11.9896C118.525 12.7355 118.962 13.063 119.616 13.063H119.926V13.6998ZM116.56 1.43732C116.56 0.836931 117.051 0.345703 117.652 0.345703C118.252 0.345703 118.743 0.836931 118.743 1.43732C118.743 2.03771 118.252 2.52894 117.652 2.52894C117.051 2.52894 116.56 2.03771 116.56 1.43732Z" fill="currentColor"/>
+    <path d="M112.483 5.76728C112.483 5.49437 112.574 5.25786 112.738 5.05773C111.283 5.05773 110.591 6.09476 109.955 7.27735V11.9895C109.955 12.7354 110.391 13.0629 111.046 13.0629H112.083V13.6997H107.007V13.0629H107.316C107.953 13.0629 108.408 12.7354 108.408 11.9895V6.31309C108.408 5.56715 107.953 5.23966 107.316 5.23966H107.007V4.60289H109.955V7.27735V6.5496C110.828 4.96676 111.938 4.23901 112.829 4.23901C114.103 4.23901 114.667 4.93037 114.667 5.76728C114.667 6.36767 114.175 6.85889 113.575 6.85889C112.975 6.85889 112.483 6.36767 112.483 5.76728Z" fill="currentColor"/>
+    <path d="M97.6188 1.23715V6.87717H100.039C103.041 6.87717 103.987 5.60362 103.987 4.05716C103.987 2.31058 102.695 1.23715 100.039 1.23715H97.6188ZM93.9619 0.327474H100.748C104.532 0.327474 105.952 2.07406 105.952 4.07536C105.952 6.14943 104.532 7.78685 100.839 7.78685H97.6188V11.9896C97.6188 12.7355 98.0737 13.063 98.7105 13.063H99.6201V13.6998H93.9619V13.063H94.8716C95.5084 13.063 95.945 12.7355 95.945 11.9896V2.03767C95.945 1.29173 95.5084 0.964249 94.8716 0.964249H93.9619V0.327474Z" fill="currentColor"/>
+    <path d="M90.2882 9.04213H83.7567C83.8113 11.0252 84.3935 13.1539 86.7769 13.1539C87.9958 13.1539 89.0329 12.5717 89.7606 11.753L90.1609 12.1714C89.324 13.0629 88.196 13.8816 86.4676 13.8816C83.4838 13.8816 82.0283 11.2617 82.0283 8.75103C82.0283 6.31309 83.5566 4.23901 86.4858 4.23901C89.3058 4.23901 90.2882 6.71335 90.2882 9.04213ZM86.4858 4.96676C84.7028 4.96676 83.8841 6.65876 83.7749 8.31438H87.9049C88.3597 8.31438 88.4325 8.05967 88.4325 7.71399C88.4325 6.40405 87.9958 4.96676 86.4858 4.96676Z" fill="currentColor"/>
+    <path d="M79.7717 7.6959V11.9896C79.7717 12.7355 80.2265 13.063 80.8633 13.063H81.1726V13.6998H76.8425V13.063H77.1336C77.7886 13.063 78.2252 12.7355 78.2252 11.9896V7.6959C78.2252 6.29499 78.0978 5.33073 76.5332 5.33073C75.478 5.33073 74.4409 5.84015 73.4767 7.36841V11.9896C73.4767 12.7355 73.9133 13.063 74.5683 13.063H74.8776V13.6998H70.5293V13.063H70.8386C71.4754 13.063 71.9302 12.7355 71.9302 11.9896V2.01949C71.9302 1.23716 71.2025 1.1462 70.5293 1.1462V0.509421L73.2038 0H73.4767V6.64067C74.35 5.33073 75.5689 4.42105 77.1336 4.42105C79.0985 4.42105 79.7717 5.53086 79.7717 7.6959Z" fill="currentColor"/>
+    <path d="M62.2342 11.9896V1.23715H61.1608C58.5773 1.23715 57.5767 2.20141 57.3947 5.3671H56.667L57.0491 0.327474H69.0932L69.4753 5.3671H68.7657C68.5838 2.20141 67.565 1.23715 64.9815 1.23715H63.9081V12.1533C63.9626 12.7901 64.3993 13.063 64.9997 13.063H65.9093V13.6998H60.2329V13.063H61.1426C61.7976 13.063 62.2342 12.7355 62.2342 11.9896Z" fill="currentColor"/>
+    </symbol></svg>
+
+<!-- Nav: one link per section, in reading order. The five pillars are wired now and
+     start working the moment those sections land — brand.js no-ops on a missing id. -->
+<header class="nav" id="site-nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="#top" aria-label="The Private Markets Forum — back to top">
+      <svg viewBox="0 0 191 34" fill="none" aria-hidden="true"><use href="#pmf-logo"/></svg>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a class="nav__link" href="#summary">Summary</a>
+      <a class="nav__link" href="#profile">Profile</a>
+      <a class="nav__link" href="#constraints">Constraints</a>
+      <a class="nav__link" href="#pressure">LP pressure</a>
+      <a class="nav__link" href="#trajectory">Trajectory</a>
+      <a class="nav__link" href="#build-list">Build list</a>
+      <a class="nav__link" href="#segments">At scale</a>
+      <a class="nav__link" href="#conclusion">Conclusion</a>
+    </nav>
+    <!-- Copy link + PDF view. One group, so .nav__inner's space-between lands
+         logo / links / actions exactly where the artboard has them. Under 900px
+         the PDF control stands down and the link rides in with the panel. -->
+    <div class="nav__actions">
+      <button class="action-button" type="button" data-copy-link aria-label="Copy a link to this report">
+        <span class="action-button__bubble" aria-hidden="true">Copy Link</span>
+        <svg aria-hidden="true" viewBox="0 0 32 34" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.6389 15.4113L11.0146 17.0356C10.4079 17.6423 10.0591 18.4677 10.0654 19.3352C10.0718 20.2027 10.413 21.0332 11.0485 21.649C11.6642 22.2844 12.4949 22.6256 13.3622 22.632C14.2494 22.6385 15.0553 22.3093 15.662 21.7027L17.2863 20.0783M19.3611 18.0432L20.9854 16.4189C21.592 15.8123 21.9409 14.9868 21.9345 14.1193C21.9281 13.2518 21.5869 12.4214 20.9515 11.8056C20.3359 11.1899 19.5054 10.8487 18.6379 10.8423C17.7704 10.8359 16.9448 11.165 16.3381 11.7717L14.7138 13.396M13.5368 19.147L18.4098 14.274" stroke="currentColor" stroke-width="1.45455" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a class="action-button action-button--pdf" href="infrastructure-at-the-edge-of-scale-pdf.html" aria-label="Show this report as a PDF">
+        <span class="action-button__bubble" aria-hidden="true">Show as PDF</span>
+        <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.382 12.5091H18.6183M13.382 15.1273H18.6183M13.382 17.7455H16.0001M12.0727 9.01819H19.9274C20.8914 9.01819 21.6728 9.79967 21.6728 10.7637L21.6726 21.2364C21.6726 22.2004 20.8911 22.9818 19.9272 22.9818L12.0726 22.9818C11.1086 22.9818 10.3271 22.2003 10.3271 21.2363L10.3272 10.7636C10.3272 9.79965 11.1087 9.01819 12.0727 9.01819Z" stroke="currentColor" stroke-width="1.45455" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
+      <span class="nav__bar"></span>
+      <span class="nav__bar"></span>
+      <span class="nav__bar"></span>
+    </button>
+  </div>
+  <div class="nav__panel" id="nav-panel">
+    <div class="nav__panel-inner">
+      <nav class="nav__links nav__links--stacked" aria-label="Sections">
+        <a class="nav__link" href="#summary">Summary</a>
+      <a class="nav__link" href="#profile">Profile</a>
+        <a class="nav__link" href="#constraints">Constraints</a>
+        <a class="nav__link" href="#pressure">LP pressure</a>
+        <a class="nav__link" href="#trajectory">Trajectory</a>
+        <a class="nav__link" href="#build-list">Build list</a>
+        <a class="nav__link" href="#segments">At scale</a>
+        <a class="nav__link" href="#conclusion">Conclusion</a>
+        </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO — radial navy plate: the section is the claim, and the claim is carried by boxes -->
+  <section class="hero" id="top">
+
+    <svg class="hero__logo" viewBox="0 0 191 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Private Markets Forum">
+      <use href="#pmf-logo"/>
+    </svg>
+
+    <div class="hero__meta">
+      <span class="pill pill--ice">Survey findings</span>
+      <span class="pill pill--cream pill--date">March&nbsp;2026</span>
+      <span class="pill pill--blue">Private credit</span>
+    </div>
+
+    <div class="hero__heading">
+      <h1 class="hero__title">Infrastructure at the edge of scale</h1>
+      <p class="hero__subtitle">What private credit needs to build next. The industry has scaled in assets faster than it has scaled in infrastructure — this survey of senior operators puts data behind that thesis.</p>
+    </div>
+
+    <div class="stack">
+      <p class="stack__eyebrow">The five pillars of this survey:</p>
+
+      <ol class="stack__list">
+        <li class="stack__item">
+          <span class="stack__index">I</span>
+          <a class="stack__label stack__link" href="#constraints">Scaling constraints</a>
+        </li>
+        <li class="stack__item">
+          <span class="stack__index">II</span>
+          <a class="stack__label stack__link" href="#pressure">LP pressure</a>
+        </li>
+        <li class="stack__item">
+          <span class="stack__index">III</span>
+          <a class="stack__label stack__link" href="#trajectory">Modernization</a>
+        </li>
+        <li class="stack__item">
+          <span class="stack__index">IV</span>
+          <a class="stack__label stack__link" href="#build-list">Build list</a>
+        </li>
+        <li class="stack__item">
+          <span class="stack__index">V</span>
+          <a class="stack__label stack__link" href="#segments">At scale</a>
+        </li>
+      </ol>
+
+      <p class="stack__note">Across every firm size, the industry converges on the same core problem: a unified data model that does not yet exist.</p>
+    </div>
+
+  </section>
+
+
+  <!-- EXECUTIVE SUMMARY — white plate: this is the narrative, so it runs as prose -->
+  <section class="intro" id="summary">
+    <div class="intro__content">
+
+      <h2 class="intro__title">Executive Summary</h2>
+
+      <div class="intro__body-group">
+        <p class="intro__lead">Private credit has scaled in assets faster than it has scaled in infrastructure. This survey confirms that thesis with data.</p>
+
+        <div class="intro__body">
+          <p>We surveyed senior operators across the AUM spectrum — from sub-$1B emerging managers to $50B+ global platforms — with deliberate emphasis on the largest and most operationally complex firms in the market. 42% of respondents manage $50B+ in AUM. These are the platforms where infrastructure failure has the largest consequences, and where the findings carry the most weight.</p>
+          <p>Across this sample, the industry converges on the same core problem: a unified data model that does not yet exist. LP pressure is rising everywhere. AI adoption is accelerating across the board. But where the infrastructure actually breaks, and how firms respond, depends on where they sit on the growth curve.</p>
+          <p>This report presents aggregate findings across five pillars: the Scaling Constraints Map, the LP Pressure Index, the Modernization Trajectory, the Build List, and What Breaks at Scale — the segmented view showing how constraints shift from people to process to architecture as platforms scale.</p>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat__value">42%</span>
+            <span class="stat__label">$50B+ AUM</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">45%</span>
+            <span class="stat__label">Data model</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">61%</span>
+            <span class="stat__label">AI in production</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FIVE FINDINGS — radial plate: these are the conclusions, carried by boxes -->
+  <section class="actions">
+
+    <div class="actions__intro">
+      <p class="actions__lead">Five findings define the landscape:</p>
+    </div>
+
+  <article class="action-card">
+    <span class="action-card__number">01</span>
+    <h3 class="action-card__title">The data model is the bottleneck</h3>
+    <p class="action-card__body">45% of respondents named a unified data model across strategies and systems as the single operational problem they would most want solved. <span class="nb">Cross-system</span> integration is the #1 weighted scaling constraint, appearing across all three ranking tiers more than any other item.</p>
+  </article>
+
+  <article class="action-card">
+    <span class="action-card__number">02</span>
+    <h3 class="action-card__title">What breaks depends on where you are</h3>
+    <p class="action-card__body">Emerging firms are constrained by people. <span class="nb">Mid-market</span> firms are constrained by process. Large platforms are constrained by architecture. The demand for a unified data model is universal across all three tiers, but the path to get there looks different at each stage. Firms starting today can build clean from the outset. Firms at scale are retrofitting systems that were never designed to work together.</p>
+  </article>
+
+  <article class="action-card">
+    <span class="action-card__number">03</span>
+    <h3 class="action-card__title">LP pressure is accelerating</h3>
+    <p class="action-card__body">74% report that LP and ODD pressure has increased in the past two years, with 37% calling the increase significant. The top demands are faster reporting, bespoke templates, and <span class="nb">real-time</span> data access. LPs are pushing GPs from document delivery to data delivery.</p>
+  </article>
+
+  <article class="action-card">
+    <span class="action-card__number">04</span>
+    <h3 class="action-card__title">The industry is building</h3>
+    <p class="action-card__body">71% of respondents have built internal tools because nothing on the market fits. Core system satisfaction averages just 2.8 out of 5. The vendor landscape is underserving the market.</p>
+  </article>
+
+  <article class="action-card">
+    <span class="action-card__number">05</span>
+    <h3 class="action-card__title">AI has hit production</h3>
+    <p class="action-card__body">61% of firms now run AI in production for at least one workflow. Document extraction is the consensus entry point, but the pipeline extends into underwriting, covenant compliance, and monitoring. The hybrid model (vendor + internal customization) is the dominant deployment approach.</p>
+  </article>
+
+  </section>
+
+
+  <!-- RESPONDENT PROFILE — white plate: who answered, told as narrative -->
+  <section class="intro" id="profile">
+    <div class="intro__content">
+
+      <h2 class="intro__title">Respondent Profile</h2>
+
+      <div class="intro__body-group">
+        <p class="intro__lead">The survey targeted senior operators at <span class="nb">institutional-scale</span> private credit platforms — the people closest to the infrastructure challenges this research targets, at the firms where those challenges matter most.</p>
+
+        <div class="intro__body">
+          <p>The respondent base is intentionally concentrated in technology and operations leadership: CTOs, Heads of Data, and senior operations <span class="nb">decision-makers</span> who own the problems documented in this report. The sample is designed to reflect the firms operating at scale.</p>
+          <p>61% of respondents manage $15B+ in AUM. A meaningful cohort of sub-$1B emerging managers (21%) provides analytical contrast across growth stages — firms building infrastructure from scratch alongside platforms managing the consequences of rapid growth.</p>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat__value">47%</span>
+            <span class="stat__label">CTO / Head of Technology</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">61%</span>
+            <span class="stat__label">$15B+ AUM</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">42%</span>
+            <span class="stat__label">$50B+ AUM</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE SAMPLE — cream plate: every figure in this section is a table in the docx,
+       so every figure here is a .table with the docx heading carried in its <caption>. -->
+  <section class="forces" id="sample">
+    <div class="forces__inner">
+
+      <div class="figure-pair">
+        <figure class="figure figure--on-light">
+          <img class="figure__img" src="Assets/Images/summit-delegates-1600.jpg" srcset="Assets/Images/summit-delegates-800.jpg 800w, Assets/Images/summit-delegates-1600.jpg 1600w, Assets/Images/summit-delegates-2432.jpg 2432w" sizes="(min-width: 1280px) 584px, (min-width: 900px) 47vw, 94vw" width="2432" height="1622" alt="Delegates talking in small groups beside a Private Markets Technology Summit poster on an easel" loading="lazy" decoding="async" style="--focus:50% 45%">
+          <figcaption class="figure__caption">
+            <b>Delegates in conversation between sessions</b>
+            <span class="figure__credit">Credits: The Private Markets Forum Team</span>
+          </figcaption>
+        </figure>
+        <figure class="figure figure--on-light">
+          <img class="figure__img" src="Assets/Images/summit-stage-wide-1600.jpg" srcset="Assets/Images/summit-stage-wide-800.jpg 800w, Assets/Images/summit-stage-wide-1600.jpg 1600w, Assets/Images/summit-stage-wide-2432.jpg 2432w" sizes="(min-width: 1280px) 584px, (min-width: 900px) 47vw, 94vw" width="2432" height="1622" alt="Four panellists seated on a stage beneath a sponsor screen, with a Private Markets Forum lectern at the left" loading="lazy" decoding="async" style="--focus:50% 40%">
+          <figcaption class="figure__caption">
+            <b>Panellists on stage at the Private Markets Technology Summit, London</b>
+            <span class="figure__credit">Credits: The Private Markets Forum Team</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Firm Size Distribution</caption>
+          <thead>
+            <tr><th scope="col">AUM Range</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">$50B+</th><td class="is-num">16</td><td class="is-num">42%</td></tr>
+            <tr><th scope="row">&lt; $1B</th><td class="is-num">8</td><td class="is-num">21%</td></tr>
+            <tr><th scope="row">$5–$15B</th><td class="is-num">6</td><td class="is-num">16%</td></tr>
+            <tr><th scope="row">$15–$30B</th><td class="is-num">4</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">$30–$50B</th><td class="is-num">3</td><td class="is-num">8%</td></tr>
+            <tr><th scope="row">$1–$5B</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The bimodal distribution provides valuable analytical contrast. Infrastructure challenges manifest differently at scale versus in growth mode. The largest platforms contend with <span class="nb">multi-strategy</span> complexity and the weight of legacy systems. Emerging managers face the greenfield question of what to build first.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Primary Roles</caption>
+          <thead>
+            <tr><th scope="col">Role</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">CTO / Head of Engineering / Technology</th><td class="is-num">18</td><td class="is-num">47%</td></tr>
+            <tr><th scope="row">Managing Director / Partner (Investment)</th><td class="is-num">6</td><td class="is-num">16%</td></tr>
+            <tr><th scope="row">Head of Data / Analytics</th><td class="is-num">4</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">Head of Portfolio Operations / Monitoring</th><td class="is-num">2</td><td class="is-num">5%</td></tr>
+            <tr><th scope="row">COO / Head of Operations</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+            <tr><th scope="row">CFO / Finance / Controller</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+            <tr><th scope="row">General Counsel / CLO</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+            <tr><th scope="row">Other <span class="nb">C-Suite</span> / Senior Leadership</th><td class="is-num">5</td><td class="is-num">13%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Respondents represent firms running diverse strategies, with significant overlap. 66% are active in <span class="nb">asset-based</span> finance. 63% run direct lending. 58% manage <span class="nb">multi-strategy</span> portfolios. This multistrategy complexity is itself a driver of infrastructure challenges.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Strategy Coverage</caption>
+          <thead>
+            <tr><th scope="col">Strategy</th><th scope="col" class="is-num">Firms Active</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><span class="nb">Asset-based</span> finance (ABF) / NAV / specialty</th><td class="is-num">25</td><td class="is-num">66%</td></tr>
+            <tr><th scope="row">Direct lending / corporate credit</th><td class="is-num">24</td><td class="is-num">63%</td></tr>
+            <tr><th scope="row">Structured credit / CLO / opportunistic</th><td class="is-num">22</td><td class="is-num">58%</td></tr>
+            <tr><th scope="row"><span class="nb">Multi-strategy</span> private credit</th><td class="is-num">22</td><td class="is-num">58%</td></tr>
+            <tr><th scope="row">BDCs / Interval Funds</th><td class="is-num">18</td><td class="is-num">47%</td></tr>
+            <tr><th scope="row">Real estate credit</th><td class="is-num">16</td><td class="is-num">42%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The industry remains in aggressive growth mode. 74% of respondents expect to grow AUM by 1.25x or more within the next 24–36 months, with nearly one in four targeting 2x+ growth. This growth trajectory is the engine that exposes infrastructure gaps.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Growth Trajectory</caption>
+          <thead>
+            <tr><th scope="col">Expected Growth</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">1.25–2.0x AUM</th><td class="is-num">19</td><td class="is-num">50%</td></tr>
+            <tr><th scope="row">2.0x+ AUM</th><td class="is-num">9</td><td class="is-num">24%</td></tr>
+            <tr><th scope="row">&lt; 1.25x AUM</th><td class="is-num">4</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">Uncertain</th><td class="is-num">4</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">Flat or contracting</th><td class="is-num">2</td><td class="is-num">5%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Technology budgets are expanding to match. 79% of respondents expect to increase technology spending this year. The balance has shifted toward moderate increases (up to 20%), suggesting the industry is moving from <span class="nb">one-time</span> platform builds to sustained operational investment.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Technology Investment</caption>
+          <thead>
+            <tr><th scope="col">Budget Direction</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Increase moderately (up to 20%)</th><td class="is-num">20</td><td class="is-num">53%</td></tr>
+            <tr><th scope="row">Increase significantly (20%+)</th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">Flat or slight decrease</th><td class="is-num">4</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">Don’t know</th><td class="is-num">3</td><td class="is-num">8%</td></tr>
+            <tr><th scope="row">Decrease significantly</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The staffing picture underscores the talent constraint identified later in this report. 58% of firms report <span class="nb">investment-weighted</span> staffing ratios of 3:1 or higher, meaning investment teams significantly outnumber operations and technology staff. Only 11% are <span class="nb">operations-weighted</span>. The operational side of the house is structurally understaffed relative to the complexity it manages.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Staffing Ratios</caption>
+          <thead>
+            <tr><th scope="col">Staffing Ratio</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Heavily <span class="nb">investment-weighted</span> (&gt;5:1)</th><td class="is-num">12</td><td class="is-num">32%</td></tr>
+            <tr><th scope="row"><span class="nb">Investment-weighted</span> (3:1 to 5:1)</th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">Balanced (1.5:1 to 3:1)</th><td class="is-num">6</td><td class="is-num">16%</td></tr>
+            <tr><th scope="row"><span class="nb">Operations-weighted</span> (&lt;1.5:1)</th><td class="is-num">4</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">Don’t know / prefer not to say</th><td class="is-num">6</td><td class="is-num">16%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+      <p class="chart__source is-narrow">Base: 38 respondents. Shares are rounded, so columns may not total exactly 100%. Strategy coverage is <span class="nb">multi-select</span>, so those shares sum above 100%.</p>
+
+    </div>
+  </section>
+
+
+  <!-- LAYER I — edge-lit divider: the chapter break -->
+  <section class="layer" id="constraints">
+    <div class="layer__inner">
+
+      <div class="layer__heading-group">
+        <span class="pill pill--ice pill--md">Pillar I</span>
+        <div class="layer__heading">
+          <h2 class="layer__title">The Scaling Constraints Map</h2>
+          <p class="layer__subtitle">The core research question is simple: what breaks when you scale? We asked respondents to identify and rank the operational constraints most likely to fracture as they add AUM, asset classes, and investor types. The answers reveal an industry whose primary challenge is not any single system failure. It is a fundamental inability to connect systems into a coherent whole.</p>
+        </div>
+      </div>
+
+      <ol class="stack__list">
+        <li class="stack__item">
+          <span class="stack__index">I</span>
+          <span class="stack__label">Scaling constraints</span>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">II</span>
+          <a class="stack__label stack__link" href="#pressure">LP pressure</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">III</span>
+          <a class="stack__label stack__link" href="#trajectory">Modernization</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">IV</span>
+          <a class="stack__label stack__link" href="#build-list">Build list</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">V</span>
+          <a class="stack__label stack__link" href="#segments">At scale</a>
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- THE THREE INSIGHTS — white plate. Titles are the constraint names from the
+       ranking table; bodies are the three "Analysis" paragraphs, verbatim. -->
+  <section class="insights">
+
+    <div class="insight">
+      <h2 class="insight__title">Analysis: The Three Dominant Constraints</h2>
+    </div>
+
+    <article class="insight">
+
+      <header class="insight__header">
+        <span class="insight__number">01</span>
+        <h3 class="insight__title"><span class="nb">Cross-system</span> data model / integrations</h3>
+      </header>
+
+      <div class="insight__block">
+        <p><span class="nb">Cross-system</span> data integration leads the weighted ranking despite not being the most common single #1 choice. Its strength comes from breadth: 53% of respondents placed it in their top three. This is the constraint that touches everything. When firms cannot unify data across portfolio systems, accounting platforms, and reporting tools, every downstream function requires manual intervention to bridge the gaps.</p>
+      </div>
+
+    </article>
+
+    <article class="insight">
+
+      <header class="insight__header">
+        <span class="insight__number">02</span>
+        <h3 class="insight__title">Talent (hiring/retaining ops &amp; tech staff)</h3>
+      </header>
+
+      <div class="insight__block">
+        <p>Talent is the most frequently cited #1 constraint (24%), reflecting an industry where operations and technology roles are chronically understaffed. With 58% of firms reporting <span class="nb">investment-weighted</span> staffing ratios of 3:1 or above, the operational side of the house is being asked to do more with less.</p>
+      </div>
+
+    </article>
+
+    <article class="insight">
+
+      <header class="insight__header">
+        <span class="insight__number">03</span>
+        <h3 class="insight__title">LP reporting (frequency, granularity, bespoke)</h3>
+      </header>
+
+      <div class="insight__block">
+        <p>LP reporting rounds out the top three. Notably, it ranks as a #1 or #2 constraint for 32% of respondents. This is not a <span class="nb">back-office</span> nuisance. It is a scaling bottleneck that directly affects fundraising capacity and LP retention.</p>
+      </div>
+
+    </article>
+
+    <!-- FROM THE INTERVIEWS — docx H3 under the Analysis heading, in source order -->
+    <article class="insight">
+
+      <header class="insight__header">
+        <h3 class="insight__title">From the Interviews: What Integration Actually Looks Like</h3>
+      </header>
+
+      <div class="insight__block">
+        <p><span class="nb">Follow-up</span> interviews brought these constraints to life. At one $50B+ platform, the integration challenge is visceral: people have become the connective tissue between systems.</p>
+      </div>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“Too much of the day is spent connecting dots between systems via email and spreadsheets, rather than going out and finding the next deal or asking whether we're picking the right ones.”</p>
+        <footer class="callout__body">— Product &amp; Strategy Leader, $50B+ <span class="nb">Multi-Strategy</span> Platform</footer>
+      </blockquote>
+
+      <div class="insight__block">
+        <p>The same respondent traced the root cause to security master inconsistency across merged entities. Every downstream system derives its information from security master, so any inconsistency there cascades. His observation: he knows you need 8 fields to settle a bond on the street, so why does the internal system require 35? Legacy complexity has layered requirements on top of requirements, and no one has gone back to simplify.</p>
+        <p>On the talent constraint, a Managing Director at a <span class="nb">mid-market</span> <span class="nb">multi-strategy</span> firm confirmed the pattern. Private credit is growing, the economy is at full employment, and the pool of people with relevant experience is genuinely limited. Technology adoption, in his telling, is partly a response to the talent shortage: if you cannot hire your way out of the volume problem, you find tools that let existing people handle more.</p>
+        <p>A different perspective came from the Head of Credit Product at a major technology platform, who reframed data ingestion as structural rather than solvable. Private borrowers do not file publicly. The data arrives in different formats with different levels of availability. His point was sharp:</p>
+      </div>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“The complexity premium that private credit investors earn is partly compensation for navigating exactly this kind of data complexity. Things can be improved on the margin, but structural messiness is intrinsic to the asset class.”</p>
+        <footer class="callout__body">— Head of Credit Product, Global Technology Platform</footer>
+      </blockquote>
+
+    </article>
+
+  </section>
+
+  <!-- THE EVIDENCE — cream plate. Every figure is a table in the docx, so every
+       figure here is a .table carrying its docx heading in the caption. -->
+  <section class="forces" id="constraints-data">
+    <div class="forces__inner">
+
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat__value">#1</span>
+          <span class="stat__label"><span class="nb">Cross-system</span> integration is top constraint</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">71%</span>
+          <span class="stat__label">Have built internal tools</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">2.8/5</span>
+          <span class="stat__label">Core system satisfaction</span>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Respondents ranked their top three scaling constraints. The weighted scoring reveals <span class="nb">cross-system</span> data integration as the single most pervasive constraint. It appears consistently across all three ranking tiers, reflecting its impact on every downstream process.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Top Scaling Break Points (Weighted Ranking)</caption>
+          <thead>
+            <tr><th scope="col">Constraint</th><th scope="col" class="is-num">Weighted</th><th scope="col" class="is-num">#1</th><th scope="col" class="is-num">#2</th><th scope="col" class="is-num">#3</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><span class="nb">Cross-system</span> data model / integrations</th><td class="is-num">38</td><td class="is-num">6</td><td class="is-num">6</td><td class="is-num">8</td></tr>
+            <tr><th scope="row">Talent (hiring/retaining ops &amp; tech staff)</th><td class="is-num">34</td><td class="is-num">9</td><td class="is-num">2</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">LP reporting (frequency, granularity, bespoke)</th><td class="is-num">32</td><td class="is-num">6</td><td class="is-num">6</td><td class="is-num">2</td></tr>
+            <tr><th scope="row">Reconciliation (positions, cash, accruals)</th><td class="is-num">23</td><td class="is-num">4</td><td class="is-num">4</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">Portfolio monitoring cadence</th><td class="is-num">23</td><td class="is-num">3</td><td class="is-num">6</td><td class="is-num">2</td></tr>
+            <tr><th scope="row">Data ingestion from borrowers/agents</th><td class="is-num">19</td><td class="is-num">4</td><td class="is-num">2</td><td class="is-num">3</td></tr>
+            <tr><th scope="row"><span class="nb">Multi-asset</span> <span class="nb">straight-through</span> processing</th><td class="is-num">15</td><td class="is-num">2</td><td class="is-num">3</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">Availability of quality market data</th><td class="is-num">15</td><td class="is-num">2</td><td class="is-num">3</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">Portfolio accounting / ABOR / asset servicing</th><td class="is-num">12</td><td class="is-num">1</td><td class="is-num">3</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">Covenant tracking &amp; compliance</th><td class="is-num">9</td><td class="is-num">0</td><td class="is-num">2</td><td class="is-num">5</td></tr>
+            <tr><th scope="row">ODD readiness (controls, evidence, audit)</th><td class="is-num">8</td><td class="is-num">1</td><td class="is-num">1</td><td class="is-num">3</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="chart__source is-narrow">Methodology: Weighted score assigns 3 points for a #1 ranking, 2 for #2, and 1 for #3. Maximum possible = 114.</p>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>We asked respondents to identify where they rely most on manual workarounds today. The weighted results show that manual work clusters around four areas, each representing a significant automation opportunity.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Where Manual Work Concentrates</caption>
+          <thead>
+            <tr><th scope="col">Workaround Area</th><th scope="col" class="is-num">Weighted</th><th scope="col" class="is-num">#1</th><th scope="col" class="is-num">#2</th><th scope="col" class="is-num">#3</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Valuation / <span class="nb">mark-to-market</span> process</th><td class="is-num">40</td><td class="is-num">7</td><td class="is-num">7</td><td class="is-num">5</td></tr>
+            <tr><th scope="row">Data ingestion / spreading / extraction</th><td class="is-num">38</td><td class="is-num">9</td><td class="is-num">2</td><td class="is-num">7</td></tr>
+            <tr><th scope="row"><span class="nb">Cross-system</span> integrations / data stitching</th><td class="is-num">31</td><td class="is-num">6</td><td class="is-num">4</td><td class="is-num">5</td></tr>
+            <tr><th scope="row">LP reporting / ODD response process</th><td class="is-num">30</td><td class="is-num">7</td><td class="is-num">3</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">Reconciliation (cash, payments, positions)</th><td class="is-num">22</td><td class="is-num">2</td><td class="is-num">6</td><td class="is-num">4</td></tr>
+            <tr><th scope="row">Due diligence / IC memo workflow</th><td class="is-num">17</td><td class="is-num">1</td><td class="is-num">5</td><td class="is-num">4</td></tr>
+            <tr><th scope="row">Covenant compliance workflow</th><td class="is-num">14</td><td class="is-num">1</td><td class="is-num">4</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">Deal pipeline / CRM / coverage tracking</th><td class="is-num">13</td><td class="is-num">2</td><td class="is-num">2</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">Monitoring / alerts / exceptions</th><td class="is-num">12</td><td class="is-num">1</td><td class="is-num">3</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">Portfolio accounting / ABOR</th><td class="is-num">11</td><td class="is-num">2</td><td class="is-num">2</td><td class="is-num">1</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Valuation and data ingestion together account for the heaviest manual burden. These are the two areas where the gap between data volume and system capability is widest. They are also the areas where AI deployment is concentrating, as documented in Section III.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>71% of respondents have built internal tools because nothing on the market fits. The areas where firms are building reveal the vendor landscape’s most acute gaps.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>The Internal Build Response</caption>
+          <thead>
+            <tr><th scope="col">Area</th><th scope="col" class="is-num">Firms Building</th><th scope="col" class="is-num">Share of Builders (n=27)</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Portfolio management / allocation</th><td class="is-num">13</td><td class="is-num">48%</td></tr>
+            <tr><th scope="row">Data ingestion / validation</th><td class="is-num">12</td><td class="is-num">44%</td></tr>
+            <tr><th scope="row">Pipeline / deal tracking</th><td class="is-num">11</td><td class="is-num">41%</td></tr>
+            <tr><th scope="row">Data model / warehouse / BI</th><td class="is-num">10</td><td class="is-num">37%</td></tr>
+            <tr><th scope="row">LP reporting / portals</th><td class="is-num">8</td><td class="is-num">30%</td></tr>
+            <tr><th scope="row">Covenant tracking</th><td class="is-num">5</td><td class="is-num">19%</td></tr>
+            <tr><th scope="row">Reconciliation</th><td class="is-num">4</td><td class="is-num">15%</td></tr>
+            <tr><th scope="row">Monitoring / alerting</th><td class="is-num">4</td><td class="is-num">15%</td></tr>
+            <tr><th scope="row">Underwriting / IC workflow</th><td class="is-num">3</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">Valuation / pricing</th><td class="is-num">3</td><td class="is-num">11%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Current satisfaction with core systems remains low. The average rating for core loan and portfolio systems is 2.8 out of 5. Pipeline and CRM systems fare slightly better at 3.2 out of 5. Neither score reflects confidence in the current vendor landscape.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>System Satisfaction: A Market Underserved</caption>
+          <thead>
+            <tr><th scope="col">Rating (1–5)</th><th scope="col" class="is-num">Core Loan/Portfolio System</th><th scope="col" class="is-num">Pipeline / CRM System</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">1 (Very Dissatisfied)</th><td class="is-num">4 (11%)</td><td class="is-num">2 (5%)</td></tr>
+            <tr><th scope="row">2</th><td class="is-num">8 (21%)</td><td class="is-num">6 (16%)</td></tr>
+            <tr><th scope="row">3</th><td class="is-num">18 (47%)</td><td class="is-num">16 (42%)</td></tr>
+            <tr><th scope="row">4</th><td class="is-num">7 (18%)</td><td class="is-num">12 (32%)</td></tr>
+            <tr><th scope="row">5 (Very Satisfied)</th><td class="is-num">1 (3%)</td><td class="is-num">2 (5%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Key signal: 47% of respondents rate their core portfolio system at the midpoint (3/5). This is not satisfaction. It is tolerance. The market is enduring mediocre tools because better alternatives do not exist or are too costly to switch to.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- LAYER II — edge-lit divider -->
+  <section class="layer" id="pressure">
+    <div class="layer__inner">
+
+      <div class="layer__heading-group">
+        <span class="pill pill--ice pill--md">Pillar II</span>
+        <div class="layer__heading">
+          <h2 class="layer__title">The LP Pressure Index</h2>
+          <p class="layer__subtitle">Limited partners are no longer passive recipients of quarterly reports. They are active drivers of GP infrastructure modernization. This section captures what LPs are demanding, how that pressure is changing, and where GPs are struggling to respond.</p>
+        </div>
+      </div>
+
+      <ol class="stack__list">
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">I</span>
+          <a class="stack__label stack__link" href="#constraints">Scaling constraints</a>
+        </li>
+        <li class="stack__item">
+          <span class="stack__index">II</span>
+          <span class="stack__label">LP pressure</span>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">III</span>
+          <a class="stack__label stack__link" href="#trajectory">Modernization</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">IV</span>
+          <a class="stack__label stack__link" href="#build-list">Build list</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">V</span>
+          <a class="stack__label stack__link" href="#segments">At scale</a>
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- THE ANALYSIS — white plate. Subsections follow the docx: the Trifecta, then the
+       ODD burden in respondents' own words, then the interviews. -->
+  <section class="insights">
+
+    <article class="insight">
+
+      <header class="insight__header">
+        <span class="insight__number">01</span>
+        <h3 class="insight__title">The Reporting Trifecta</h3>
+      </header>
+
+      <div class="insight__block">
+        <p>Three <span class="nb">reporting-related</span> demands dominate the LP pressure landscape, and they reinforce each other. LPs want reports faster, they want them customized to their templates, and they want selfservice access to the underlying data. Meeting any one of these demands is manageable. Meeting all three simultaneously requires a fundamentally different data architecture than most GPs have today.</p>
+        <p>This is the link between the LP Pressure Index and the Scaling Constraints Map. The LP demands documented here are, in effect, an external forcing function on the same <span class="nb">cross-system</span> data integration problem identified as the #1 scaling constraint. GPs cannot deliver faster, bespoke, ondemand reporting without clean, normalized, continuously updated data pipelines.</p>
+      </div>
+
+    </article>
+
+    <article class="insight">
+
+      <header class="insight__header">
+        <h3 class="insight__title">The ODD Burden: In Their Own Words</h3>
+      </header>
+
+      <div class="insight__block">
+        <p>We asked respondents to describe the hardest recurring LP/ODD request to satisfy. The openended responses reveal a consistent theme: bespoke demands that resist systematization.</p>
+      </div>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“Each ODD is a different template and definitions of required fields are always different.”</p>
+        <footer class="callout__body">— CFO, <span class="nb">Multi-Strategy</span> Platform</footer>
+      </blockquote>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“Side letter report where data is needed from portfolio management system, accounting system, and spreadsheets which don’t have common identifiers.”</p>
+        <footer class="callout__body">— Senior Operations Leader, $50B+ Platform</footer>
+      </blockquote>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“Supporting datasets and documentation: full <span class="nb">transaction-level</span> cash flows, portfolio positionlevel data extract, capital account data feed, <span class="nb">look-through</span> company financials, ESG metric datasets.”</p>
+        <footer class="callout__body">— Head of Data, <span class="nb">Large-Scale</span> Manager</footer>
+      </blockquote>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“<span class="nb">Mark-to-market</span> and timely valuations. Every LP wants it on their schedule.”</p>
+        <footer class="callout__body">— Head of Operations, Direct Lending</footer>
+      </blockquote>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“Frequency and volume of requests. It’s the sheer throughput that breaks us.”</p>
+        <footer class="callout__body">— CTO, <span class="nb">Mid-Market</span> Platform</footer>
+      </blockquote>
+
+    </article>
+
+    <!-- FROM THE INTERVIEWS — docx H3, in source order -->
+    <article class="insight">
+
+      <header class="insight__header">
+        <h3 class="insight__title">From the Interviews: Why LP Pressure is Structural</h3>
+      </header>
+
+      <div class="insight__block">
+        <p>The interviews revealed that LP pressure operates through multiple mechanisms, not all of which are visible in the survey data. At larger platforms, the pressure is <span class="nb">self-reinforcing</span>: competitive positioning creates promises that become operational mandates.</p>
+      </div>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“We’re out there promising things. Daily NAV, <span class="nb">real-time</span> reporting, data room access so LPs can see the underlying company financials. That’s how you attract and differentiate. But once you’ve made that promise, the pressure to actually deliver it flows back onto the front office. And then an LP sees another manager offering the same thing, comes to us and says can you do that too. The promises compound.”</p>
+        <footer class="callout__body">— Product &amp; Strategy Leader, $50B+ Platform</footer>
+      </blockquote>
+
+      <div class="insight__block">
+        <p>A Head of Credit Product at a major technology platform offered a more structural view. In his framing, the reporting pressure is a symptom of a deeper shift in how LPs are asserting themselves:</p>
+      </div>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“LPs are starting to walk with their dollars toward managers who will give them an easier time. If you just need access to an asset class and one manager is going to cost you an extra five to ten FTEs just to process their data because they’re inflexible on format, you’re going to move your commitment elsewhere.”</p>
+        <footer class="callout__body">— Head of Credit Product, Global Technology Platform</footer>
+      </blockquote>
+
+      <div class="insight__block">
+        <p>At smaller firms, the dynamic is different. An emerging manager building from scratch was direct about how LP pressure actually works in practice. In his telling, institutional LPs do not coach GPs on what to upgrade. They run a <span class="nb">red-flag</span> checklist and move on if anything is missing.</p>
+      </div>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“The easiest thing for an LP to do is run their red list. If anyone hits any of those flags, they’re out. Then they sort by returns, by track record, by pedigree, and the top one or two float to the top. They don’t coach you on what to improve. They just move to the next one.”</p>
+        <footer class="callout__body">— CFO, Emerging Manager (<span class="nb">Pre-Launch</span>)</footer>
+      </blockquote>
+
+      <div class="insight__block">
+        <p>A <span class="nb">mid-market</span> Managing Director described a third mechanism: competitive benchmarking. Many of his firm’s LPs are also investors in competitor funds. If another manager provides something his firm does not, those LPs will ask for it. The bar keeps rising because someone else already raised it.</p>
+        <p>One concrete data point from the interviews that deserves specific mention: side letter agreements at some firms now require LP estimates within 10 business days for private credit portfolios. That timeline compresses the entire valuation workflow and puts strain on every upstream process.</p>
+      </div>
+
+    </article>
+
+    <figure class="figure figure--on-light figure--wide">
+      <img class="figure__img" src="Assets/Images/summit-speaker-1600.jpg" srcset="Assets/Images/summit-speaker-800.jpg 800w, Assets/Images/summit-speaker-1600.jpg 1600w, Assets/Images/summit-speaker-2432.jpg 2432w" sizes="(min-width: 1280px) 960px, 94vw" width="2432" height="1590" alt="A panellist in a pale jacket speaks into a microphone, seated between two other panellists" loading="lazy" decoding="async" style="--focus:50% 35%">
+      <figcaption class="figure__caption">
+        <b>A panellist speaking at the inaugural Summit in London</b>
+        <span class="figure__credit">Credits: The Private Markets Forum Team</span>
+      </figcaption>
+    </figure>
+
+  </section>
+
+  <!-- THE EVIDENCE — cream plate. Both figures are tables in the docx. -->
+  <section class="forces" id="pressure-data">
+    <div class="forces__inner">
+
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat__value">74%</span>
+          <span class="stat__label">Report LP/ODD pressure has increased</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">37%</span>
+          <span class="stat__label">Say increase is “significant”</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">#1</span>
+          <span class="stat__label">Faster reporting is top LP demand</span>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>We asked: which LP or allocator requirement is the biggest driver of your infrastructure modernization? The results show a market being reshaped by three closely ranked demands.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption><span class="nb">LP-Driven</span> Modernization Priorities (Weighted Ranking)</caption>
+          <thead>
+            <tr><th scope="col">LP Requirement</th><th scope="col" class="is-num">Weighted</th><th scope="col" class="is-num">#1</th><th scope="col" class="is-num">#2</th><th scope="col" class="is-num">#3</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Faster / more frequent reporting</th><td class="is-num">50</td><td class="is-num">8</td><td class="is-num">9</td><td class="is-num">8</td></tr>
+            <tr><th scope="row">Bespoke reporting formats / templates</th><td class="is-num">45</td><td class="is-num">9</td><td class="is-num">6</td><td class="is-num">6</td></tr>
+            <tr><th scope="row"><span class="nb">Real-time</span> or <span class="nb">on-demand</span> data access</th><td class="is-num">40</td><td class="is-num">7</td><td class="is-num">6</td><td class="is-num">7</td></tr>
+            <tr><th scope="row">More granular portfolio data (<span class="nb">loan-level</span>)</th><td class="is-num">29</td><td class="is-num">5</td><td class="is-num">6</td><td class="is-num">2</td></tr>
+            <tr><th scope="row">Investment guidelines / mandate compliance</th><td class="is-num">16</td><td class="is-num">3</td><td class="is-num">1</td><td class="is-num">5</td></tr>
+            <tr><th scope="row">Valuation / pricing governance</th><td class="is-num">16</td><td class="is-num">2</td><td class="is-num">3</td><td class="is-num">4</td></tr>
+            <tr><th scope="row">Cybersecurity / operational resilience</th><td class="is-num">15</td><td class="is-num">2</td><td class="is-num">4</td><td class="is-num">1</td></tr>
+            <tr><th scope="row">Replicating books and records</th><td class="is-num">10</td><td class="is-num">1</td><td class="is-num">2</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">ODD depth (controls, policies, evidence)</th><td class="is-num">7</td><td class="is-num">1</td><td class="is-num">1</td><td class="is-num">2</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>74% of respondents report that LP/ODD pressure has increased over the past two years. More than one in three say the increase has been significant. This is an accelerating trend.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Pressure Trajectory</caption>
+          <thead>
+            <tr><th scope="col">LP/ODD Pressure Trend</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Significantly increased</th><td class="is-num">14</td><td class="is-num">37%</td></tr>
+            <tr><th scope="row">Somewhat increased</th><td class="is-num">14</td><td class="is-num">37%</td></tr>
+            <tr><th scope="row">Stayed about the same</th><td class="is-num">9</td><td class="is-num">24%</td></tr>
+            <tr><th scope="row">N/A</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- LAYER III — edge-lit divider -->
+  <section class="layer" id="trajectory">
+    <div class="layer__inner">
+
+      <div class="layer__heading-group">
+        <span class="pill pill--ice pill--md">Pillar III</span>
+        <div class="layer__heading">
+          <h2 class="layer__title">The Modernization Trajectory</h2>
+          <p class="layer__subtitle">Where is the industry headed? This section maps what operators have changed in the past 12–18 months, what they plan to prioritize next, and what’s driving those decisions. The picture is an industry in active transformation, led by data platform investments and increasingly by AI deployment at production scale.</p>
+        </div>
+      </div>
+
+      <ol class="stack__list">
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">I</span>
+          <a class="stack__label stack__link" href="#constraints">Scaling constraints</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">II</span>
+          <a class="stack__label stack__link" href="#pressure">LP pressure</a>
+        </li>
+        <li class="stack__item">
+          <span class="stack__index">III</span>
+          <span class="stack__label">Modernization</span>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">IV</span>
+          <a class="stack__label stack__link" href="#build-list">Build list</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">V</span>
+          <a class="stack__label stack__link" href="#segments">At scale</a>
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- THE ANALYSIS — white plate. The only subsection in this pillar without a table
+       of its own is the interview block, so that is what runs here. -->
+  <section class="insights">
+
+    <article class="insight">
+
+      <header class="insight__header">
+        <h3 class="insight__title">From the Interviews: How Operators Think About AI</h3>
+      </header>
+
+      <div class="insight__block">
+        <p>The interviews surfaced sharper frameworks for AI deployment than the survey data alone can capture. The most pointed came from a strategy leader at a $50B+ platform, who drew a clear line between firms that are succeeding with AI and those that are not.</p>
+      </div>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“The companies that have done successful AI implementation go an inch wide and a mile deep. They fully automate one specific workflow that they’ve already mastered manually. Then you put an agent on it. The mistake is thinking you can just drop in an LLM and it’ll figure things out.”</p>
+        <footer class="callout__body">— Product &amp; Strategy Leader, $50B+ Platform</footer>
+      </blockquote>
+
+      <div class="insight__block">
+        <p>His framework for the <span class="nb">build-versus-buy</span> question in the AI era was equally direct: build what is bespoke and differentiating, buy what someone else has already solved. The interesting shift is that AI has made building so cheap that the old calculus is changing. But the prerequisite for all of it, in his view, is structured data in a warehouse. Without that foundation, AI deployment is premature.</p>
+        <p>On the <span class="nb">human-in-the-loop</span> question, a Managing Director at a <span class="nb">mid-market</span> firm was clear about where the line sits. His firm uses AI to process volume at the front end of the deal pipeline, filtering thousands of potential deals down to the ones worth serious attention. But no final investment decision will ever be made purely off AI output. The tool filters and prioritizes. A human being makes the final call every time. That boundary, in his view, is <span class="nb">non-negotiable</span> in private credit.</p>
+        <p>That same respondent was candid about the noise level in the AI vendor market. He receives cold outreach weekly from AI products promising to automate some part of his process. His observation:</p>
+        <p>if he believed everything he was being pitched, his firm could let AI run the entire business. The challenge is not finding AI products. It is evaluating which ones actually meet the firm’s standards.</p>
+      </div>
+
+    </article>
+
+  </section>
+
+  <!-- THE EVIDENCE — cream plate. All nine figures are tables in the docx. -->
+  <section class="forces" id="trajectory-data">
+    <div class="forces__inner">
+
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat__value">45%</span>
+          <span class="stat__label">Scaling AUM as primary trigger</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">79%</span>
+          <span class="stat__label">Increasing tech budgets</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">61%</span>
+          <span class="stat__label">AI in production (1+ workflows)</span>
+        </div>
+      </div>
+
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Respondents identified the infrastructure changes their firms have made in the past 12–18 months. Data platform implementation and data workflow automation lead by a wide margin, each cited by 45% of respondents.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>What Firms Have Changed (Last 12–18 Months)</caption>
+          <thead>
+            <tr><th scope="col">Change Made</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Implemented data platform (warehouse/lakehouse)</th><td class="is-num">17</td><td class="is-num">45%</td></tr>
+            <tr><th scope="row">Automated data workflows (ingestion, monitoring, exceptions)</th><td class="is-num">17</td><td class="is-num">45%</td></tr>
+            <tr><th scope="row">Introduced AI/ML in production</th><td class="is-num">13</td><td class="is-num">34%</td></tr>
+            <tr><th scope="row">Cyber / resilience program improvements</th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">Strengthened reconciliation / accounting controls</th><td class="is-num">9</td><td class="is-num">24%</td></tr>
+            <tr><th scope="row">Made outsourcing/insourcing/<span class="nb">co-sourcing</span> decision</th><td class="is-num">9</td><td class="is-num">24%</td></tr>
+            <tr><th scope="row">Added/changed core portfolio/loan system</th><td class="is-num">9</td><td class="is-num">24%</td></tr>
+            <tr><th scope="row">Upgraded LP reporting process / portal</th><td class="is-num">7</td><td class="is-num">18%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Looking ahead, data workflow automation holds the top position. AI deployment and data platform investment follow closely. The industry’s forward agenda is converging on a clear stack: unified data, automated workflows, <span class="nb">AI-augmented</span> processes.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Priorities for the Next 12–18 Months (Weighted)</caption>
+          <thead>
+            <tr><th scope="col">Priority</th><th scope="col" class="is-num">Weighted</th><th scope="col" class="is-num">Top 1</th><th scope="col" class="is-num">Top 2</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Automated data workflows</th><td class="is-num">28</td><td class="is-num">9</td><td class="is-num">10</td></tr>
+            <tr><th scope="row">Data platform (warehouse/lakehouse)</th><td class="is-num">19</td><td class="is-num">8</td><td class="is-num">3</td></tr>
+            <tr><th scope="row">AI/ML in production</th><td class="is-num">18</td><td class="is-num">7</td><td class="is-num">4</td></tr>
+            <tr><th scope="row">Reconciliation / accounting controls</th><td class="is-num">15</td><td class="is-num">3</td><td class="is-num">9</td></tr>
+            <tr><th scope="row">LP reporting process / portal</th><td class="is-num">14</td><td class="is-num">6</td><td class="is-num">2</td></tr>
+            <tr><th scope="row">Core portfolio/loan system</th><td class="is-num">8</td><td class="is-num">2</td><td class="is-num">4</td></tr>
+            <tr><th scope="row">Outsourcing/insourcing decision</th><td class="is-num">8</td><td class="is-num">2</td><td class="is-num">4</td></tr>
+            <tr><th scope="row">Cyber / resilience</th><td class="is-num">4</td><td class="is-num">1</td><td class="is-num">2</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="chart__source is-narrow">Methodology: Weighted score assigns 2 points for Top 1 priority and 1 point for Top 2.</p>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>What’s driving the next wave of investment? Scaling AUM remains the dominant trigger, but multistrategy complexity has risen sharply as a modernization driver (21%), reflecting the industry’s expansion beyond direct lending into ABF, structured credit, and <span class="nb">multi-asset</span> platforms.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Primary Triggers for Modernization</caption>
+          <thead>
+            <tr><th scope="col">Trigger</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Scaling AUM / deal volume</th><td class="is-num">17</td><td class="is-num">45%</td></tr>
+            <tr><th scope="row">Adding strategies / <span class="nb">multi-strategy</span> complexity</th><td class="is-num">8</td><td class="is-num">21%</td></tr>
+            <tr><th scope="row">Entering / scaling wealth channels</th><td class="is-num">6</td><td class="is-num">16%</td></tr>
+            <tr><th scope="row">Cost reduction / efficiency push</th><td class="is-num">4</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">LP/ODD requirements</th><td class="is-num">2</td><td class="is-num">5%</td></tr>
+            <tr><th scope="row">Competitive pressure (peers are ahead)</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The AI adoption curve in private credit has moved faster than many anticipated. 61% of respondents now have AI deployed in production for at least one workflow. One in four run AI across multiple workflows. The “exploring” phase is over for the majority of the market.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>AI/Automation: From Pilot to Production</caption>
+          <thead>
+            <tr><th scope="col">AI Journey Stage</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">In production for multiple workflows</th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">In production for 1–2 workflows</th><td class="is-num">13</td><td class="is-num">34%</td></tr>
+            <tr><th scope="row">Piloting in limited use cases</th><td class="is-num">8</td><td class="is-num">21%</td></tr>
+            <tr><th scope="row">Exploring / evaluating vendors</th><td class="is-num">6</td><td class="is-num">16%</td></tr>
+            <tr><th scope="row">Not exploring yet</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Document extraction is the consensus entry point and the most widely deployed AI use case across the sample. But the ambition extends further: investment memo drafting is already the second most common AI workflow, and covenant tracking and monitoring are in active deployment.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Where AI Is Being Deployed</caption>
+          <thead>
+            <tr><th scope="col">AI Workflow (<span class="nb">multi-select</span>)</th><th scope="col" class="is-num">Firms Using</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Document extraction / financial spreading</th><td class="is-num">26</td><td class="is-num">68%</td></tr>
+            <tr><th scope="row">Investment memo drafting</th><td class="is-num">17</td><td class="is-num">45%</td></tr>
+            <tr><th scope="row">LP reporting / data extraction</th><td class="is-num">11</td><td class="is-num">29%</td></tr>
+            <tr><th scope="row">Covenant tracking / compliance checking</th><td class="is-num">7</td><td class="is-num">18%</td></tr>
+            <tr><th scope="row">Monitoring alerts / exception triage</th><td class="is-num">7</td><td class="is-num">18%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>When asked where they see the single biggest opportunity for AI in the application stack, the answers extend well beyond current deployment. Underwriting and credit analysis (24%) and covenant compliance (21%) rank close behind data ingestion (29%), signaling where investment will concentrate next.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Biggest AI Opportunity Area</caption>
+          <thead>
+            <tr><th scope="col">Biggest AI Opportunity</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Data ingestion / document extraction</th><td class="is-num">11</td><td class="is-num">29%</td></tr>
+            <tr><th scope="row">Underwriting / credit analysis</th><td class="is-num">9</td><td class="is-num">24%</td></tr>
+            <tr><th scope="row">Covenant compliance / legal review</th><td class="is-num">8</td><td class="is-num">21%</td></tr>
+            <tr><th scope="row">Portfolio monitoring / exception management</th><td class="is-num">5</td><td class="is-num">13%</td></tr>
+            <tr><th scope="row">Risk analytics / valuation</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+            <tr><th scope="row">LP reporting / investor communications</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The hybrid model—combining vendor solutions with internal customization—is the dominant deployment approach (39%). This suggests that <span class="nb">off-the-shelf</span> AI tools are insufficient for the nuances of private credit workflows. Firms need the ability to adapt and control. The 26% building <span class="nb">in-house</span> using enterprise LLM APIs (OpenAI, Anthropic) reflects the technical depth of larger platforms.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Deployment Approach</caption>
+          <thead>
+            <tr><th scope="col">Approach</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Hybrid (vendor + internal customization)</th><td class="is-num">15</td><td class="is-num">39%</td></tr>
+            <tr><th scope="row">Built <span class="nb">in-house</span> using enterprise LLM APIs</th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">Purchased vendor solution with AI <span class="nb">built-in</span></th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">Haven’t successfully deployed yet</th><td class="is-num">2</td><td class="is-num">5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Governance is tightening alongside deployment. Half of respondents operate under a guided posture with policies in place and vendor approval required. 26% describe their posture as restrictive. The market has moved past the “move fast and break things” phase into structured, <span class="nb">policy-driven</span> adoption.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>AI Governance</caption>
+          <thead>
+            <tr><th scope="col">Governance Posture</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Guided (policies, vendor approval required)</th><td class="is-num">19</td><td class="is-num">50%</td></tr>
+            <tr><th scope="row">Restrictive (formal approval, limited use cases)</th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">Open (minimal restrictions, experiment encouraged)</th><td class="is-num">5</td><td class="is-num">13%</td></tr>
+            <tr><th scope="row">No formal policy yet</th><td class="is-num">2</td><td class="is-num">5%</td></tr>
+            <tr><th scope="row">Blocked (AI tools not currently permitted)</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <!-- LAYER IV — edge-lit divider -->
+  <section class="layer" id="build-list">
+    <div class="layer__inner">
+
+      <div class="layer__heading-group">
+        <span class="pill pill--ice pill--md">Pillar IV</span>
+        <div class="layer__heading">
+          <h2 class="layer__title">The Build List</h2>
+          <p class="layer__subtitle">The final pillar surfaces what doesn’t exist yet, or doesn’t exist well enough. These are the infrastructure gaps the market needs filled. The data here comes from three <span class="nb">open-ended</span> questions that together map the industry’s unmet needs, interoperability pain points, and demand for peer intelligence.</p>
+        </div>
+      </div>
+
+      <ol class="stack__list">
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">I</span>
+          <a class="stack__label stack__link" href="#constraints">Scaling constraints</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">II</span>
+          <a class="stack__label stack__link" href="#pressure">LP pressure</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">III</span>
+          <a class="stack__label stack__link" href="#trajectory">Modernization</a>
+        </li>
+        <li class="stack__item">
+          <span class="stack__index">IV</span>
+          <span class="stack__label">Build list</span>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">V</span>
+          <a class="stack__label stack__link" href="#segments">At scale</a>
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- THE ANALYSIS — white plate: the one subsection in this pillar with no table -->
+  <section class="insights">
+
+    <article class="insight">
+
+      <header class="insight__header">
+        <h3 class="insight__title">From the Interviews: The Data Model as Foundation</h3>
+      </header>
+
+      <div class="insight__block">
+        <p>The interviews reinforced the unified data model finding with operator experience. A Credit Controller at a firm that built its credit business from scratch within a larger PE platform described attending a Private Funds CFO conference where the question “if you had to start over, what would you do first?” came up repeatedly. The answer was <span class="nb">near-universal</span>:</p>
+      </div>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“A unified data model with a data warehouse where all position and accounting data from various sources flows into one place, all the relationships are built, everything speaks to each other. I left that conference thinking: I think we got that one right. It’s probably the hardest thing to undo as you scale, because everything builds on top of it.”</p>
+        <footer class="callout__body">— Credit Controller, PE Platform with Nascent Credit Strategy</footer>
+      </blockquote>
+
+      <div class="insight__block">
+        <p>A Head of Credit Product at a major technology platform offered the most structural version of the build list answer. His wand wave was not a technology feature but a market structure change: lifecycle activity in private credit (paydowns, amendments, agent notices) is still processed through PDFs that people then scrape with LLMs. His vision is that a paydown should be captured as a digital record at the moment it is created, then disseminated directly to systems of record as a transaction.</p>
+      </div>
+
+      <blockquote class="callout callout--auto">
+        <p class="callout__label">“In 2026, in an <span class="nb">AI-first</span> era, that makes no sense. The paydown should be captured as a digital record at the moment it’s created. Not: create it digitally, print it to paper, send it as a PDF, and then reconstruct the digital record on the receiving end.”</p>
+        <footer class="callout__body">— Head of Credit Product, Global Technology Platform</footer>
+      </blockquote>
+
+      <div class="insight__block">
+        <p>His point was that individual <span class="nb">firm-level</span> technology improvements will always be capped in their impact if the underlying market rails do not change. That change requires ecosystem participants (technology providers, data providers, agent banks, lenders) to coordinate. It will not happen through individual firm action alone.</p>
+      </div>
+
+    </article>
+
+    <div class="figure-pair">
+      <figure class="figure figure--on-light">
+        <img class="figure__img" src="Assets/Images/summit-panel-session-1600.jpg" srcset="Assets/Images/summit-panel-session-800.jpg 800w, Assets/Images/summit-panel-session-1600.jpg 1600w, Assets/Images/summit-panel-session-2432.jpg 2432w" sizes="(min-width: 1280px) 584px, (min-width: 900px) 47vw, 94vw" width="2432" height="1624" alt="Four panellists seated on stage in front of a wooden wall; a woman at the centre speaks into a microphone" loading="lazy" decoding="async" style="--focus:50% 40%">
+        <figcaption class="figure__caption">
+          <b>Panellists in session at the Private Markets Technology Summit</b>
+          <span class="figure__credit">Credits: The Private Markets Forum Team</span>
+        </figcaption>
+      </figure>
+      <figure class="figure figure--on-light">
+        <img class="figure__img" src="Assets/Images/summit-panel-discussion-1600.jpg" srcset="Assets/Images/summit-panel-discussion-800.jpg 800w, Assets/Images/summit-panel-discussion-1600.jpg 1600w, Assets/Images/summit-panel-discussion-2432.jpg 2432w" sizes="(min-width: 1280px) 584px, (min-width: 900px) 47vw, 94vw" width="2432" height="1622" alt="Three panellists seated on stage; the one in the centre speaks into a microphone while the others listen" loading="lazy" decoding="async" style="--focus:50% 45%">
+        <figcaption class="figure__caption">
+          <b>A point made from the panel</b>
+          <span class="figure__credit">Credits: The Private Markets Forum Team</span>
+        </figcaption>
+      </figure>
+    </div>
+
+  </section>
+
+  <!-- THE EVIDENCE — cream plate. All three figures are tables in the docx. -->
+  <section class="forces" id="build-data">
+    <div class="forces__inner">
+
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat__value">45%</span>
+          <span class="stat__label">Want a unified <span class="nb">cross-strategy</span> data model</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">32%</span>
+          <span class="stat__label">Want common private credit identifiers</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">32%</span>
+          <span class="stat__label">Want to see peers’ technology stacks</span>
+        </div>
+      </div>
+
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>We asked: if you could wave a wand and solve one operational problem, what would it be? The responses cluster tightly. The unified data model is the clear winner, cited by nearly half the sample. This is the single strongest signal in the entire survey.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>“Wave a Wand”: The #1 Operational Problem to Solve</caption>
+          <thead>
+            <tr><th scope="col">Problem to Solve</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">A unified data model across strategies and systems</th><td class="is-num">17</td><td class="is-num">45%</td></tr>
+            <tr><th scope="row">Clean, standardized borrower data ingestion at scale</th><td class="is-num">6</td><td class="is-num">16%</td></tr>
+            <tr><th scope="row">Monitoring + exception management without headcount growth</th><td class="is-num">4</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">LP reporting / ODD response that’s fast and repeatable</th><td class="is-num">3</td><td class="is-num">8%</td></tr>
+            <tr><th scope="row">Wealth channel operations at scale</th><td class="is-num">3</td><td class="is-num">8%</td></tr>
+            <tr><th scope="row">ABF collateral / borrowing base verification</th><td class="is-num">2</td><td class="is-num">5%</td></tr>
+            <tr><th scope="row">Reconciliation that is <span class="nb">low-touch</span> and <span class="nb">cross-system</span></th><td class="is-num">2</td><td class="is-num">5%</td></tr>
+            <tr><th scope="row">Covenant tracking that is reliable and auditable</th><td class="is-num">1</td><td class="is-num">3%</td></tr>
+          </tbody>
+          <tfoot><tr><td>All respondents</td><td class="is-num">38</td><td class="is-num">100%</td></tr></tfoot>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The dominance of the unified data model response (45%) reflects a fundamental architectural deficit. Most private credit platforms operate with fragmented data spread across multiple systems, strategies, and formats. The direct lending team uses one system. The ABF team uses another. The accounting team uses a third. And the reporting team stitches them together manually.</p>
+          <p>Until this problem is solved, every downstream function—reporting, risk, compliance, monitoring— will continue to require manual intervention to bridge the gaps. This is why <span class="nb">cross-system</span> integration appears as the #1 weighted scaling constraint, the #3 manual workaround area, and the dominant “wand” answer. The industry is describing the same problem from three different angles.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>We asked which data standard or interoperability problem respondents would most like solved. The responses identify three distinct layers of the standards problem.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Interoperability and Standards Gaps</caption>
+          <thead>
+            <tr><th scope="col">Standard / Interoperability Need</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Common identifiers for private credit assets</th><td class="is-num">12</td><td class="is-num">32%</td></tr>
+            <tr><th scope="row">Standardized LP reporting template</th><td class="is-num">10</td><td class="is-num">26%</td></tr>
+            <tr><th scope="row">Common API standards for system integration</th><td class="is-num">8</td><td class="is-num">21%</td></tr>
+            <tr><th scope="row">Standardized borrower / loan tape format</th><td class="is-num">6</td><td class="is-num">16%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The call for common identifiers (32%) addresses a structural gap. Unlike public securities with CUSIPs or ISINs, private credit assets lack a universal identifier. This makes automated tracking, settlement, and <span class="nb">cross-platform</span> reconciliation structurally difficult. The LSTA’s push for FIGI adoption in private credit is a step forward, but the gap remains wide.</p>
+          <p>The demand for a standardized LP reporting template (26%) mirrors the ODD burden documented in Section II. One respondent captured it precisely: the challenge is not the lack of a standard. It is that every LP continues to send their own template regardless of what standards exist. ILPA’s 2.0 templates represent progress, but respondents indicate they remain one more format rather than a replacement.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The final question surfaces latent demand for benchmarking and peer intelligence. These responses carry direct implications for the ongoing value of this research program.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>What Operators Want to Learn from Peers</caption>
+          <thead>
+            <tr><th scope="col">Peer Intelligence Need</th><th scope="col" class="is-num">Count</th><th scope="col" class="is-num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Technology stack decisions (what systems peers use)</th><td class="is-num">12</td><td class="is-num">32%</td></tr>
+            <tr><th scope="row">What ‘good’ looks like (benchmarks / maturity model)</th><td class="is-num">11</td><td class="is-num">29%</td></tr>
+            <tr><th scope="row">Vendor vs. build decisions (what worked)</th><td class="is-num">6</td><td class="is-num">16%</td></tr>
+            <tr><th scope="row">Implementation pitfalls / change management</th><td class="is-num">4</td><td class="is-num">11%</td></tr>
+            <tr><th scope="row">Org model / headcount ratios</th><td class="is-num">3</td><td class="is-num">8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The top two responses are closely linked: operators want to know what systems their peers are running (32%) and what “good” looks like as a benchmark (29%). Together, 61% of respondents are asking for operational intelligence that does not currently exist in private credit. The industry benchmarks available in public markets—risk management maturity frameworks, technology spend ratios, staffing models—have no equivalent here.</p>
+          <p>The interviews confirmed this demand in the most direct terms. A Managing Director at a <span class="nb">mid-market</span> firm described how he currently makes technology adoption decisions: by calling peers and competitors to ask what they are using.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <blockquote class="callout callout--auto">
+          <p class="callout__label">“If I had access to a survey showing that 50% of private credit firms are using a given product, that single data point would make decisions significantly easier. The market is so crowded with competing products that any real data on what’s actually being adopted would be enormously helpful.”</p>
+          <footer class="callout__body">— Managing Director, <span class="nb">Mid-Market</span> <span class="nb">Multi-Strategy</span> Firm</footer>
+        </blockquote>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>He went further, noting that there is no Forrester or Gartner equivalent for private credit infrastructure. No independent research presence covers the space. If one existed, he said, there would be clear demand for it.</p>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <!-- LAYER V — edge-lit divider -->
+  <section class="layer" id="segments">
+    <div class="layer__inner">
+
+      <div class="layer__heading-group">
+        <span class="pill pill--ice pill--md">Pillar V</span>
+        <div class="layer__heading">
+          <h2 class="layer__title">What Breaks at Scale: Segmented Analysis</h2>
+          <p class="layer__subtitle">The aggregate findings tell a clear story. But infrastructure challenges are not uniform across the industry. Firms at different stages of growth face different constraints, feel different LP pressures, and adopt technology at different speeds. This section segments the data by AUM tier to surface the patterns that only emerge when you look beneath the averages.</p>
+        </div>
+      </div>
+
+      <ol class="stack__list">
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">I</span>
+          <a class="stack__label stack__link" href="#constraints">Scaling constraints</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">II</span>
+          <a class="stack__label stack__link" href="#pressure">LP pressure</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">III</span>
+          <a class="stack__label stack__link" href="#trajectory">Modernization</a>
+        </li>
+        <li class="stack__item stack__item--muted">
+          <span class="stack__index">IV</span>
+          <a class="stack__label stack__link" href="#build-list">Build list</a>
+        </li>
+        <li class="stack__item">
+          <span class="stack__index">V</span>
+          <span class="stack__label">At scale</span>
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- THE EVIDENCE — cream plate. Every subsection in this pillar carries a table,
+       so the whole segmented analysis runs here. No bar charts: the docx has none. -->
+  <section class="forces" id="segments-data">
+    <div class="forces__inner">
+
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>AUM Tier Definitions</caption>
+          <thead>
+            <tr><th scope="col">Tier</th><th scope="col">Definition</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Emerging (&lt;$5B)</th><td><span class="nb">Growth-stage</span> firms building foundational infrastructure.</td></tr>
+            <tr><th scope="row"><span class="nb">Mid-Market</span> ($5–$30B)</th><td>Scaling firms hitting integration complexity for the first time.</td></tr>
+            <tr><th scope="row">Large Platform ($30B+)</th><td><span class="nb">Multi-strategy</span> platforms managing legacy systems at institutional scale.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The top scaling constraints shift markedly across firm sizes. Each tier faces a fundamentally different version of the infrastructure challenge.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Where It Breaks: Constraints by Tier</caption>
+          <thead>
+            <tr><th scope="col">Rank</th><th scope="col">Emerging (&lt;$5B)</th><th scope="col"><span class="nb">Mid-Market</span> ($5–$30B)</th><th scope="col">Large Platform ($30B+)</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">#1</th><td>Talent (hiring/retaining)</td><td>Talent + Reconciliation (tied)</td><td>LP reporting</td></tr>
+            <tr><th scope="row">#2</th><td><span class="nb">Cross-system</span> integration</td><td>Market data availability</td><td><span class="nb">Cross-system</span> integration</td></tr>
+            <tr><th scope="row">#3</th><td>Portfolio monitoring</td><td>Data ingestion</td><td>Portfolio monitoring</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The pattern tells a clear story. Emerging firms are constrained by people. They lack the headcount to run operations at even moderate scale. <span class="nb">Mid-market</span> firms are constrained by process. Reconciliation, data ingestion, and market data gaps reflect the growing pains of adding complexity without adequate tooling. Large platforms are constrained by architecture. LP reporting and crosssystem integration dominate because these firms have multiple systems across multiple strategies that were never designed to work together.</p>
+          <p>Notably, talent drops from the #1 constraint at emerging firms to a <span class="nb">non-factor</span> for large platforms. This is not because large firms have solved the talent problem. It is because at scale, the architectural constraints become so dominant that they overshadow even chronic understaffing.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>LP pressure is not uniform. It intensifies sharply with firm size, and the nature of the pressure shifts.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>LP Pressure Intensity by Tier</caption>
+          <thead>
+            <tr><th scope="col">Metric</th><th scope="col">Emerging (&lt;$5B)</th><th scope="col"><span class="nb">Mid-Market</span> ($5–$30B)</th><th scope="col">Large Platform ($30B+)</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Pressure increased</th><td>67%</td><td>70%</td><td>79%</td></tr>
+            <tr><th scope="row">“Significantly” increased</th><td>22%</td><td>30%</td><td>47%</td></tr>
+            <tr><th scope="row">Top LP driver</th><td>Faster reporting</td><td>Granular data + Cyber</td><td>Bespoke templates</td></tr>
+            <tr><th scope="row">#2 LP driver</th><td>Bespoke templates</td><td><span class="nb">Real-time</span> data access</td><td><span class="nb">Real-time</span> data access</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The gradient is striking. Nearly half of large platforms report a significant increase in LP/ODD pressure, compared to roughly one in five emerging managers. But the more actionable insight is in what LPs are asking for. Emerging managers face a straightforward demand: report faster. Large platforms face a more complex challenge: deliver bespoke, <span class="nb">real-time</span>, <span class="nb">self-service</span> data access across diverse investor types. The infrastructure required to serve these two demands is fundamentally different.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>One of the more surprising findings in the segmented data: AI adoption does not follow a simple size gradient. Emerging firms are deploying AI at nearly the same rate as large platforms, but the approach is radically different.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>AI Adoption: Not a Straight Line</caption>
+          <thead>
+            <tr><th scope="col">Metric</th><th scope="col">Emerging (&lt;$5B)</th><th scope="col"><span class="nb">Mid-Market</span> ($5–$30B)</th><th scope="col">Large Platform ($30B+)</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">AI in production</th><td>78%</td><td>40%</td><td>63%</td></tr>
+            <tr><th scope="row">Multiple workflows</th><td>22%</td><td>10%</td><td>37%</td></tr>
+            <tr><th scope="row">Dominant approach</th><td>Built <span class="nb">in-house</span> (44%)</td><td>Vendor solution (60%)</td><td>Hybrid (58%)</td></tr>
+            <tr><th scope="row">Budget increasing</th><td>89%</td><td>80%</td><td>74%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>The <span class="nb">emerging-firm</span> cohort defies expectations. 78% have AI in production, the highest rate in the sample. They are disproportionately building <span class="nb">in-house</span> using enterprise LLM APIs, suggesting that smaller, <span class="nb">tech-forward</span> teams are moving faster precisely because they lack legacy systems to integrate around. They are building <span class="nb">AI-native</span> workflows from scratch.</p>
+          <p>One emerging manager in the interview cohort captured this dynamic precisely. He compared the situation to banking infrastructure: South Africa skipped checks entirely and went straight to electronic fund transfers because they started later. The same principle applies to private credit firms launching today.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <blockquote class="callout callout--auto">
+          <p class="callout__label">“Every firm, every project, every organization that starts later gets the benefit of building at the current technology level. It would make no sense for me to build an antiquated data workflow and then modernize it in two years. There’s no legacy. There’s no technical debt. I get to start where the industry is today.”</p>
+          <footer class="callout__body">— CFO, Emerging Manager (<span class="nb">Pre-Launch</span>)</footer>
+        </blockquote>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p><span class="nb">Mid-market</span> firms are the laggards, with only 40% in production. This may reflect the worst of both worlds: large enough to face complexity but not large enough to fund dedicated AI engineering teams. Their reliance on vendor solutions (60%) supports this interpretation.</p>
+          <p>Large platforms deploy the hybrid model (58%), combining vendor tools with internal customization. They have the engineering resources to adapt <span class="nb">off-the-shelf</span> AI to their specific workflows, but the integration challenge with legacy systems slows deployment relative to greenfield emerging firms.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Core system dissatisfaction is universal, but the response differs. Emerging firms are the least satisfied (average 2.4/5) yet build at a lower rate. Large platforms are marginally more satisfied (2.9/5) but build at the highest rate, suggesting that large firms have both the resources and the necessity to work around inadequate vendor solutions.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>System Satisfaction and the Build Response</caption>
+          <thead>
+            <tr><th scope="col">Metric</th><th scope="col">Emerging (&lt;$5B)</th><th scope="col"><span class="nb">Mid-Market</span> ($5–$30B)</th><th scope="col">Large Platform ($30B+)</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Core system satisfaction</th><td>2.4 / 5</td><td>3.0 / 5</td><td>2.9 / 5</td></tr>
+            <tr><th scope="row">Built internal tools</th><td>67%</td><td>60%</td><td>79%</td></tr>
+            <tr><th scope="row">Top manual workaround</th><td>Valuation / <span class="nb">mark-to-market</span></td><td>Data ingestion / spreading</td><td>3-way tie: Ingestion, LP reporting, Data stitching</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>We also examined whether <span class="nb">multi-strategy</span> firms (running 3+ strategies) differ from more focused firms on the data integration constraint. The answer is yes, but the gap is narrower than expected.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption><span class="nb">Strategy-Based</span> View: <span class="nb">Multi-Strategy</span> Complexity</caption>
+          <thead>
+            <tr><th scope="col">Metric</th><th scope="col" class="is-num"><span class="nb">Multi-Strategy</span> (n=22)</th><th scope="col" class="is-num">Focused (n=16)</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><span class="nb">Cross-system</span> integration in top 3</th><td class="is-num">59%</td><td class="is-num">44%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>59% of <span class="nb">multi-strategy</span> firms rank <span class="nb">cross-system</span> data integration in their top three constraints, compared to 44% of focused firms. The gap confirms that strategy complexity compounds the integration challenge, but the fact that nearly half of focused firms also rank it highly indicates that the problem is pervasive regardless of strategy count. Even a <span class="nb">single-strategy</span> firm running direct lending with separate systems for origination, portfolio management, and reporting faces integration pain.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>Perhaps the most telling finding in the segmented analysis: the “wave a wand” answer is consistent across all three tiers. A unified data model is the #1 response regardless of firm size.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>The Unified Data Model: Universal Demand</caption>
+          <thead>
+            <tr><th scope="col">Metric</th><th scope="col" class="is-num">Emerging (&lt;$5B)</th><th scope="col" class="is-num"><span class="nb">Mid-Market</span> ($5–$30B)</th><th scope="col" class="is-num">Large Platform ($30B+)</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">“Unified data model”</th><td class="is-num">33%</td><td class="is-num">50%</td><td class="is-num">47%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="forces__note">
+        <div class="forces__prose">
+          <p>This universality is significant. It means the demand for a unified data layer is not a <span class="nb">large-firm</span> luxury or a <span class="nb">scaling-stage</span> bottleneck. It is a foundational gap across the entire industry. Emerging firms want it because they are building from scratch and see the opportunity to get it right early. Large platforms want it because they are drowning in the consequences of not having it. The market opportunity for solutions that address this need spans the full AUM spectrum.</p>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <!-- CONCLUSION — radial navy plate: the section is the closing argument -->
+  <section class="actions on-dark" id="conclusion">
+
+    <div class="actions__intro">
+      <h2 class="actions__title">Conclusion: The Infrastructure Imperative</h2>
+      <p class="actions__lead">The survey data paints a consistent picture: private credit's infrastructure is not keeping pace with its ambition. The industry is growing at 1.5–2x. LP demands are intensifying. <span class="nb">Multi-strategy</span> complexity is compounding. And the operational systems that underpin most platforms were built for a smaller, simpler era.</p>
+      <div class="actions__prose">
+        <p>The good news is that the industry knows it. Technology budgets are rising. AI is moving from exploration to production. Data platforms are being built. But the core architectural challenge— creating a unified, normalized data layer that can serve multiple strategies, multiple investor types, and multiple reporting demands simultaneously—remains the industry’s most critical unsolved problem.</p>
+        <p>The firms that solve this first will be the platforms that scale. The vendors that build to this need will find a market starving for solutions. And the industry standards that emerge—common identifiers, standardized loan tapes, interoperable APIs—will be the foundation on which the next generation of private credit infrastructure is built.</p>
+      </div>
+    </div>
+
+    <div class="actions__figure">
+      <div class="table-wrap is-narrow">
+        <table class="table table--on-dark">
+          <thead>
+            <tr><th scope="col">Pillar</th><th scope="col">Key Finding</th><th scope="col">Headline Metric</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Scaling Constraints</th><td><span class="nb">Cross-system</span> data integration is the #1 weighted constraint. 71% build internal tools because the market is underserved. Core system satisfaction: 2.8/5.</td><td>53% rank integration in top 3</td></tr>
+            <tr><th scope="row">LP Pressure Index</th><td>LPs are pushing from document delivery to data delivery. Faster reporting, bespoke templates, and <span class="nb">real-time</span> access are the top three demands.</td><td>74% report rising pressure</td></tr>
+            <tr><th scope="row">Modernization Trajectory</th><td>Data platforms and workflow automation lead recent and planned investment. AI has crossed from pilot to production for 61% of firms.</td><td>61% have AI in production</td></tr>
+            <tr><th scope="row">Build List</th><td>Unified data model is the dominant #1 need (45%). Common identifiers and peer benchmarking are the top standards and intelligence gaps.</td><td>45% want unified data model</td></tr>
+            <tr><th scope="row">Segmented Analysis</th><td>Emerging firms break on people, <span class="nb">mid-market</span> on process, large platforms on architecture. AI adoption is <span class="nb">non-linear</span>: emerging firms lead at 78%.</td><td>People → Process → Architecture</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- APPENDIX: METHODOLOGY — cream plate: supporting material -->
+  <section class="forces" id="method">
+    <div class="forces__inner">
+
+      <div class="forces__intro">
+        <h2 class="forces__title">Appendix: Methodology</h2>
+      </div>
+
+      <div class="forces__note">
+        <h3 class="chart__title">Survey Design</h3>
+        <div class="forces__prose">
+          <p>The 2026 Private Credit Infrastructure Survey was designed as a structured, quantitative instrument targeting operational and technology leaders at private credit managers. The survey covers firm context, scaling constraints, manual workaround concentration, LP pressure drivers, modernization trajectory, AI adoption, and <span class="nb">open-ended</span> gap identification.</p>
+          <p>Question design prioritized <span class="nb">forced-ranking</span> approaches over “select all that apply” formats for prioritization questions, enabling weighted scoring analysis that reveals true prioritization rather than general acknowledgment. All ranking questions use a top-3 format with explicit ordinal selection.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <h3 class="chart__title">Data Collection</h3>
+        <div class="forces__prose">
+          <p>The survey was deployed via Typeform and distributed through The Private Markets Forum’s network of private credit operators, with targeted outreach to COOs, CTOs, CIOs, Heads of Data, and other operational and technology leadership. Survey design was <span class="nb">stress-tested</span> with senior industry operators prior to launch. This report reflects responses from 38 senior operators collected between January and March 2026. The sample was built through targeted outreach — not broad distribution — with the explicit goal of reaching the <span class="nb">decision-makers</span> at the largest and most operationally complex platforms in the market. 42% of respondents manage $50B+ in private credit assets. Findings are further enriched by <span class="nb">follow-up</span> qualitative interviews with select operators conducted while the survey was still in the field. These interviews inform the narrative analysis throughout this report.</p>
+        </div>
+      </div>
+
+      <div class="forces__note">
+        <h3 class="chart__title">Analysis Approach</h3>
+        <div class="forces__prose">
+          <p>Ranking questions are analyzed using weighted scoring (3 points for #1 selection, 2 for #2, 1 for #3) to surface true prioritization. <span class="nb">Multi-select</span> and categorical questions are reported as simple frequency distributions. <span class="nb">Open-ended</span> responses are thematically coded and reported as aggregated categories with representative anonymized quotations. All data is aggregated and anonymized. No individual firm or respondent is identified in this report.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap is-narrow">
+        <table class="table">
+          <caption>Sample Composition</caption>
+          <thead>
+            <tr><th scope="col">Dimension</th><th scope="col">Distribution</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">AUM</th><td>42% $50B+ | 21% &lt;$1B | 16% $5–$15B | 11% $15–$30B | 11% Other</td></tr>
+            <tr><th scope="row">Primary Role</th><td>47% CTO/Tech | 16% MD/Partner | 11% Head of Data | 26% Other Ops/<span class="nb">C-Suite</span></td></tr>
+            <tr><th scope="row">Growth Trajectory</th><td>50% 1.25–2x | 24% 2x+ | 11% &lt;1.25x | 11% Uncertain | 5% Flat</td></tr>
+            <tr><th scope="row">Strategies</th><td>66% ABF | 63% Direct Lending | 58% <span class="nb">Multi-Strategy</span> | 58% Structured Credit | 47% BDCs</td></tr>
+            <tr><th scope="row">Investor Base</th><td>76% Institutional | 55% Wealth Channel | 47% Insurance | 47% Family Office</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="closing">
+  <svg class="closing__logo" viewBox="0 0 191 34" fill="none" role="img" aria-label="The Private Markets Forum"><use href="#pmf-logo"/></svg>
+</footer>
+
+
+<script src="../Brand%20Foundations/brand.js"></script>
+<script src="../Brand%20Foundations/copyfit.js"></script>
+</body>
+</html>

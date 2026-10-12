@@ -1,0 +1,843 @@
+/* ============================================================
+   PDF VIEW — the sheet stack and its bar
+   Loaded after brand.css, never instead of it. Everything on a
+   sheet is an ordinary brand component; this file only sets the
+   sheet's geometry and the chrome that floats over it.
+
+   Figma: PDF View 2468-46218 · sheets 2462-45037
+   Motion follows bow.magier.com/pdf/ — see .notes/bow-animation-spec.md
+   ============================================================ */
+:root{
+  /* A4 portrait at 144dpi, which is what the artboards are drawn at. */
+  --pg-w: 1191px;
+  --pg-h: 1685px;
+  --pg-pad-inline: 84px;
+  --pg-pad-top:    96px;
+  --pg-pad-bottom: 56px;
+  --pg-gutter:     35px;   /* content block to footer rule */
+  --pg-content:    1023px; /* 1191 - 84 - 84 */
+  --pg-measure:    843px;  /* the text column on a sheet */
+
+  --viewer-ground: var(--c-white);
+  --viewer-gap:    40px;   /* between sheets */
+  --bar-w:         1010px;
+  --bar-lift:      53px;   /* bar to the window's bottom edge */
+  --fade-h:        200px;  /* was 271 — seats the bar without whiting out the last lines */
+  --picker-w:      290px;
+  --row-pitch:     40ms;   /* stagger between dropdown rows */
+
+  /* The sheet's rhythm — every vertical distance between text elements is one of these.
+     A document that wants more air sets .sheets--airy on <body> (report-2026 does),
+     which lifts each by 8px; the paginator for that document uses the same numbers. */
+  --s-copy:  32px;   /* heading, subhead or eyebrow → its copy */
+  --s-pill:  28px;   /* pill → its copy inside a block */
+  --s-para:  32px;   /* paragraph → paragraph */
+  --s-part:  40px;   /* part → part inside a card (head · block · block · aside) */
+  --s-quote: 36px;   /* quote → attribution */
+  --s-chip:  32px;   /* chip → title, across */
+  --s-el:    44px;   /* element → element on a sheet */
+  --s-cards: 56px;   /* card → card on a sheet of cards */
+}
+.sheets--airy{
+  --s-copy:40px; --s-pill:36px; --s-para:40px; --s-part:48px; --s-quote:44px; --s-chip:40px; --s-el:52px; --s-cards:64px;
+}
+
+/* ------------------------------------------------------------
+   THE STACK
+   ------------------------------------------------------------ */
+.sheets{
+  margin:0;
+  padding:var(--viewer-gap) 0 calc(var(--bar-lift) + 96px + var(--viewer-gap));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--viewer-gap);
+  background:var(--viewer-ground);
+}
+
+/* A sheet measures 1191 x 1685 at every window width. It is painted
+   smaller with a transform, never with zoom: a transform leaves layout
+   alone, so the line breaks a reader sees are the line breaks that print.
+   The negative margins take back the space the untransformed box still
+   occupies, so the stack stays centred and evenly spaced. */
+.pdf-page{
+  position:relative;
+  flex:none;
+  width:var(--pg-w);
+  height:var(--pg-h);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  gap:35px;                                  /* body to footer */
+  padding:var(--pg-pad-top) var(--pg-pad-inline) var(--pg-pad-bottom);
+  background:var(--c-white);
+  color:var(--c-navy);
+  /* No shadow — this system separates with fills and lines. The hairline
+     is what holds a white sheet off a white ground. */
+  outline:1px solid var(--c-cream-line);
+  outline-offset:-1px;
+}
+/* The radial plate the hero is drawn on — centre at the top edge, radii
+   130% of the box, midnight to 62.8% then out to cobalt. */
+.pdf-page--dark{
+  background:radial-gradient(130% 130% at 50% 0%,
+              var(--c-navy) 0%, var(--c-navy) 62.8%, var(--c-blue) 100%);
+  outline-color:transparent;
+  color:var(--c-white);
+}
+/* The layer divider: edge-lit, white → sky → cobalt → midnight in the
+   first 4%, mirrored at the foot. */
+.pdf-page--edge{
+  background:linear-gradient(180deg,
+      var(--c-white) 0%,  var(--c-ice) 1%,  var(--c-blue) 2%,  var(--c-navy) 4%,
+      var(--c-navy) 96%,  var(--c-blue) 98%, var(--c-ice) 99%, var(--c-white) 100%);
+  outline-color:transparent;
+  color:var(--c-white);
+}
+
+@media screen{
+  /* 888 / 1191 — the artboards' own preview size. */
+  :root{--preview-scale:.7455919}
+  .pdf-page{
+    transform:scale(var(--preview-scale));
+    transform-origin:top left;
+    margin-right: calc(var(--pg-w) * (var(--preview-scale) - 1));
+    margin-bottom:calc(var(--pg-h) * (var(--preview-scale) - 1));
+    /* Only the sheets near the window are rendered: the rest keep their box (the sheet's
+       size is fixed, so nothing jumps and the scrollbar is true) but skip style, layout,
+       paint and image decoding until they come close. Screen only — print renders all. */
+    content-visibility:auto;
+  }
+}
+/* Below the sheet's painted width there is nothing useful to show, so the
+   scale follows the window instead of the artboard. Set by pdf.js. */
+@media screen and (max-width:1000px){
+  :root{--preview-scale:var(--fit-scale,.7455919)}
+}
+
+/* ------------------------------------------------------------
+   PRINT / THE FILE
+   Each sheet becomes one A4 page: the 1191px sheet is zoomed to the
+   page's 793.7 x 1122.5 CSS px, so 1191 → 793.4 (a third of a pixel
+   short, so a page never spills). zoom rather than transform because
+   print needs the box itself to shrink, and the text stays live — the
+   file is vector, selectable and searchable, not a picture of a page.
+   The bar and its fade are screen furniture and do not print.
+   ------------------------------------------------------------ */
+@media print{
+  @page{size:A4 portrait; margin:0}
+  html,body{margin:0; padding:0; background:#fff}
+  .sheets{display:block; padding:0; gap:0; background:none}
+  .pdf-page{
+    transform:none; margin:0; outline:0;
+    zoom:.66617;                     /* 1122.5 / 1685 */
+    break-after:page; page-break-after:always;
+    break-inside:avoid;
+  }
+  /* the bar and fade follow the last sheet in the markup, so :last-child
+     would miss it — :last-of-type does not */
+  .pdf-page:last-of-type{break-after:auto; page-break-after:auto}
+  .pdf-bar,.pdf-fade{display:none!important}
+  .pdf-page,.pdf-page *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+}
+
+/* ------------------------------------------------------------
+   ON THE SHEET
+   Every value below is the artboard's own. The sheet is a fixed
+   1191px, so nothing here is fluid — where brand.css has a ramp,
+   the sheet takes the number the ramp lands on, and where the
+   artboard differs from the site (a 20/30 body, a 44px title) the
+   artboard wins: this is the document as it prints.
+   ------------------------------------------------------------ */
+.pg-body{
+  flex:1 1 0;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--pg-gap, var(--s-el));            /* element to element */
+  width:100%;
+  padding-inline:90px;                       /* 1023 → the 843 text column */
+}
+/* Sheets of cards — insights, actions — part their elements a little further,
+   so a card reads as one thing and the next as another. (Was 56 / 64.) */
+.pg-body--cards{--pg-gap:var(--s-cards)}
+
+/* ---------- type ---------- */
+/* No hyphenation and no widows anywhere on a sheet: a broken word or a
+   one-word last line reads as an error on paper. Headings take `pretty`;
+   body copy wraps greedily, so every line runs out to the 843 column and a
+   paragraph reads exactly as wide as the table beside it. The build glues
+   each run's last two words, keeps hyphenated compounds (end-to-end,
+   decision-making) on one line with .nb, and then tracks any paragraph
+   whose last line is under 30% of the measure by a hair (copyfit.js, baked
+   in as an inline style with data-fit) until it is not. */
+.nb{white-space:nowrap}
+.pdf-page{
+  hyphens:none; -webkit-hyphens:none;
+  overflow-wrap:normal; word-break:normal;
+  text-wrap:pretty;
+}
+.pg-text p, .pg-lead, .pg-note, .pg-sm, .pg-xs, .pg-credit, .pg-source,
+.pg-aside__body, .pg-quote__text, .pg-quote__by, .pg-closing__note, .pg-stat__label{text-wrap:wrap}
+.pg-h1,.pg-h2,.pg-h3,.pg-h4,.pg-h5,.pg-index{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  color:inherit;
+  text-wrap:pretty;
+}
+.pg-h1{font-size:64px; line-height:70px; letter-spacing:-.02em; text-transform:capitalize}
+.pg-h2{font-size:48px; line-height:1.2;  letter-spacing:-.02em; text-transform:capitalize}
+/* The stack sheet's standfirst is a sentence or two set as a title; over ~120
+   characters it steps down so the five pillars still clear the footer. */
+.pg-h2--long{font-size:40px}
+.pg-h3{font-size:44px; line-height:1.2;  letter-spacing:-.03em; text-transform:capitalize}
+.pg-h4{font-size:24px; line-height:32px; letter-spacing:-.02em}
+/* Subheads — the numbered actions. The site's action title at its desktop size. */
+.pg-h5{font-size:28px; line-height:32px; letter-spacing:-.02em; text-transform:capitalize}
+.pg-index{font-size:48px; line-height:54px; letter-spacing:-.03em; text-transform:capitalize}
+.pg-h1 span,.pg-h3 span{display:block}     /* the artboard's own line breaks */
+
+.pg-text{
+  margin:0;
+  font-family:var(--font-body);
+  font-weight:400;
+  font-size:20px;
+  line-height:1.5;
+  letter-spacing:-.02em;
+  color:inherit;
+}
+/* Paragraphs part by --s-para — 32 on a 30px leading, a shade over one blank line. */
+.pg-text p{margin:0}
+.pg-text p + p{margin-top:var(--s-para)}
+.pg-lead{margin:0; width:100%; font-family:var(--font-body); font-size:20px; line-height:24px; letter-spacing:-.013em}
+.pg-note{margin:0; width:100%; font-family:var(--font-body); font-size:20px; line-height:1.5; letter-spacing:-.013em}
+.pg-sm  {margin:0; font-family:var(--font-body); font-size:16px; line-height:24px; letter-spacing:-.016em}
+.pg-xs  {margin:0; font-family:var(--font-body); font-size:12px; line-height:18px; letter-spacing:-.022em}
+.pg-credit{margin:0; font-family:var(--font-body); font-size:14px; line-height:20px; letter-spacing:-.019em}
+
+/* ---------- pills ----------
+   The artboard tracks these at 2.4px — 0.2em — wider than the site's
+   --track-caps. On paper the width reads as intent, so it is kept. */
+.pg-pills{display:flex; align-items:center; gap:28px}
+.pg-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px 8px;
+  border-radius:4px;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  color:rgba(9,12,42,.8);
+}
+.pg-pill--sky      {background:var(--c-ice)}
+.pg-pill--porcelain{background:var(--c-cream)}
+.pg-pill--cobalt   {background:var(--c-blue); color:rgba(255,255,255,.8)}
+
+/* ---------- footer ----------
+   Rule, 24px, then the mark against the meta. The rule is the same grey
+   at both ends of the palette so it reads on white and on midnight. */
+.pg-foot{
+  flex:none;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:24px;
+  width:100%;
+}
+.pg-foot__rule{width:100%; height:0; border-top:1px solid #D5D5D5}
+.pg-foot__row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+}
+.pg-foot__mark{display:block; flex:none; width:179px; height:31.935px; color:inherit}
+.pg-foot__mark svg{display:block; width:100%; height:100%}
+.pg-foot__meta{display:flex; align-items:center; gap:24px}
+.pg-folio{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:540;             /* Zodiak Variable at the artboard's weight; resolves to Bold on the static face */
+  font-size:16px;
+  line-height:18px;
+  text-transform:uppercase;
+  font-variant-numeric:tabular-nums;
+  opacity:.8;
+  white-space:nowrap;
+}
+
+/* ---------- cover ---------- */
+.pdf-page--cover{gap:64px}
+.pdf-page--cover .pg-body{padding-inline:0; gap:64px}
+.pg-cover__mark{display:block; width:309px; height:55.128px; color:var(--c-white)}
+.pg-cover__mark svg{display:block; width:100%; height:100%}
+.pg-cover__title{width:844px}
+.pg-cover__img{
+  flex:1 1 0;
+  min-height:0;
+  width:1023px;
+  object-fit:cover;
+  display:block;
+}
+
+/* ---------- closing sheet ----------
+   The cover's plate again, read the other way: the mark and the thanks sit
+   at the foot of the sheet, ranged left, with the top left open. */
+.pdf-page--closing .pg-body{justify-content:flex-end; padding-inline:0; gap:56px}
+.pg-closing__mark{display:block; width:309px; height:55.128px; color:var(--c-white)}
+.pg-closing__mark svg{display:block; width:100%; height:100%}
+.pg-closing__copy{display:flex; flex-direction:column; align-items:flex-start; gap:var(--s-para); width:100%; max-width:843px}
+.pg-closing__note{margin:0; width:100%; font-family:var(--font-body); font-size:14px; line-height:20px; letter-spacing:-.019em; opacity:.8}
+
+/* ---------- headings and prose ----------
+   The sheet's rhythm (tokens at the top of this file): eyebrow → title → copy
+   --s-copy, paragraph → paragraph --s-para, part → part inside a card --s-part,
+   element → element --s-el, card → card --s-cards. Everything on a sheet is one
+   of these distances. */
+.pg-heading{display:flex; flex-direction:column; align-items:flex-start; gap:var(--s-copy); width:100%}
+.pg-heading > .pg-h3{width:100%}
+.pg-group  {display:flex; flex-direction:column; align-items:flex-start; gap:var(--s-copy); width:100%}   /* a heading and its copy */
+.pg-group > .pg-text{width:100%}
+.pg-title-w{width:100%}
+
+/* ---------- the four-layer stack ---------- */
+.pg-stack{display:flex; flex-direction:column; width:843px; margin:0; padding:0; list-style:none}
+.pg-stack__item{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  height:222px;
+  padding:24px;
+  border:1px solid var(--c-white);
+  overflow:clip;
+}
+/* Boxes stack edge to edge — the artboard draws both rules, no collapse. */
+.pg-stack__item--dashed{border-style:dashed}
+.pg-stack__item--muted{opacity:.2}
+.pg-stack__item > *{width:100%}
+
+/* ---------- sponsor wall ----------
+   The site's 4-up cream tiles, scaled from a 289px tile to the 195.75px
+   the 843 column allows (x0.68), logos and wordmarks with it. */
+.pg-logos{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  width:100%;
+  margin:0; padding:0; list-style:none;
+}
+.pg-tile{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:130px;
+  padding:12px;
+  background:var(--c-cream);
+}
+.pg-logo{display:block; max-width:100%; height:auto}
+.pg-wordmark{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:22px;
+  line-height:24px;
+  letter-spacing:-.008em;
+  color:var(--c-ink,#000);
+  text-align:center;
+}
+
+/* ---------- data on a sheet ----------
+   Tables, stat tiles, quotes and source lines — the site's §6 components
+   at the sheet's scale: 16/24 in cells where the site has 14/20, 12px caps
+   tracked like the sheet's pills, the same fills and rules otherwise. */
+/* A table sits in the text column, edge to edge with the prose around it;
+   its source line takes the same width, 12px below. */
+.pg-table-wrap,
+.pg-table-group{width:100%; margin:0}
+.pg-table-group{display:flex; flex-direction:column; gap:12px}
+.pg-table-group > .pg-source{width:100%}
+.pg-table{
+  width:100%;
+  border-collapse:collapse;
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:24px;
+  letter-spacing:-.016em;
+  color:var(--c-navy);
+  background:var(--c-white);
+}
+.pg-table caption{
+  padding:0 0 12px;
+  font-family:var(--font-display);
+  font-size:24px;
+  line-height:32px;
+  letter-spacing:-.02em;
+  text-align:left;
+  color:var(--c-navy);
+}
+.pg-table thead th{
+  padding:12px 16px;
+  background:var(--c-navy);
+  color:var(--c-white);
+  font-weight:600;
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  text-align:left;
+  white-space:nowrap;
+  vertical-align:top;               /* every cell reads from the top */
+}
+.pg-table tbody td,
+.pg-table tbody th{
+  padding:12px 16px;
+  border-bottom:1px solid rgba(70,72,80,.15);
+  vertical-align:top;
+  text-align:left;
+}
+.pg-table tbody th{font-weight:600}
+.pg-table tbody tr:nth-child(even) td,
+.pg-table tbody tr:nth-child(even) th{background:var(--c-cream)}
+.pg-table tbody tr:last-child td,
+.pg-table tbody tr:last-child th{border-bottom:0}
+.pg-table .is-num{text-align:right; font-variant-numeric:tabular-nums}
+.pg-table thead th.is-num{text-align:right}
+.pg-table tfoot td,
+.pg-table tfoot th{padding:12px 16px; background:var(--c-ice); font-weight:600; text-align:left; vertical-align:top}
+.pg-table tfoot .is-num{text-align:right}
+.pg-source{
+  margin:0;
+  width:100%;
+  font-family:var(--font-body);
+  font-size:14px;
+  line-height:20px;
+  letter-spacing:-.019em;
+  color:rgba(9,12,42,.6);
+}
+
+.pg-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  width:100%;
+}
+.pg-stat{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:24px;
+  background:var(--c-cream);
+  border:1px solid var(--c-cream-line,#E4DFDA);
+}
+.pg-stat__value{
+  font-family:var(--font-display);
+  font-size:48px;
+  line-height:54px;
+  letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+  color:var(--c-navy);
+}
+.pg-stat__label{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(9,12,42,.6);
+}
+
+/* An interview quote on the cream plate the callout uses (navy ink; was a navy plate). */
+.pg-quote{
+  display:flex;
+  flex-direction:column;
+  gap:var(--s-quote);                /* quote to attribution */
+  width:100%;
+  margin:0;
+  padding:24px;
+  background:var(--c-cream);
+  color:var(--c-navy);
+}
+.pg-quote__text{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:24px;
+  line-height:32px;
+  letter-spacing:-.02em;
+}
+.pg-quote__by{
+  margin:0;
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:24px;
+  letter-spacing:-.016em;
+  opacity:.8;
+}
+
+/* Five-pillar stacks: the boxes shorten so the set still fits a sheet. */
+.pg-stack--5 .pg-stack__item{height:160px}
+.pg-sub{display:flex; flex-direction:column; gap:var(--s-copy); width:100%}   /* a subhead and its copy */
+
+/* ---------- force cards ---------- */
+.pg-forces{display:flex; flex-direction:column; gap:19px; width:100%; margin:0; padding:0; list-style:none}
+.pg-forces__row{display:flex; align-items:center; gap:20px; height:235px; width:100%}
+.pg-force{
+  flex:1 1 0;
+  min-width:0;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:space-between;
+  padding:24px;
+  background:var(--c-slate);
+  color:var(--c-white);
+  overflow:clip;
+}
+.pg-force__head{display:flex; flex-direction:column; gap:12px; width:100%}
+.pg-force__head > *{width:100%}
+.pg-force > .pg-sm{width:100%}
+
+/* ---------- figure ---------- */
+.pg-figure{display:flex; flex-direction:column; align-items:flex-end; gap:32px; width:100%; margin:0}   /* plate to caption (was 52) */
+.pg-figure__plate{width:100%; height:642px; border:1px dashed var(--c-slate)}
+.pg-figure__img{display:block; width:100%; height:642px; object-fit:cover; object-position:var(--focus,50% 50%); background:var(--c-slate)}   /* the photograph, cropped about its focus point */
+/* two photographs side by side, each with its own caption */
+.pg-figure-pair{display:grid; grid-template-columns:1fr 1fr; gap:48px; width:100%}
+.pg-figure-pair .pg-figure__img{height:auto; aspect-ratio:3/2}
+.pg-figure__cap .pg-h4{font-size:18px; line-height:26px; letter-spacing:-.015em}      /* a caption, not a heading (was 24/32) */
+.pg-figure__cap .pg-credit{font-size:12px; line-height:18px; opacity:.8}                /* was 14/20 */
+.pg-figure__cap{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:8px;                           /* caption to credit (was 12) */
+  width:100%;
+  height:auto; min-height:52px;
+  text-align:center;
+}
+.pg-figure__cap > *{width:100%}
+
+/* ---------- insight cards ---------- */
+.pg-card{display:flex; flex-direction:column; align-items:flex-start; gap:var(--s-part); width:100%}   /* head · block · block · aside */
+.pg-card__head{display:flex; align-items:flex-start; gap:var(--s-chip); width:100%}                     /* chip to title */
+/* A subhead sits on the chip's centre line rather than hanging its cap from the top. */
+.pg-card__head--sub{align-items:center}
+.pg-card__head--sub .pg-card__title{text-box-trim:none}
+.pg-num{
+  flex:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  padding:8.571px;
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:24px;
+  letter-spacing:-.016em;
+  color:var(--c-white);
+  background:radial-gradient(100% 100% at 50% 0%,
+              var(--c-navy) 0%, var(--c-navy) 62.8%, var(--c-blue) 100%);
+}
+.pg-num--ice{background:var(--c-ice); color:var(--c-navy)}
+.pg-card__title{
+  flex:1 1 auto;
+  min-width:0;                 /* runs to the column's edge beside the chip */
+  /* The title's cap line sits on the chip's top edge, as drawn. */
+  text-box-trim:trim-both;
+  text-box-edge:cap alphabetic;
+}
+.pg-block{display:flex; flex-direction:column; align-items:flex-start; gap:var(--s-pill); width:100%}   /* eyebrow to copy */
+.pg-block > .pg-text{width:100%}
+.pg-aside{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:var(--s-copy);                 /* label to body, at least — the plate's height sets the rest */
+  height:198px;
+  width:100%;
+  padding:24px;
+  background:var(--c-cream);         /* a quiet plate on the white sheet, navy ink (was a navy plate) */
+  color:var(--c-navy);
+  overflow:clip;
+}
+.pg-aside__body{margin:0; width:100%; font-family:var(--font-body); font-size:16px; line-height:1.5; letter-spacing:-.02em}
+
+/* ------------------------------------------------------------
+   THE BAR
+   ------------------------------------------------------------ */
+.pdf-fade{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  height:var(--fade-h);
+  z-index:9;
+  pointer-events:none;
+  /* Gentle: opaque only in the strip the bar itself covers, then off
+     quickly, so the sheet's last lines stay legible right up to the pill. */
+  background:linear-gradient(to top,
+      rgb(255 255 255 / .9)  0%,
+      rgb(255 255 255 / .8)  30%,
+      rgb(255 255 255 / .45) 55%,
+      rgb(255 255 255 / .15) 80%,
+      rgb(255 255 255 / 0)   100%);
+}
+.pdf-bar{
+  position:fixed;
+  left:0; right:0;
+  bottom:var(--bar-lift);
+  z-index:10;
+  display:flex;
+  justify-content:center;
+  padding-inline:24px;
+  pointer-events:none;     /* only the pill is a target */
+}
+.pdf-bar__pill{
+  pointer-events:auto;
+  width:100%;
+  max-width:var(--bar-w);
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:32px;
+  padding:24px;
+  border-radius:4px;
+  background:var(--c-cream);
+}
+.pdf-bar__logo{display:block; flex:none; width:191px; color:var(--c-navy)}
+.pdf-bar__logo svg{display:block; width:100%; height:auto}
+.pdf-bar__actions{
+  flex:none;
+  display:flex;
+  align-items:center;
+  gap:32px;               /* icons to the download button */
+}
+.pdf-bar__icons{
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+.pdf-bar__icons .action-button{
+  --btn-size:36px;
+  --btn-icon:100%;
+}
+/* The bar's icons are the nav's files, drawn on a 32px box with the glyph
+   at ~12px. The artboard draws them here at 36px with a ~19px icon, so
+   the inline copies in the PDF page carry a tighter viewBox (a 24-box on
+   the same glyph) — half the button, 18px on screen. */
+.pdf-bar__download{
+  flex:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 24px;
+  border:1px solid var(--c-navy);
+  border-radius:4px;
+  background:var(--c-navy);
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:16px;
+  line-height:24px;
+  letter-spacing:-.016em;
+  color:var(--c-white);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background-color var(--dur-ui) var(--ease-ui),
+             border-color var(--dur-ui) var(--ease-ui);
+}
+.pdf-bar__download:hover{background:var(--c-blue); border-color:var(--c-blue)}
+.pdf-bar__download:focus-visible{outline:2px solid var(--c-blue); outline-offset:3px}
+
+/* ------------------------------------------------------------
+   CHAPTER PICKER
+   The panel is anchored to the trigger's own left edge and grows
+   upward from its bottom: it comes from y:+10 at scaleY(.8) with
+   transform-origin at the bottom, so the card unrolls out of the
+   pill. Opening overshoots a little and takes 250ms; closing is
+   quicker and flat, which is what makes it feel like a lid.
+   ------------------------------------------------------------ */
+.pdf-picker{position:relative; flex:0 1 auto; min-width:0}
+.pdf-picker__trigger{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:var(--picker-w);
+  max-width:100%;
+  min-width:0;
+  padding:6px 12px;
+  border:1px solid var(--c-cream);
+  border-radius:4px;
+  background:var(--c-white);
+  cursor:pointer;
+  font-family:var(--font-body);
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:-.022em;
+  white-space:nowrap;
+  transition:border-color var(--dur-ui) var(--ease-ui),
+             background-color var(--dur-ui) var(--ease-ui);
+}
+.pdf-picker__trigger:hover{
+  border-color:var(--c-ice);
+  background:linear-gradient(var(--c-btn-hover),var(--c-btn-hover)) var(--c-white);
+}
+.pdf-picker__trigger:focus-visible{outline:2px solid var(--c-blue); outline-offset:2px}
+.pdf-picker__label{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-width:0;
+}
+.pdf-picker__num{
+  flex:none;
+  font-weight:600;
+  color:var(--c-navy);
+  font-variant-numeric:tabular-nums;
+}
+.pdf-picker__name{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color:var(--c-ink,#000);
+}
+.pdf-picker__chevron{
+  flex:none;
+  display:grid;
+  place-items:center;
+  width:24px; height:24px;
+  color:var(--c-navy);
+  transition:transform 250ms var(--ease-ui);
+}
+.pdf-picker__chevron svg{display:block; width:16px; height:16px}
+.pdf-picker[data-open="true"] .pdf-picker__chevron{transform:rotate(180deg)}
+
+.pdf-picker__panel{
+  position:absolute;
+  left:0;
+  bottom:calc(100% + 48px);
+  width:var(--picker-w);
+  max-width:calc(100vw - 48px);
+  background:var(--c-white);
+  transform-origin:bottom center;
+  opacity:0;
+  transform:translateY(10px) scaleY(.8);
+  visibility:hidden;
+  transition:opacity 150ms var(--ease-ui),
+             transform 150ms var(--ease-ui),
+             visibility 0s linear 150ms;
+}
+.pdf-picker[data-open="true"] .pdf-picker__panel{
+  opacity:1;
+  transform:translateY(0) scaleY(1);
+  visibility:visible;
+  transition:opacity 250ms cubic-bezier(.22,1.15,.36,1),
+             transform 250ms cubic-bezier(.22,1.15,.36,1),
+             visibility 0s linear 0s;
+}
+
+/* Rows arrive with the panel, staggered, from x:-10. --row-i is written
+   on each row so the delay is data rather than a pile of nth-child rules. */
+.pdf-toc{display:flex; flex-direction:column}
+.pdf-toc__row{
+  position:relative;
+  display:flex;
+  align-items:center;
+  width:100%;
+  padding:12px;
+  border:1px solid #D5D5D5;
+  background:var(--c-white);
+  cursor:pointer;
+  font-family:var(--font-body);
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:-.022em;
+  text-align:left;
+  color:var(--c-ink,#000);
+  opacity:0;
+  transform:translateX(-10px);
+  transition:opacity 200ms var(--ease-ui),
+             transform 200ms var(--ease-ui),
+             background-color var(--dur-ui) var(--ease-ui);
+}
+.pdf-toc__row + .pdf-toc__row{margin-top:-1px}   /* collapse shared rules */
+.pdf-picker[data-open="true"] .pdf-toc__row{
+  opacity:1;
+  transform:translateX(0);
+  transition-delay:calc(var(--row-i, 0) * var(--row-pitch) + 60ms);
+}
+/* ---------- text reveal, the site's own ----------
+   bow.magier.com's .toc-wipe, unchanged in mechanism: the label is a
+   two-colour gradient clipped to its glyphs, twice as wide as the word,
+   parked on the ink half. Hover slides the lit half across from the left,
+   200ms on the interface curve. Only the text moves — the row's ground is
+   left alone. The current chapter holds the lit state and carries a hair
+   of stroke for weight, as it does on the site. */
+.pdf-toc__row:hover,
+.pdf-toc__row:focus-visible{background:var(--c-white)}     /* the box does nothing */
+.pdf-toc__row:focus-visible{outline:2px solid var(--c-blue); outline-offset:-2px}
+
+.toc-wipe{
+  --toc-ink:var(--c-ink,#000);
+  --toc-lit:var(--c-blue);
+  display:inline;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+  background-image:linear-gradient(to right, var(--toc-lit) 50%, var(--toc-ink) 50%);
+  background-repeat:no-repeat;
+  background-size:200% 100%;
+  background-position:100% 0;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  -webkit-text-stroke-color:transparent;
+  -webkit-text-stroke-width:0;
+  transition:background-position 200ms var(--ease-ui),
+             -webkit-text-stroke-width 200ms var(--ease-ui);
+}
+.pdf-toc__row:hover .toc-wipe,
+.pdf-toc__row:focus-visible .toc-wipe,
+.pdf-toc__row[aria-current="true"] .toc-wipe{background-position:0 0}
+.pdf-toc__row[aria-current="true"] .toc-wipe{
+  -webkit-text-stroke-color:var(--toc-lit);
+  -webkit-text-stroke-width:.4px;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .pdf-picker__panel,
+  .pdf-picker[data-open="true"] .pdf-picker__panel,
+  .pdf-toc__row,
+  .pdf-picker[data-open="true"] .pdf-toc__row{
+    transform:none;
+    transition-duration:1ms;
+    transition-delay:0s;
+  }
+  .pdf-picker__chevron,
+  .toc-wipe{transition-duration:1ms}
+}
+
+/* ------------------------------------------------------------
+   NARROW WINDOWS
+   The bar is the whole control surface, so it keeps working; the
+   picker gives up its fixed width first, then the logo stands down.
+   ------------------------------------------------------------ */
+@media (max-width:900px){
+  :root{--bar-lift:24px; --fade-h:140px}
+  .pdf-bar{padding-inline:16px}
+  .pdf-bar__pill{gap:16px; padding:16px}
+  .pdf-bar__actions{gap:16px}
+  .pdf-bar__logo{display:none}
+  .pdf-picker{flex:1 1 auto}
+  .pdf-picker__trigger{width:100%}
+  .pdf-picker__panel{width:min(var(--picker-w), calc(100vw - 32px)); bottom:calc(100% + 24px)}
+}
+@media (max-width:560px){
+  .pdf-bar__download{padding:12px 16px; font-size:14px}
+}

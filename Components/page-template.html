@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PAGE TITLE — The Private Markets Forum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../Brand%20Foundations/brand.css">
+</head>
+<body>
+
+<!-- 1 — logo sprite: paste the <symbol id="pmf-logo"> block here once -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><!-- SYMBOL --></svg>
+
+<!-- 2 — nav: one <a> per section id, in reading order -->
+<header class="nav" id="site-nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="#top" aria-label="The Private Markets Forum — back to top">
+      <svg viewBox="0 0 191 34" fill="none" aria-hidden="true"><use href="#pmf-logo"/></svg>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a class="nav__link" href="#summary">Summary</a>
+      <a class="nav__link" href="#base">Base</a>
+    </nav>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
+      <span class="nav__bar"></span><span class="nav__bar"></span><span class="nav__bar"></span>
+    </button>
+  </div>
+  <div class="nav__panel" id="nav-panel">
+    <div class="nav__panel-inner">
+      <nav class="nav__links nav__links--stacked" aria-label="Sections">
+        <a class="nav__link" href="#summary">Summary</a>
+        <a class="nav__link" href="#base">Base</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 3 — NARRATIVE (general idea) → white plate, prose column -->
+  <section class="intro" id="summary">
+    <div class="intro__content">
+      <span class="pill pill--ice pill--md">Eyebrow</span>
+      <h2 class="intro__title">Section title in sentence case.</h2>
+      <div class="intro__body-group">
+        <p class="intro__lead">Standfirst paragraph.</p>
+        <div class="intro__body">
+          <p>Body paragraph.</p>
+          <p>Body paragraph.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 — LAYER DIVIDER (insight) → edge-lit plate + box highlights -->
+  <section class="layer" id="base">
+    <div class="layer__inner">
+      <div class="layer__heading-group">
+        <span class="pill pill--ice pill--md">Layer I - Three insights</span>
+        <div class="layer__heading">
+          <h2 class="layer__title">The base layer</h2>
+          <p class="layer__subtitle">One-sentence definition of the layer.</p>
+        </div>
+      </div>
+      <ol class="stack__list">
+        <li class="stack__item stack__item--pending"><span class="stack__index">I</span><span class="stack__label">Base — not yet built</span></li>
+        <li class="stack__item stack__item--muted"><span class="stack__index">II</span><span class="stack__label">Semantic</span></li>
+        <li class="stack__item stack__item--muted"><span class="stack__index">III</span><span class="stack__label">Control</span></li>
+        <li class="stack__item stack__item--muted"><span class="stack__index">IV</span><span class="stack__label">Presentation</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5 — INSIGHTS → white plate, numbered articles, callout per point -->
+  <section class="insights">
+    <article class="insight">
+      <header class="insight__header">
+        <span class="insight__number">01</span>
+        <h2 class="insight__title">Insight title</h2>
+      </header>
+      <div class="insight__block">
+        <span class="pill pill--ice pill--md">What's happening</span>
+        <p>Observation.</p>
+      </div>
+      <div class="insight__block">
+        <span class="pill pill--ice pill--md">Why it matters</span>
+        <p>Consequence.</p>
+      </div>
+      <aside class="insight__aside">
+        <span class="insight__aside-label">What to consider</span>
+        <p class="insight__aside-body">The question to take away.</p>
+      </aside>
+    </article>
+  </section>
+
+</main>
+
+<footer class="closing">
+  <svg class="closing__logo" viewBox="0 0 191 34" fill="none" role="img" aria-label="The Private Markets Forum"><use href="#pmf-logo"/></svg>
+  <div class="closing__thanks">
+    <p class="closing__thanks-text">Thanks line.</p>
+    <p class="closing__note">Footnote line.</p>
+  </div>
+</footer>
+
+<script src="../Brand%20Foundations/brand.js"></script>
+</body>
+</html>

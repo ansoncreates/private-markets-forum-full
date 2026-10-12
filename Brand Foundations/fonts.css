@@ -1,0 +1,31 @@
+/* ============================================================
+   SELF-HOSTED FACES
+   Zodiak (display serif, Indian Type Foundry via Fontshare) and Inter,
+   both as variable files in Brand Foundations/fonts/. Link this before
+   brand.css. No page loads a font from a CDN — the same two files
+   paint the homepage, the web reports and the PDF views, and get
+   embedded in the downloadable PDF, so nothing can drift; and the
+   variable axis is what lets the sheet folio sit on the artboard's
+   weight 540 exactly.
+
+     fonts/Zodiak-Variable.woff2   wght 100–900   (Fontshare download, WEB/fonts)
+     fonts/InterVariable.woff2     wght 100–900, opsz 14–32 — the .ttf subset to Latin, Latin
+                                   Extended, punctuation, currency, arrows and maths with
+                                   every OpenType feature kept (222 KB, was 875 KB); the
+                                   .ttf stays as the fallback for a client without WOFF2
+   Zodiak-Regular.woff2 / Zodiak-Bold.woff2 are kept as statics for a
+   client without variable-font support; declared first, so the variable
+   file wins wherever it loads.
+   ============================================================ */
+@font-face{font-family:"Zodiak"; font-weight:400; font-style:normal; font-display:swap;
+  src:url("fonts/Zodiak-Regular.woff2") format("woff2")}
+@font-face{font-family:"Zodiak"; font-weight:700; font-style:normal; font-display:swap;
+  src:url("fonts/Zodiak-Bold.woff2") format("woff2")}
+
+@font-face{font-family:"Zodiak"; font-weight:100 900; font-style:normal; font-display:swap;
+  src:url("fonts/Zodiak-Variable.woff2") format("woff2-variations"),
+      url("fonts/Zodiak-Variable.woff2") format("woff2")}
+@font-face{font-family:"Inter"; font-weight:100 900; font-style:normal; font-display:swap;
+  src:url("fonts/InterVariable.woff2") format("woff2-variations"),
+      url("fonts/InterVariable.woff2") format("woff2"),
+      url("fonts/InterVariable.ttf") format("truetype")}

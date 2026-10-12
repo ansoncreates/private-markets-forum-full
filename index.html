@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Private Markets Forum — Reports</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#090C2A">
+<link rel="stylesheet" href="Brand%20Foundations/fonts.css">
+<link rel="stylesheet" href="Home/home.css">
+<script>
+// Watchdog: if the 3D view has not started (script blocked, old browser, no GPU), show the list.
+(function () {
+  function booted() { return !!(window.__app && window.__app.booted); }
+  function fallback(why) {
+    if (booted()) return;
+    if (window.__pmfShowFallback) { window.__pmfShowFallback(why); return; }
+    var fb = document.getElementById('fallback'), st = document.getElementById('stage');
+    if (!fb) return;
+    fb.hidden = false; fb.className += ' is-shown';
+    if (st) st.className += ' is-hidden';
+    document.body.className += ' has-fallback';
+  }
+  window.addEventListener('error', function () { if (!booted()) fallback('script error'); });
+  setTimeout(function () { fallback('timeout'); }, 15000);
+})();
+</script>
+</head>
+<body>
+
+<!-- 1. The listening room — one viewport, no scroll -->
+<main class="stage is-booting" id="stage" aria-label="Report selector">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- DOM overlay: the real controls. Positions are set from projected 3D points. -->
+  <div class="overlay" id="overlay">
+    <!-- view switcher: Table · Rack · Shelves -->
+    <div class="switcher" id="switcher" role="radiogroup" aria-label="View" aria-disabled="false">
+      <button class="switcher__opt" id="switch-table" type="button" role="radio" aria-checked="true">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><circle cx="6" cy="8" r="2.4"/><path d="M10.5 6v4"/></svg>
+        <span>Table</span>
+      </button>
+      <button class="switcher__opt" id="switch-rack" type="button" role="radio" aria-checked="false" tabindex="-1">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 12.5h13"/><rect x="3" y="4" width="4" height="8.5" rx=".5"/><rect x="9" y="4" width="4" height="8.5" rx=".5"/></svg>
+        <span>Rack</span>
+      </button>
+      <button class="switcher__opt" id="switch-shelves" type="button" role="radio" aria-checked="false" tabindex="-1">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 5.5h13M1.5 10.5h13"/><rect x="3" y="2" width="2.6" height="3.5" rx=".4"/><rect x="7" y="2" width="2.6" height="3.5" rx=".4"/><rect x="3" y="7" width="2.6" height="3.5" rx=".4"/><rect x="10.4" y="7" width="2.6" height="3.5" rx=".4"/><rect x="7" y="12" width="2.6" height="3" rx=".4"/></svg>
+        <span>Shelves</span>
+      </button>
+      <span class="action-button__bubble switcher__bubble" id="switch-label">Choose a view</span>
+    </div>
+
+    <button class="action-button sound" id="sound" type="button" aria-pressed="true">
+      <svg class="sound__on" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a7.5 7.5 0 0 1 0 11"/>
+      </svg>
+      <svg class="sound__off" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M16 9.5l5 5"/><path d="M21 9.5l-5 5"/>
+      </svg>
+      <span class="action-button__bubble" id="sound-label">Sound on</span>
+    </button>
+
+    <!-- the active jacket's hit target -->
+    <button class="hit hit--jacket" id="hit" type="button" aria-label="Open report"></button>
+
+    <!-- Table view: browse controls + the active jacket's details -->
+    <div class="ui-group" id="table-ui">
+    <div class="browse" id="browse">
+      <button class="key key--prev" id="prev" type="button" aria-label="Previous report">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M10 2.5 4.5 8 10 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="info" id="info" aria-live="off">
+        <div class="info__row"><span class="pill" id="info-eyebrow">Executive Report</span><span class="info__meta" id="info-meta">London · 25 June 2026</span></div>
+        <h1 class="info__title" id="info-title">Capital built the industry. Infrastructure will define its next era.</h1>
+        <div class="info__row info__row--foot"><span class="info__index" id="info-index">01 / 05</span><a class="info__pdf" id="info-pdf" href="Reports/Assets/report-2026.pdf">PDF</a></div>
+      </div>
+      <button class="key key--next" id="next" type="button" aria-label="Next report">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    </div>
+
+    <!-- Rack view: edge arrows, the title row under the jacket, the confirm panel in the open gatefold -->
+    <div class="ui-group" id="rack-ui" hidden>
+      <button class="edge edge--prev" id="rack-prev" type="button" aria-label="Previous report">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="M10 2.5 4.5 8 10 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="edge edge--next" id="rack-next" type="button" aria-label="Next report">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="info info--rack" id="rack-info" aria-live="off">
+        <div class="info__row"><span class="pill" id="rack-eyebrow">Executive Report</span><span class="info__meta" id="rack-meta">London · 25 June 2026</span></div>
+        <h1 class="info__title" id="rack-title">Capital built the industry. Infrastructure will define its next era.</h1>
+        <div class="info__row info__row--foot"><span class="info__index" id="rack-index">01 / 05</span><a class="info__pdf" id="rack-pdf" href="Reports/Assets/report-2026.pdf">PDF</a></div>
+      </div>
+      <div class="confirm" id="confirm" role="dialog" aria-labelledby="confirm-title" hidden>
+        <h2 class="confirm__title" id="confirm-title">Capital built the industry. Infrastructure will define its next era.</h2>
+        <div class="confirm__row">
+          <button class="confirm__go" id="confirm-go" type="button">Go to report</button>
+          <button class="confirm__back" id="confirm-back" type="button">Back to the collection</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shelves view: zoom keys, the hint, the focus block under a raised jacket, the keyboard grid -->
+    <div class="ui-group" id="shelves-ui" hidden>
+      <div class="zoom-keys" id="zoom-keys">
+        <button class="edge edge--zoom" id="zoom-out" type="button" aria-label="Zoom out"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <button class="edge edge--zoom" id="zoom-in" type="button" aria-label="Zoom in"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <button class="edge edge--zoom" id="zoom-fit" type="button" aria-label="Show all shelves"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <p class="shelves-hint" id="shelves-hint" aria-hidden="true">Drag to explore · Scroll to zoom · Select a jacket</p>
+      <div class="focus" id="focus" role="dialog" aria-labelledby="focus-title" hidden>
+        <div class="info__row focus__row"><span class="pill" id="focus-eyebrow">Executive Report</span><span class="info__meta" id="focus-meta">London · 25 June 2026</span></div>
+        <h2 class="focus__title" id="focus-title">Capital built the industry. Infrastructure will define its next era.</h2>
+        <div class="confirm__row">
+          <button class="confirm__go" id="focus-go" type="button">Go to report</button>
+          <button class="confirm__back" id="focus-back" type="button">Back to the shelves</button>
+        </div>
+      </div>
+      <div class="focus-ring" id="focus-ring" aria-hidden="true" hidden></div>
+      <div class="shelf-grid" id="shelf-grid" role="group" aria-label="Jackets on the shelves"></div>
+    </div>
+
+    <!-- READY: the prompt and the way back -->
+    <div class="prompt" id="prompt" hidden>
+      <button class="prompt__play" id="play" type="button">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
+        <span>Play vinyl to go to report</span>
+      </button>
+      <button class="prompt__eject" id="eject" type="button">Choose another report</button>
+    </div>
+    <button class="hit hit--play" id="play-hit" type="button" aria-label="Play" hidden></button>
+
+    <div class="live" id="live" aria-live="polite"></div>
+  </div>
+
+  <!-- the hand-over to the report, and the first paint -->
+  <div class="fade" id="fade" aria-hidden="true"></div>
+  <div class="debug" id="debug" hidden></div>
+</main>
+
+<!-- 2. Without WebGL (or without scripts): the index as cards -->
+<section class="fallback" id="fallback" hidden>
+  <div class="wrap">
+    <span class="eyebrow">The Private Markets Forum</span>
+    <h1>Research on the infrastructure reshaping private markets.</h1>
+    <p class="sub">Two reports on where capital, operations and technology meet at the edge of scale.</p>
+    <div class="grid">
+      <a class="card" href="Reports/report-2026.html">
+        <h2>Capital built the industry. Infrastructure will define its next era.</h2>
+        <div><div class="meta"><span class="tag">Report 2026</span><span class="tag alt">Flagship</span></div></div>
+      </a>
+      <a class="card" href="Reports/infrastructure-at-the-edge-of-scale.html">
+        <h2>Infrastructure at the edge of scale</h2>
+        <div><div class="meta"><span class="tag">Report</span><span class="tag alt">Operations</span></div></div>
+      </a>
+    </div>
+    <div class="links">
+      <span>PDF:</span>
+      <a href="Reports/Assets/report-2026.pdf">Report 2026</a>
+      <a href="Reports/Assets/infrastructure-at-the-edge-of-scale.pdf">Infrastructure at the edge of scale</a>
+    </div>
+  </div>
+</section>
+<noscript><style>.stage{display:none}.fallback[hidden]{display:block}</style></noscript>
+
+<!-- One classic script: Home/home.js and the vendored three.js bundled by tools/bundle.mjs (sources stay under Home/). -->
+<script src="Home/home.bundle.js" defer></script>
+</body>
+</html>

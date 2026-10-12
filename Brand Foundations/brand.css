@@ -1,0 +1,1809 @@
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  /* brand colours */
+  --c-navy:      #090C2A;   /* deep navy — gradient core, pill text */
+  --c-blue:      #0D1DCC;   /* brand blue — gradient edge, accent pill */
+  --c-ice:       #C8DFF3;   /* pale blue pill */
+  --c-cream:     #F6F4F2;   /* off-white pill */
+  --c-cream-line:#E4DFDA;   /* darker beige — hairline on cream tiles */
+  --c-white:     #FFFFFF;
+
+  --c-text:            var(--c-white);
+  --c-text-muted:      rgba(255,255,255,.5);
+  --c-rule:            rgba(255,255,255,1);   /* stack card outline */
+  --c-pill-text-dark:  rgba(9,12,42,.8);
+  --c-pill-text-light: rgba(255,255,255,.8);
+
+  /* type families */
+  --track-caps: .08em;   /* tracking for uppercase micro-labels — tight, not spaced out */
+  --font-display: "Zodiak","Zodiak Variable",Georgia,"Times New Roman",serif;
+  --font-body:    "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+
+  /* fluid engine: 0 at 375px viewport, 1px-per-unit at 1440px viewport */
+  --fluid: clamp(0px, (100vw - 375px) / 1065, 1px);
+
+  /* fluid type — mobile value → desktop value */
+  --fs-title:    calc(40px + 24 * var(--fluid));   /* 40 → 64 */
+  --lh-title:    calc(46px + 24 * var(--fluid));   /* 46 → 70 */
+  --fs-body:     16px;                             /* 16 at every width — was 14 → 16; 14px body is under-sized on a phone */
+  --lh-body:     24px;                             /* 24 at every width — was 20 → 24 */
+  --fs-pill:     calc(10px +  2 * var(--fluid));   /* 10 → 12 */
+  --fs-index:    calc(24px + 24 * var(--fluid));   /* 24 → 48 */
+  --lh-index:    calc(32px + 22 * var(--fluid));   /* 32 → 54 */
+  --fs-label:    24px;
+  --lh-label:    32px;
+
+  /* fluid spacing */
+  --pad-block:   calc(35px + 18 * var(--fluid));   /* 35 → 53  */
+  --pad-inline:  calc(20px + 92 * var(--fluid));   /* 20 → 112 */
+  --gap-group:   calc(32px + 12 * var(--fluid));   /* 32 → 44  */
+  --gap-section: calc(32px + 52 * var(--fluid));   /* 32 → 84  */
+  --gap-heading: calc(16px +  4 * var(--fluid));   /* 16 → 20 — title to subtitle (was 24 → 32) */
+  --gap-stack:   24px;                             /* eyebrow · stack · note (was 38) */
+  --card-min-h:  calc(178px + 159 * var(--fluid)); /* 178 → 337 */
+
+  /* measures */
+  --measure-title:    calc(335px + 485 * var(--fluid)); /* 335 → 820 — holds the 3-line break of the design */
+  --measure-subtitle: calc(291px + 307 * var(--fluid)); /* 291 → 598 */
+  --measure-note:     calc(281px + 573 * var(--fluid)); /* 281 → 854 */
+  --content-max: 1216px;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--c-navy);
+  color:var(--c-text);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,p,ol,ul,li,figure,figcaption,blockquote,footer{margin:0;padding:0}
+ol,ul{list-style:none}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:var(--pad-block) var(--pad-inline);
+  /* radial gradient: centre at top-middle, radii 130% of the box (Figma parity) */
+  background:radial-gradient(130% 130% at 50% 0%,
+              var(--c-navy) 0%,
+              var(--c-navy) 62.8%,
+              var(--c-blue) 100%);
+}
+
+.hero__logo{
+  display:block;
+  width:191px;
+  max-width:100%;
+  height:auto;
+  color:var(--c-white);
+}
+
+/* vertical rhythm — margins instead of gap so each step can differ */
+.hero__meta{margin-top:var(--gap-group)}
+.hero__heading{margin-top:var(--gap-group)}
+.stack{margin-top:var(--gap-section)}
+
+/* ---------- eyebrow pills ---------- */
+.hero__meta{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  column-gap:28px;
+  row-gap:12px;
+  width:100%;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding:calc(2px + 2 * var(--fluid)) 8px;   /* 2px → 4px block, 8px inline */
+  border-radius:4px;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:var(--fs-pill);
+  line-height:18px;
+  letter-spacing:var(--track-caps);
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.pill--ice  {background:var(--c-ice);   color:var(--c-pill-text-dark)}
+.pill--cream{background:var(--c-cream); color:var(--c-pill-text-dark)}
+.pill--blue {background:var(--c-blue);  color:var(--c-pill-text-light)}
+/* mobile wraps as [report + summit] / [location]; desktop keeps source order */
+.pill--date{order:3}
+
+/* ---------- headline ---------- */
+.hero__heading{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--gap-heading);
+  width:100%;
+  max-width:var(--content-max);
+}
+.hero__title{
+  max-width:var(--measure-title);
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-title);
+  line-height:var(--lh-title);
+  letter-spacing:-.02em;
+  text-transform:capitalize;
+  text-align:center;
+  text-wrap:balance;
+  color:var(--c-white);
+}
+/* each sentence starts its own line — mirrors the break in the design at every width */
+.hero__title span{display:block}
+.hero__subtitle{
+  max-width:var(--measure-subtitle);
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+  letter-spacing:-.016em;
+  text-align:center;
+  color:var(--c-white);
+}
+
+/* ============================================================
+   STACK SUMMARY
+   ============================================================ */
+.stack{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--gap-stack);
+  width:100%;
+  max-width:var(--content-max);
+}
+.stack__eyebrow{
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+  letter-spacing:-.016em;
+  text-align:center;
+  color:var(--c-text-muted);
+}
+.stack__list{
+  display:grid;
+  grid-template-columns:1fr;
+  width:100%;
+}
+.stack__item{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:var(--card-min-h);
+  padding:24px;
+  border:1px solid var(--c-rule);
+}
+/* collapse shared borders in the stacked (mobile) layout */
+.stack__item + .stack__item{margin-top:-1px}
+/* layer I is not built yet — dashed outline */
+.stack__item--pending{border-style:dashed; border-width:1px; background-image:none}
+.stack__index{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-index);
+  line-height:var(--lh-index);
+  letter-spacing:-.03em;
+  color:var(--c-white);
+}
+.stack__label{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-label);
+  line-height:var(--lh-label);
+  letter-spacing:-.02em;
+  color:var(--c-white);
+}
+.stack__note{
+  max-width:var(--measure-note);
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+  letter-spacing:-.016em;
+  text-align:center;
+  color:var(--c-white);
+}
+
+/* ============================================================
+   DESKTOP LAYOUT
+   ============================================================ */
+/* once the three pills fit on one line, restore the source (desktop) order */
+@media (min-width:640px){
+  .pill--date{order:0}
+}
+
+/* tablet: two columns */
+@media (min-width:600px) and (max-width:899.98px){
+  .stack__list{grid-template-columns:repeat(2,1fr)}
+  .stack__item{margin-top:0}
+  .stack__item + .stack__item{margin-top:0}
+  .stack__item:nth-child(n+3){margin-top:-1px}
+  .stack__item:nth-child(even){margin-left:-1px}
+}
+
+@media (min-width:900px){
+  .stack__list{
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .stack__item{
+    padding:15px 23px 21px;
+    margin-top:0;
+  }
+  .stack__item + .stack__item{margin-top:0}
+}
+
+/* dashed borders read heavier on hi-dpi — keep the 7/7 dash rhythm of the design */
+@supports (border-image:none){
+  .stack__item--pending{
+    border:0;
+    background-image:repeating-linear-gradient(to right,var(--c-rule) 0 7px,transparent 7px 14px),
+                     repeating-linear-gradient(to right,var(--c-rule) 0 7px,transparent 7px 14px),
+                     repeating-linear-gradient(to bottom,var(--c-rule) 0 7px,transparent 7px 14px),
+                     repeating-linear-gradient(to bottom,var(--c-rule) 0 7px,transparent 7px 14px);
+    background-size:100% 1px,100% 1px,1px 100%,1px 100%;
+    background-position:0 0,0 100%,0 0,100% 0;
+    background-repeat:no-repeat;
+    padding:25px;
+  }
+}
+@media (min-width:900px){
+  @supports (border-image:none){
+    .stack__item--pending{padding:16px 24px 22px}
+  }
+}
+
+/* ============================================================
+   SPONSORS
+   ============================================================ */
+:root{
+  --c-ink:   #000000;
+
+  /* type */
+  --fs-section-title: calc(28px + 16 * var(--fluid));  /* 28 → 44 (was 32 → 48) */
+  --lh-section-title: calc(34px + 16 * var(--fluid));  /* 34 → 50 */
+  --fs-wordmark:      calc(20px + 12 * var(--fluid));  /* 20 → 32 */
+
+  /* spacing */
+  --pad-top:     calc(64px + 32 * var(--fluid));   /* 64 → 96  */
+  --pad-bottom:  calc(20px + 76 * var(--fluid));   /* 20 → 96  */
+  --gap-title:   44px;
+  --gap-grid:    20px;
+  --tile-h:      calc(96px + 57 * var(--fluid));   /* 96 → 153 */
+}
+
+
+/* ============================================================
+   SPONSORS
+   ============================================================ */
+.sponsors{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-title);
+  padding:var(--pad-top) var(--pad-inline) var(--pad-bottom);
+  background:var(--c-white);
+}
+.sponsors__inner{
+  width:100%;
+  max-width:var(--content-max);
+  margin-inline:auto;
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-title);
+}
+.sponsors__title{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-section-title);
+  line-height:var(--lh-section-title);
+  letter-spacing:-.03em;
+  text-transform:capitalize;
+  text-align:center;
+  color:var(--c-navy);
+}
+
+.sponsors__grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);   /* mobile: 2 up */
+  gap:var(--gap-grid);
+}
+.sponsors__cell{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:var(--tile-h);
+  padding:12px;
+  background:var(--c-cream);
+}
+/* each mark keeps its Figma width at both ends of the scale */
+.sponsors__logo-mark{
+  display:block;
+  width:calc(var(--logo-w-mob) * 1px + (var(--logo-w-desk) - var(--logo-w-mob)) * var(--fluid));
+  max-width:100%;
+  height:auto;
+}
+/* sponsors supplied as type, not artwork */
+.sponsors__wordmark{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:var(--fs-wordmark);
+  line-height:24px;
+  letter-spacing:-.008em;
+  color:var(--c-ink);
+  text-align:center;
+}
+
+@media (min-width:900px){
+  .sponsors__grid{grid-template-columns:repeat(4,1fr)}   /* desktop: 4 up */
+}
+
+/* ============================================================
+   INTRO / EXECUTIVE SUMMARY
+   ============================================================ */
+:root{
+  --fs-intro-title: calc(28px + 16 * var(--fluid));   /* 28 → 44 — every section and insight title (was 32 → 48) */
+  --lh-intro-title: calc(34px + 16 * var(--fluid));   /* 34 → 50 */
+  --fs-lead:        calc(18px +  2 * var(--fluid));   /* 18 → 20 */
+  --lh-lead:        calc(28px +  4 * var(--fluid));   /* 28 → 28 → 32 */
+  --fs-prose:       16px;                             /* 16 at every width — was 14 → 16 */
+  --lh-prose:       24px;                             /* 24 at every width — was 20 → 24 */
+  --gap-prose:      16px;                             /* eyebrow → title → copy (was 24) */
+  --gap-para:       16px;                             /* paragraph → paragraph, every run of copy (was one line, 24) */
+
+  --measure-prose:       calc(335px + 625 * var(--fluid));  /* 335 → 960 — reading column, two-thirds of a 1440 viewport (was 598, then 720) */
+  --measure-layer-subtitle: calc(335px + 263 * var(--fluid)); /* 335 → 598 — centred copy under a layer title keeps the old measure */
+}
+
+.intro{
+  display:flex;
+  justify-content:center;
+  padding:var(--pad-top) var(--pad-inline) var(--pad-bottom);
+  background:var(--c-white);
+}
+.intro__content{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--gap-prose);
+  width:100%;
+  max-width:var(--measure-prose);
+}
+/* fixed-size eyebrow pill — used by every section below the hero,
+   where the hero's fluid 10→12px pills would be inconsistent */
+.pill--md{
+  font-size:12px;
+  padding:4px 8px;
+}
+.intro__title{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-intro-title);
+  line-height:var(--lh-intro-title);
+  letter-spacing:-.03em;
+  text-transform:capitalize;
+  text-wrap:pretty;
+  color:var(--c-navy);
+}
+.intro__body-group{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-prose);
+  width:100%;
+}
+.intro__lead{
+  font-size:var(--fs-lead);
+  line-height:var(--lh-lead);
+  letter-spacing:-.014em;
+  color:var(--c-navy);
+}
+/* paragraph rhythm equals one blank line of body text, as in the artboard */
+.intro__body{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-para);
+}
+.intro__body p{
+  font-size:var(--fs-prose);
+  line-height:var(--lh-prose);
+  letter-spacing:-.016em;
+  color:var(--c-navy);
+}
+
+/* ============================================================
+   FORCES / WHY THIS MATTERS NOW
+   ============================================================ */
+:root{
+  --c-slate: #464850;                                 /* force-card fill, figure rule */
+  --gap-forces: calc(40px + 16 * var(--fluid));       /* 40 → 56 (was 44 → 64) */
+  --card-force-h: calc(261px + 72 * var(--fluid));    /* 261 → 333 */
+  --figure-h: calc(210px + 432 * var(--fluid));       /* 210 → 642 */
+  --gap-pair: calc(32px + 24 * var(--fluid));          /* 32 → 56 — between the two photographs of a pair */
+  --measure-forces-body:  var(--measure-prose);             /* 335 → 960 — follows the reading column (was 566) */
+}
+
+.forces{
+  padding:var(--pad-top) var(--pad-inline) var(--pad-bottom);
+  background:var(--c-cream);
+}
+.forces__inner{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-forces);
+  width:100%;
+  max-width:var(--content-max);
+  margin-inline:auto;
+}
+/* the two prose blocks sit in a centred column, narrower than the grid */
+.forces__intro,
+.forces__note{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--gap-prose);
+  width:100%;
+  max-width:var(--measure-prose);
+  margin-inline:auto;
+}
+.forces__title{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-intro-title);
+  line-height:var(--lh-intro-title);
+  letter-spacing:-.03em;
+  text-transform:capitalize;
+  text-wrap:pretty;
+  color:var(--c-navy);
+}
+
+.forces__prose{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-para);
+  width:100%;
+}
+.forces__intro .forces__prose{max-width:var(--measure-forces-body)}
+.forces__prose p{
+  font-size:16px;                 /* holds at 16/24 on both artboards */
+  line-height:24px;
+  letter-spacing:-.016em;
+  color:var(--c-navy);
+}
+
+/* ---------- force cards ---------- */
+.forces__list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+}
+.force-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:24px;
+  min-height:var(--card-force-h);
+  padding:24px;
+  background:var(--c-slate);
+  color:var(--c-white);
+}
+.force-card__head{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.force-card__index{
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:-.021em;
+  color:var(--c-white);
+}
+.force-card__title{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:24px;
+  line-height:32px;
+  letter-spacing:-.02em;
+  color:var(--c-white);
+}
+.force-card__body{
+  font-size:14px;
+  line-height:20px;
+  letter-spacing:-.018em;
+  color:var(--c-white);
+}
+
+/* ---------- figure (shared: cream sections and navy sections) ---------- */
+.figure{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-prose);
+  width:100%;
+}
+.figure--on-light{--rule:var(--c-slate); --figure-ink:var(--c-navy)}
+.figure--on-dark {--rule:var(--c-white); --figure-ink:var(--c-white)}
+/* placeholder plate — 4/4 dashed rule, drawn with gradients to hold the rhythm */
+.figure__plate{
+  height:var(--figure-h);
+  background-image:repeating-linear-gradient(to right,var(--rule) 0 4px,transparent 4px 8px),
+                   repeating-linear-gradient(to right,var(--rule) 0 4px,transparent 4px 8px),
+                   repeating-linear-gradient(to bottom,var(--rule) 0 4px,transparent 4px 8px),
+                   repeating-linear-gradient(to bottom,var(--rule) 0 4px,transparent 4px 8px);
+  background-size:100% 1px,100% 1px,1px 100%,1px 100%;
+  background-position:0 0,0 100%,0 0,100% 0;
+  background-repeat:no-repeat;
+}
+/* the photograph: fills the plate's box, cropped about its focus point */
+.figure__img{
+  display:block;
+  width:100%;
+  height:var(--figure-h);
+  object-fit:cover;
+  object-position:var(--focus,50% 50%);
+  background:var(--c-slate);
+}
+/* two photographs side by side, each with its own caption; stacked under 900 px */
+.figure-pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--gap-pair);
+  width:100%;
+  max-width:var(--content-max);
+}
+.figure-pair .figure__img{height:auto;aspect-ratio:3/2}
+@media (max-width:899.98px){
+  .figure-pair{grid-template-columns:1fr;gap:40px}
+}
+.figure__caption{
+  display:flex;
+  flex-direction:column;
+  gap:8px;                         /* caption to credit (was 12) */
+  text-align:center;
+}
+.figure__caption b{
+  display:block;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:18px;                  /* was 24/32: a caption, not a heading */
+  line-height:26px;
+  letter-spacing:-.015em;
+  color:var(--figure-ink);
+}
+.figure__credit{
+  font-size:12px;                  /* was 14/20 */
+  line-height:18px;
+  letter-spacing:-.016em;
+  color:var(--figure-ink);
+  opacity:.8;
+}
+/* a single photograph at the full content width, outside a prose column */
+.figure--wide{max-width:var(--content-max);margin-inline:auto}
+
+@media (min-width:600px) and (max-width:899.98px){
+  .forces__list{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:900px){
+  .forces__list{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ============================================================
+   LAYER DETAIL / THE BASE LAYER
+   ============================================================ */
+:root{
+  --pad-layer-block:   calc(129px - 17 * var(--fluid));  /* 129 → 112 */
+  --gap-layer:         calc(40px + 16 * var(--fluid));   /* 40 → 56 — heading group to stack (was 44 → 64) */
+  --gap-layer-heading: calc(20px +  4 * var(--fluid));   /* 20 → 24 — eyebrow to title (was 32 → 44) */
+  --gap-layer-title:   var(--gap-heading);               /* 16 → 20 — title to subtitle, as in the hero (was 24 → 32) */
+}
+
+.layer{
+  padding:var(--pad-layer-block) var(--pad-inline);
+  /* edge-lit plate: white → ice → blue → navy in the first 6%, mirrored at the foot */
+  background:linear-gradient(180deg,
+      var(--c-white)  0%,
+      var(--c-ice)    2%,
+      var(--c-blue)   4%,
+      var(--c-navy)   6%,
+      var(--c-navy)  94%,
+      var(--c-blue)  96%,
+      var(--c-ice)   98%,
+      var(--c-white) 100%);
+}
+.layer__inner{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-layer);
+  width:100%;
+  max-width:var(--content-max);
+  margin-inline:auto;
+}
+.layer__heading-group{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--gap-layer-heading);
+}
+.layer__heading{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--gap-layer-title);
+  width:100%;
+}
+.layer__title{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-title);      /* 40 → 64, shared with the hero */
+  line-height:var(--lh-title);    /* 46 → 70 */
+  letter-spacing:-.02em;
+  text-transform:capitalize;
+  text-align:center;
+  text-wrap:balance;
+  color:var(--c-white);
+}
+.layer__subtitle{
+  max-width:var(--measure-layer-subtitle);
+  font-size:16px;                 /* holds at 16/24 on both artboards */
+  line-height:24px;
+  letter-spacing:-.016em;
+  text-align:center;
+  color:var(--c-white);
+}
+/* layers beyond the one in focus sit back */
+.stack__item--muted{opacity:.2}
+/* cards with a .stack__link jump to their section — the link stretches over the whole card */
+.stack__item:has(.stack__link){position:relative; transition:background-color .2s ease, opacity .2s ease}
+.stack__link{color:inherit; text-decoration:none}
+.stack__link::after{content:""; position:absolute; inset:0}
+.stack__link:focus-visible{outline:none}
+.stack__item:has(.stack__link:hover),
+.stack__item:has(.stack__link:focus-visible){background-color:rgba(255,255,255,.08)}
+.stack__item--muted:has(.stack__link:hover),
+.stack__item--muted:has(.stack__link:focus-visible){opacity:.6}
+.stack__item:has(.stack__link:focus-visible){outline:1px solid var(--c-ice); outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.stack__item:has(.stack__link){transition:none}}
+
+/* ============================================================
+   INSIGHTS
+   ============================================================ */
+:root{
+  --gap-insights:        calc(40px + 56 * var(--fluid));   /* 40 → 96 — card to card (was 44 → 128) */
+  --aside-min-h:         calc(265px - 67 * var(--fluid));  /* 265 → 198 */
+}
+
+.insights{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--gap-insights);
+  padding:var(--pad-top) var(--pad-inline) var(--pad-bottom);
+  background:var(--c-white);
+}
+.insight{
+  display:flex;
+  flex-direction:column;
+  gap:32px;                        /* header · block · block · aside (was 56) */
+  width:100%;
+  max-width:var(--measure-prose);
+}
+.insight__header{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--gap-prose);            /* chip to title (was 24) */
+}
+/* number plate — same radial as the hero, scaled to the chip */
+.insight__number{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  padding:8.57px;
+  font-size:16px;
+  line-height:24px;
+  color:var(--c-white);
+  background:radial-gradient(100% 100% at 50% 0%,
+              var(--c-navy) 0%, var(--c-navy) 62.8%, var(--c-blue) 100%);
+}
+.insight__title{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-intro-title);   /* 32 → 48 */
+  line-height:var(--lh-intro-title); /* 38 → 54 */
+  letter-spacing:-.03em;
+  text-transform:capitalize;
+  text-wrap:pretty;
+  color:var(--c-navy);
+}
+.insight__block{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--gap-prose);            /* eyebrow to copy (was 24) */
+}
+.insight__block p{
+  font-size:16px;                 /* holds at 16/24 on both artboards */
+  line-height:24px;
+  letter-spacing:-.016em;
+  color:var(--c-navy);
+}
+/* pull-out: label top, body pinned to the foot */
+.insight__aside{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:24px;                        /* label to body (was 38) */
+  min-height:var(--aside-min-h);
+  padding:24px;
+  background:var(--c-cream);       /* a quiet plate on the white section, navy ink (was a navy plate, white ink) */
+}
+.insight__aside-label{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:24px;
+  line-height:32px;
+  letter-spacing:-.02em;
+  color:var(--c-navy);
+}
+.insight__aside-body{
+  font-size:14px;
+  line-height:20px;
+  letter-spacing:-.018em;
+  color:var(--c-navy);
+}
+
+/* ============================================================
+   ACTIONS / IN PRACTICE
+   ============================================================ */
+:root{
+  --gap-actions:          calc(40px + 24 * var(--fluid));   /* 40 → 64 — intro · card · card · figure (was 44 → 84) */
+  --fs-action-title:      calc(24px +  4 * var(--fluid));   /* 24 → 28 */
+  --measure-action-body:  var(--measure-prose);             /* 335 → 960 — follows the reading column (was 554) */
+}
+
+.actions{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--gap-actions);
+  padding:var(--pad-top) var(--pad-inline);
+  /* same radial plate as the hero */
+  background:radial-gradient(130% 130% at 50% 0%,
+              var(--c-navy) 0%,
+              var(--c-navy) 62.8%,
+              var(--c-blue) 100%);
+  color:var(--c-white);
+}
+/* prose blocks share the 335 → 960 column; the figure spans the full 1216 */
+.actions__intro,
+.action-card,
+.actions__closing{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--gap-prose);
+  width:100%;
+  max-width:var(--measure-prose);
+}
+.actions__figure{
+  width:100%;
+  max-width:var(--content-max);
+}
+.actions__title{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-intro-title);         /* 32 → 48 */
+  line-height:var(--lh-intro-title);
+  letter-spacing:-.03em;
+  text-transform:capitalize;
+  text-wrap:pretty;
+  color:var(--c-white);
+}
+.actions__prose{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-para);
+  max-width:var(--measure-forces-body);    /* 335 → 960 */
+}
+.actions__prose p{
+  font-size:16px;
+  line-height:24px;
+  letter-spacing:-.016em;
+  color:var(--c-white);
+}
+.actions__lead{
+  font-size:20px;
+  line-height:32px;
+  letter-spacing:-.013em;
+  color:var(--c-white);
+}
+
+/* ---------- numbered actions ---------- */
+.action-card__number{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  padding:8.57px;
+  font-size:16px;
+  line-height:24px;
+  color:var(--c-navy);
+  background:var(--c-ice);
+}
+.action-card__title{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-action-title);   /* 24 → 28 */
+  line-height:32px;
+  letter-spacing:-.02em;
+  text-transform:capitalize;
+  text-wrap:pretty;
+  color:var(--c-white);
+}
+.action-card__body{
+  max-width:var(--measure-action-body);
+  font-size:16px;
+  line-height:24px;
+  letter-spacing:-.016em;
+  color:var(--c-white);
+}
+
+/* ============================================================
+   CLOSING / COLOPHON
+   ============================================================ */
+:root{
+  --pad-closing-block: calc(64px - 16 * var(--fluid));   /* 64 → 48 */
+  --gap-closing:       calc(44px + 20 * var(--fluid));   /* 44 → 64 */
+}
+
+.closing{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--gap-closing);
+  padding:var(--pad-closing-block) var(--pad-inline);
+  background:var(--c-cream);
+}
+/* same artwork as the hero, referenced rather than repeated */
+.closing__logo{
+  display:block;
+  width:191px;
+  max-width:100%;
+  height:auto;
+  color:var(--c-navy);
+}
+.closing__thanks{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap-para);
+  width:100%;
+  max-width:var(--measure-prose);
+  text-align:center;
+}
+.closing__thanks-text{
+  font-size:16px;
+  line-height:24px;
+  letter-spacing:-.016em;
+  color:var(--c-navy);
+}
+.closing__note{
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:-.022em;
+  color:var(--c-navy);
+}
+
+/* ============================================================
+   NAV BAR
+   ============================================================ */
+:root{
+  --nav-pad-inline: var(--pad-inline);                /* 20 → 112, same as every section */
+  --nav-logo-w:     calc(157px + 34 * var(--fluid));  /* 157 → 191 */
+  --nav-ease:       cubic-bezier(.22,1,.36,1);        /* eased, never linear */
+}
+
+.nav{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:100;
+  background:var(--c-white);
+  transform:translateY(-100%);
+  transition:transform .5s var(--nav-ease);
+  will-change:transform;
+}
+.nav.is-visible{transform:translateY(0)}
+
+.nav__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:20px var(--nav-pad-inline);
+}
+.nav__logo{
+  display:block;
+  flex:none;
+  width:var(--nav-logo-w);
+  color:var(--c-navy);
+}
+.nav__logo svg{display:block; width:100%; height:auto}
+
+.nav__links{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.nav__link{
+  padding:8px;
+  font-family:var(--font-body);
+  font-weight:500;
+  font-size:14px;
+  line-height:20px;
+  letter-spacing:-.019em;
+  color:var(--c-navy);
+  text-decoration:none;
+  transition:color .2s ease;
+}
+.nav__link:hover,
+.nav__link:focus-visible{color:var(--c-blue)}
+
+/* ---------- hamburger ---------- */
+.nav__toggle{
+  display:none;
+  position:relative;
+  flex:none;
+  width:24px;
+  height:24px;
+  padding:0;
+  border:0;
+  background:none;
+  cursor:pointer;
+}
+.nav__bar{
+  position:absolute;
+  left:4px;
+  width:16px;
+  height:1.5px;
+  background:var(--c-navy);
+  transition:transform .35s var(--nav-ease), opacity .2s ease;
+}
+.nav__bar:nth-child(1){top:5px}
+.nav__bar:nth-child(2){top:11.25px}
+.nav__bar:nth-child(3){top:17.5px}
+/* … folds into a cross */
+.nav.is-open .nav__bar:nth-child(1){transform:translateY(6.25px) rotate(45deg)}
+.nav.is-open .nav__bar:nth-child(2){opacity:0; transform:scaleX(.4)}
+.nav.is-open .nav__bar:nth-child(3){transform:translateY(-6.25px) rotate(-45deg)}
+
+/* ---------- mobile panel: masks down / up ---------- */
+.nav__panel{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .45s var(--nav-ease);
+}
+.nav.is-open .nav__panel{grid-template-rows:1fr}
+.nav__panel-inner{
+  overflow:hidden;
+  min-height:0;
+}
+.nav__links--stacked{
+  flex-direction:column;
+  align-items:flex-start;
+  gap:8px;
+  padding:0 var(--nav-pad-inline) 20px;
+}
+
+@media (max-width:899.98px){
+  .nav__inner > .nav__links{display:none}   /* inline list is desktop-only */
+  .nav__toggle{display:block}
+}
+@media (min-width:900px){
+  .nav__panel{display:none}
+}
+/* ============================================================
+   DATA COMPONENTS — tables, charts, stat tiles, callouts
+   Palette computed + validated (see BRAND-FOUNDATION.md §6):
+     node scripts/validate_palette.js "#133EEC,#0091CE,#005886" \
+          --mode light --surface "#F6F4F2" --pairs all
+   ============================================================ */
+:root{
+  /* --- categorical series, light surfaces (cream / white) --- */
+  --data-1: #133EEC;   /* brand blue, chart-legal step  */
+  --data-2: #0091CE;   /* azure                          */
+  --data-3: #005886;   /* deep petrol                    */
+  --data-other: var(--c-slate);   /* 4th+ series folds to neutral */
+
+  /* --- sequential / ordinal ramp (one hue, light → dark) --- */
+  --data-s1: #E3EBFC;
+  --data-s2: #B9C9F6;
+  --data-s3: #8AA3EE;
+  --data-s4: #5578E4;
+  --data-s5: #2B4CD9;
+  --data-s6: #0D1DCC;
+  --data-s7: #090C2A;
+
+  /* --- chart chrome --- */
+  --chart-ink:      var(--c-navy);
+  --chart-ink-soft: rgba(9,12,42,.6);
+  --chart-grid:     rgba(9,12,42,.12);
+  --chart-surface:  var(--c-white);
+
+  --table-radius: 0px;
+}
+
+/* dark plates re-step the same families against navy — never an automatic flip */
+.on-dark{
+  --data-1: #1C4DFB;
+  --data-2: #009EDB;
+  --data-3: #006690;
+  --data-other: var(--c-ice);
+  --chart-ink:      var(--c-white);
+  --chart-ink-soft: rgba(255,255,255,.6);
+  --chart-grid:     rgba(255,255,255,.18);
+  --chart-surface:  transparent;
+}
+
+/* ------------------------------------------------------------
+   TABLE
+   Header is always the darkest brand blue; the body sits on a
+   light plate so it reads on cream, white and navy sections alike.
+   ------------------------------------------------------------ */
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;   /* no plate here — the caption sits on the section */
+}
+.table{
+  width:80%;
+  border-collapse:collapse;
+  font-family:var(--font-body);
+  font-size:14px;
+  line-height:20px;
+  letter-spacing:-.018em;
+  color:var(--c-navy);
+  background:var(--c-white);
+}
+.table caption{
+  padding:0 0 12px;
+  background:none;                    /* inherits the section, never its own colour */
+  font-family:var(--font-display);
+  font-size:24px;
+  line-height:32px;
+  letter-spacing:-.02em;
+  text-align:left;
+  color:var(--chart-ink);             /* navy on light plates, white inside .on-dark */
+}
+.table thead th{
+  padding:12px 16px;
+  background:var(--c-navy);           /* darkest brand blue */
+  color:var(--c-white);
+  vertical-align:top;
+  font-weight:600;
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:var(--track-caps);
+  text-transform:uppercase;
+  text-align:left;
+  white-space:nowrap;
+}
+.table tbody td{
+  padding:12px 16px;
+  border-bottom:1px solid rgba(70,72,80,.15);
+  vertical-align:top;
+}
+.table tbody tr:nth-child(even) td,
+.table tbody tr:nth-child(even) th[scope="row"]{background:var(--c-cream)}  /* lighter brand tone for zebra */
+.table tbody tr:last-child td,
+.table tbody tr:last-child th[scope="row"]{border-bottom:0}
+.table tbody th[scope="row"]{
+  padding:12px 16px;
+  border-bottom:1px solid rgba(70,72,80,.15);
+  vertical-align:top;
+  font-weight:600;
+  text-align:left;
+}
+.table .is-num{
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.table tfoot td,
+.table tfoot th{
+  padding:12px 16px;
+  background:var(--c-ice);            /* lighter brand tone for the total row */
+  vertical-align:top;
+  font-weight:600;
+}
+
+/* ------------------------------------------------------------
+   CHART SHELL
+   ------------------------------------------------------------ */
+.chart{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  width:100%;
+  color:var(--chart-ink);
+}
+.chart__head{display:flex; flex-direction:column; gap:4px}
+.chart__title{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:24px;
+  line-height:32px;
+  letter-spacing:-.02em;
+  color:var(--chart-ink);
+}
+.chart__note,
+.chart__source{
+  font-family:var(--font-body);
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:-.02em;
+  color:var(--chart-ink-soft);
+}
+.chart__legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 20px;
+  font-family:var(--font-body);
+  font-size:12px;
+  line-height:18px;
+  color:var(--chart-ink);
+}
+.chart__key{display:inline-flex; align-items:center; gap:8px}
+.chart__swatch{
+  width:10px; height:10px;
+  flex:none;
+  background:var(--key, var(--data-1));
+}
+.chart__swatch--line{height:2px; width:16px}
+
+/* ---------- column chart ---------- */
+.chart__plot{
+  position:relative;
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:1fr;
+  align-items:end;
+  gap:16px;
+  height:var(--plot-h, 240px);
+  padding-top:20px;
+  border-bottom:1px solid var(--chart-grid);
+}
+.chart__col{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
+  gap:8px;
+  height:100%;
+}
+.chart__bars{
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:2px;                       /* 2px surface gap between adjacent fills */
+  width:100%;
+  height:100%;
+}
+.chart__bar{
+  position:relative;
+  width:100%;
+  max-width:48px;
+  height:calc(var(--v) * 1%);
+  background:var(--key, var(--data-1));
+  border-radius:4px 4px 0 0;     /* rounded data end, anchored to the baseline */
+  transition:filter .15s ease;
+}
+.chart__bar:hover{filter:brightness(1.12)}
+.chart__bar-value{
+  position:absolute;
+  left:50%;
+  bottom:100%;
+  transform:translate(-50%,-6px);
+  font-family:var(--font-body);
+  font-size:12px;
+  line-height:18px;
+  font-variant-numeric:tabular-nums;
+  color:var(--chart-ink);
+  white-space:nowrap;
+}
+.chart__x{
+  font-family:var(--font-body);
+  font-size:12px;
+  line-height:18px;
+  color:var(--chart-ink-soft);
+  text-align:center;
+}
+.chart__xrow{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:1fr;
+  gap:16px;
+  padding-top:8px;
+}
+
+/* ---------- stacked column: 2px gap between segments ---------- */
+.chart__stack{
+  display:flex;
+  flex-direction:column-reverse;
+  gap:2px;
+  width:100%;
+  max-width:48px;
+  height:100%;
+  justify-content:flex-start;
+}
+.chart__seg{
+  height:calc(var(--v) * 1%);
+  background:var(--key, var(--data-1));
+}
+.chart__stack > .chart__seg:last-child{border-radius:4px 4px 0 0}
+
+/* ---------- bar (horizontal ranking) ---------- */
+.chart__rows{display:flex; flex-direction:column; gap:12px}
+.chart__row{display:grid; grid-template-columns:minmax(88px,22%) 1fr auto; align-items:center; gap:12px}
+.chart__row-label{font-family:var(--font-body); font-size:13px; line-height:18px; color:var(--chart-ink)}
+.chart__track{height:14px; background:var(--chart-grid)}
+.chart__fill{
+  height:100%;
+  width:calc(var(--v) * 1%);
+  background:var(--key, var(--data-1));
+  border-radius:0 4px 4px 0;
+}
+.chart__row-value{
+  font-family:var(--font-body);
+  font-size:13px;
+  line-height:18px;
+  font-variant-numeric:tabular-nums;
+  color:var(--chart-ink);
+}
+
+/* ---------- line chart (inline SVG) ----------
+   The viewBox is 720 wide but the SVG stretches to its container, so every
+   viewBox unit is multiplied on screen — at the 1216 content max-width that is
+   1.689x. --chart-svg-fs divides the wanted on-screen size by that ratio, so the
+   label rules below are authored as the size the reader actually sees: 14px.   */
+:root{
+  --chart-svg-ratio: 1.689;                              /* 1216 / 720 */
+  --chart-svg-fs:    calc(14px / var(--chart-svg-ratio));
+}
+.chart__svg{width:100%; height:auto; display:block; overflow:visible}
+.chart__gridline{stroke:var(--chart-grid); stroke-width:1}
+.chart__axis-label{
+  font-family:var(--font-body);
+  font-size:var(--chart-svg-fs);
+  fill:var(--chart-ink-soft);
+}
+.chart__line{
+  fill:none;
+  stroke:var(--key, var(--data-1));
+  stroke-width:2;                 /* 2px lines */
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.chart__dot{
+  r:4.5;                          /* ≥8px marker */
+  fill:var(--key, var(--data-1));
+  stroke:var(--chart-surface, #fff);
+  stroke-width:2;                 /* 2px surface ring on overlapping marks */
+}
+.chart__dot--bare{stroke:none}
+.chart__label{
+  font-family:var(--font-body);
+  font-size:var(--chart-svg-fs);
+  fill:var(--chart-ink);
+}
+
+/* ---------- tooltip (shared by every mark) ---------- */
+.chart-tip{
+  position:fixed;
+  z-index:200;
+  pointer-events:none;
+  padding:8px 10px;
+  background:var(--c-navy);
+  color:var(--c-white);
+  font-family:var(--font-body);
+  font-size:12px;
+  line-height:18px;
+  opacity:0;
+  transform:translate(-50%,-100%) translateY(-8px);
+  transition:opacity .12s ease;
+}
+.chart-tip.is-on{opacity:1}
+.chart-tip b{font-weight:600}
+
+/* ---------- stat tiles (when the answer is one number) ---------- */
+.stat-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+  width:100%;
+}
+.stat{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:24px;
+  background:var(--c-cream);
+  border:1px solid var(--c-cream-line);
+}
+.on-dark .stat{background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.14)}
+.stat__value{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:var(--fs-index);      /* 24 → 48, the layer-index ramp */
+  line-height:var(--lh-index);
+  letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+  color:var(--chart-ink);
+}
+.stat__label{
+  font-family:var(--font-body);
+  font-size:12px;
+  line-height:18px;
+  letter-spacing:var(--track-caps);
+  text-transform:uppercase;
+  color:var(--chart-ink-soft);
+}
+.stat__note{
+  font-family:var(--font-body);
+  font-size:14px;
+  line-height:20px;
+  color:var(--chart-ink);
+}
+
+/* ------------------------------------------------------------
+   CALLOUT — the plate used for points raised inside a layer
+   (generalised from the insight card's "What to consider" box):
+   cream with navy ink on white, navy on a cream section, ice tint on navy
+   ------------------------------------------------------------ */
+.callout{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:24px;                          /* label to body (was 38) */
+  min-height:var(--aside-min-h);
+  padding:24px;
+  background:var(--c-cream);         /* on a white section: a quiet cream plate, navy ink (was navy, white ink) */
+  width:100%;
+}
+.callout--auto{min-height:0}
+.callout__label{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:24px;
+  line-height:32px;
+  letter-spacing:-.02em;
+  color:var(--c-navy);
+}
+.callout__body{
+  font-size:14px;
+  line-height:20px;
+  letter-spacing:-.018em;
+  color:var(--c-navy);
+}
+/* on a cream section a cream plate would vanish: there it keeps the navy plate and white ink */
+.forces .callout{background:var(--c-navy)}
+.forces .callout__label, .forces .callout__body{color:var(--c-white)}
+/* on a navy section the plate inverts to an ice tint so it still separates */
+.on-dark .callout{background:rgba(255,255,255,.07)}
+.on-dark .callout__label, .on-dark .callout__body{color:var(--c-white)}
+
+/* ============================================================
+   OPT-IN MODIFIERS
+   Nothing here applies unless a page asks for it by class, so
+   existing pages render exactly as they did before this block.
+   ============================================================ */
+:root{
+  --narrow-w:    var(--measure-prose);       /* the reading column — tables sit flush with the prose (was 60%) */
+  --reveal-dur:  .9s;
+  --ease-reveal: cubic-bezier(.22,1,.36,1);  /* the nav curve, reused */
+}
+
+/* ---------- .is-narrow — the reading column, centred ----------
+   Applies to the full-width blocks: table wrap, chart, callout, and the
+   source line that belongs to the block above it. The block takes the same
+   max-width as the prose (--measure-prose, 335 → 960) at every width, so a
+   table is exactly as wide as the paragraphs above and below it — on a
+   phone, a tablet and a desktop alike. (It used to stand down to the full
+   container below 900px, which left it a few pixels wider than the copy.) */
+.table-wrap.is-narrow,
+.chart.is-narrow,
+.callout.is-narrow,
+.chart__source.is-narrow{
+  width:100%;
+  max-width:var(--narrow-w);
+  margin-inline:auto;
+}
+/* .table carries its own width; inside a narrowed wrap the wrap owns it,
+   so the two do not multiply into a much smaller, left-hung table */
+.table-wrap.is-narrow > .table{width:100%}
+
+/* ---------- .table--on-dark — a table sitting on a navy or radial plate ----------
+   The body keeps its own white plate, so only the parts that touch the dark
+   background change. The header row inverts: an ice (--c-ice) fill carrying navy
+   ink, rather than the navy fill it takes on light plates — a navy band on a navy
+   plate has no edge to read against. That matches the total row, which is already
+   ice. The caption, which sits outside the table's own plate, inks ice.
+   Applied contextually inside .on-dark so a page never has to remember the
+   modifier; the explicit class is there for a dark plate without .on-dark.      */
+.table--on-dark caption,
+.on-dark .table caption{color:var(--c-ice)}
+
+.table--on-dark thead th,
+.on-dark .table thead th{
+  background:var(--c-ice);
+  color:var(--c-navy);
+}
+
+/* the total row already carries an ice fill, so its ink flips to navy to match */
+.table--on-dark tfoot td,
+.table--on-dark tfoot th,
+.on-dark .table tfoot td,
+.on-dark .table tfoot th{color:var(--c-navy)}
+
+/* ---------- .chart--reveal — bars ease up from zero on scroll ----------
+   brand.js adds .is-revealed the first time the chart enters the viewport
+   and never removes it. Without JS the bars sit at full value, so the
+   figures are never hidden behind a script that failed to run.            */
+/* the pending state carries transition:none so the drop to zero happens in one
+   frame at load; the transition only exists on the way back up */
+.chart--reveal.is-pending .chart__fill{width:0; transition:none}
+.chart--reveal.is-pending .chart__bar,
+.chart--reveal.is-pending .chart__seg{height:0; transition:none}
+.chart--reveal .chart__fill{
+  transition:width var(--reveal-dur) var(--ease-reveal);
+}
+.chart--reveal .chart__bar,
+.chart--reveal .chart__seg{
+  transition:height var(--reveal-dur) var(--ease-reveal);
+}
+@media (prefers-reduced-motion:reduce){
+  .chart--reveal.is-pending .chart__fill{width:calc(var(--v) * 1%)}
+  .chart--reveal.is-pending .chart__bar,
+  .chart--reveal.is-pending .chart__seg{height:calc(var(--v) * 1%)}
+  .chart--reveal .chart__fill,
+  .chart--reveal .chart__bar,
+  .chart--reveal .chart__seg{transition:none}
+}
+
+/* ---------- .chart__rows--stacked — label over a thin bar ----------
+   Same markup as .chart__rows: label, track + fill, value. Only the
+   grid changes, so tooltips, focus order and the reveal all carry over.
+   Fill is --data-1 (#133EEC on light plates, the dark-set step inside
+   .on-dark). Track is --data-s1, the lightest step of the same hue.     */
+.chart__rows--stacked{gap:24px}
+.chart__rows--stacked .chart__row{
+  grid-template-columns:1fr auto;
+  grid-template-areas:
+    "label value"
+    "track track";
+  align-items:baseline;
+  gap:8px 16px;
+}
+.chart__rows--stacked .chart__row-label{
+  grid-area:label;
+  font-size:16px;
+  line-height:24px;
+  letter-spacing:-.016em;
+}
+/* the figure is titular here, so it takes the display serif */
+.chart__rows--stacked .chart__row-value{
+  grid-area:value;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:24px;
+  line-height:32px;
+  letter-spacing:-.02em;
+}
+.chart__rows--stacked .chart__track{
+  grid-area:track;
+  height:6px;
+  background:var(--data-s1);
+  border-radius:999px;              /* pill caps — this variant only */
+}
+.chart__rows--stacked .chart__fill{border-radius:999px}
+.on-dark .chart__rows--stacked .chart__track{background:rgba(255,255,255,.18)}
+
+/* ---------- five-layer stack ----------
+   The desktop stack is hard-set to four columns, so a fifth box wraps onto a
+   row of its own. Match the track count to the item count instead. Stacks of
+   four and fewer are untouched, so nothing that exists today moves.          */
+@media (min-width:900px){
+  .stack__list:has(> :nth-child(5)){grid-template-columns:repeat(5,1fr)}
+}
+
+/* ============================================================
+   ACTION BUTTONS — an icon that names itself on hover
+   Used by the nav bar (both reports) and the PDF viewer bar.
+   The label is a box, not a native title: it fades and eases in
+   from 4px away, so the reveal reads as motion rather than a
+   tooltip appearing. Direction is set by the modifier, because a
+   nav sits at the top of the window and the viewer bar at the
+   bottom — the label always travels away from its own chrome.
+   ============================================================ */
+:root{
+  --btn-size:     32px;
+  --btn-icon:     100%;                      /* the supplied icons carry their own 8px inset inside the 32px box */
+  --btn-radius:   4px;
+  /* A light shade of the brand blue rather than a flat grey, so the
+     wash picks up whatever plate it sits on — white in the nav,
+     porcelain in the viewer bar — instead of fighting it. */
+  --c-btn-hover:  rgba(13,29,204,.08);
+  --dur-ui:       120ms;                     /* icon wash + lift */
+  --dur-bubble:   140ms;                     /* label reveal */
+  --ease-ui:      cubic-bezier(.4,0,.2,1);
+  --bubble-offset: 8px;
+  --fs-bubble:    10px;
+  --lh-bubble:    14px;
+}
+
+.action-button{
+  position:relative;
+  flex:none;
+  display:grid;
+  place-items:center;
+  width:var(--btn-size);
+  height:var(--btn-size);
+  padding:0;
+  border:0;
+  border-radius:var(--btn-radius);
+  background:transparent;
+  color:var(--c-navy);
+  cursor:pointer;
+  text-decoration:none;
+  transition:background-color var(--dur-ui) var(--ease-ui),
+             color var(--dur-ui) var(--ease-ui);
+}
+.action-button:hover,
+.action-button:focus-visible{
+  background:var(--c-btn-hover);
+  color:var(--c-blue);                       /* same hover ink as .nav__link */
+}
+.action-button:focus-visible{
+  outline:2px solid var(--c-blue);
+  outline-offset:2px;
+}
+.action-button svg{
+  display:block;
+  width:var(--btn-icon);
+  height:var(--btn-icon);
+  transition:transform var(--dur-ui) var(--ease-ui);
+}
+/* the icon lifts a hair as the label arrives — the two read as one gesture */
+.action-button:hover svg{transform:translateY(-1px)}
+
+/* ---------- the label ----------
+   aria-hidden: the accessible name is already on the button. */
+.action-button__bubble{
+  position:absolute;
+  left:50%;
+  top:calc(100% + var(--bubble-offset));     /* default: below, for the nav */
+  padding:6px 8px;
+  border-radius:var(--btn-radius);
+  background:var(--c-navy);
+  color:var(--c-white);
+  font-family:var(--font-body);
+  font-weight:400;
+  font-size:var(--fs-bubble);
+  line-height:var(--lh-bubble);
+  letter-spacing:-.02em;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transform:translate(-50%,-4px);
+  transition:opacity var(--dur-bubble) var(--ease-ui),
+             transform var(--dur-bubble) var(--ease-ui);
+}
+/* .is-tipped is the touch path — there is no hover to reveal a label,
+   so brand.js sets it on tap and clears it on the next one. */
+.action-button:hover .action-button__bubble,
+.action-button:focus-visible .action-button__bubble,
+.action-button.is-tipped .action-button__bubble{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+/* Bottom-anchored chrome: the label sits above and rises into place. */
+.action-button--up .action-button__bubble{
+  top:auto;
+  bottom:calc(100% + var(--bubble-offset));
+  transform:translate(-50%,4px);
+}
+.action-button--up:hover .action-button__bubble,
+.action-button--up:focus-visible .action-button__bubble,
+.action-button--up.is-tipped .action-button__bubble{
+  transform:translate(-50%,0);
+}
+/* The last icon in a row sits against the section's inline padding, so a
+   centred label would overhang the window. These pull it back to the edge
+   it belongs to and let it grow inward instead. */
+.action-button--end .action-button__bubble{left:auto; right:0; transform:translate(0,-4px)}
+.action-button--end:hover .action-button__bubble,
+.action-button--end:focus-visible .action-button__bubble,
+.action-button--end.is-tipped .action-button__bubble{transform:translate(0,0)}
+.action-button--end.action-button--up .action-button__bubble{transform:translate(0,4px)}
+.action-button--end.action-button--up:hover .action-button__bubble,
+.action-button--end.action-button--up:focus-visible .action-button__bubble,
+.action-button--end.action-button--up.is-tipped .action-button__bubble{transform:translate(0,0)}
+
+/* A control whose destination does not exist yet. It holds the row's
+   geometry so both reports' bars measure the same, and says so when
+   asked, but it is not a link and never takes the hover wash. */
+.action-button--pending{
+  color:rgba(9,12,42,.28);
+  cursor:default;
+}
+.action-button--pending:hover{background:transparent; color:rgba(9,12,42,.28)}
+.action-button--pending:hover svg{transform:none}
+
+/* On a dark plate the wash and the label invert: a navy box on a navy
+   section has no edge to read against. */
+.on-dark .action-button,
+.action-button--on-dark{color:var(--c-white)}
+.on-dark .action-button:hover,
+.action-button--on-dark:hover{background:rgba(255,255,255,.12); color:var(--c-white)}
+.on-dark .action-button__bubble,
+.action-button--on-dark .action-button__bubble{
+  background:var(--c-ice);
+  color:var(--c-navy);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .action-button__bubble,
+  .action-button svg{transition-duration:1ms}
+  .action-button__bubble{transform:translate(-50%,0)}
+  .action-button--end .action-button__bubble{transform:translate(0,0)}
+  .action-button:hover svg{transform:none}
+}
+
+/* ---------- the group in the nav bar ----------
+   Desktop: link + PDF, flush with the section's inline padding, so
+   .nav__inner's space-between reproduces the artboard exactly —
+   logo 191, links 578, actions 88 across the 1216 content width.
+   Mobile: the PDF control stands down and the link rides in with the
+   panel, next to the hamburger it shares a row with. */
+.nav__actions{
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+@media (max-width:899.98px){
+  .nav__actions{
+    margin-left:auto;                        /* sit against the toggle */
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity var(--nav-ease-dur,.35s) var(--nav-ease),
+               visibility 0s linear .35s;
+  }
+  .nav.is-open .nav__actions{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transition:opacity .35s var(--nav-ease), visibility 0s linear 0s;
+  }
+  .nav__actions .action-button--pdf{display:none}
+}
+
+/* ============================================================
+   COPY FITTING
+   No orphans, no hyphenation, no short last line.
+   Body copy wraps greedily, so every line runs out to the measure and
+   a paragraph reads as wide as the table beside it. Headings keep
+   text-wrap:pretty. The pages glue each run's final two words with a
+   no-break space and hold hyphenated compounds together (.nb); on top
+   of that copyfit.js tracks each paragraph by a hair (±.02em, ±2px of
+   word space) until its last line is at least 30% of the measure.
+   ============================================================ */
+p, li, figcaption, caption, blockquote,
+.hero__subtitle, .layer__subtitle, .stack__note, .stack__eyebrow,
+.callout__body, .callout__label, .insight__aside-body, .insight__aside-label,
+.action-card__body, .force-card__body, .figure__credit, .chart__source, .stat__label{
+  text-wrap:wrap;                  /* greedy: every line runs to the measure, so copy and table share an edge */
+  hyphens:none; -webkit-hyphens:none;
+  overflow-wrap:normal;
+}
+h1, h2, h3, .stack__label, .force-card__title, .action-card__title, .chart__title{
+  text-wrap:pretty;
+  hyphens:none; -webkit-hyphens:none;
+}
+.hero__title, .layer__title, .sponsors__title{text-wrap:balance}   /* centred titles balance */
+.nb{white-space:nowrap}
+
+/* The second layer of heading under a section's own: an h3 insight title
+   sits below an h2, so it takes the action title's size rather than the
+   section title's. (h2 insight titles — the report-2026 layers — keep 48.) */
+h3.insight__title{
+  font-size:var(--fs-action-title);   /* 24 → 28 */
+  line-height:32px;
+  letter-spacing:-.02em;
+}
+
+/* ============================================================
+   TABLETS — a table is as wide as the copy, and fits it
+   Between 600 and 900px the reading measure is 400–566px, and a
+   table takes exactly that width (see .is-narrow). Its headers give
+   up nowrap and every cell 4px of padding, so the columns wrap inside
+   the measure instead of scrolling; the type stays at 14/20.
+   ============================================================ */
+@media (min-width:600px) and (max-width:899.98px){
+  .table thead th{white-space:normal; padding:10px 12px}
+  .table tbody td, .table tbody th[scope="row"], .table tfoot td, .table tfoot th{padding:10px 12px}
+  .table tbody .is-num, .table tfoot .is-num{white-space:nowrap}   /* a figure never breaks; its header may wrap */
+}
+
+/* ============================================================
+   PHONES — the type steps down 2px and every table fits the screen
+   Below 600px each heading, subheading and run of body copy is two
+   pixels smaller than its ramp's foot (leading follows), and a table
+   gives up its nowrap header and 16px cell padding so its columns
+   wrap inside the 335px the phone has, rather than scrolling.
+   ============================================================ */
+@media (max-width:599.98px){
+  :root{
+    --fs-title:         calc(38px + 24 * var(--fluid));   /* 40 → 38 */
+    --lh-title:         calc(44px + 24 * var(--fluid));
+    --fs-body:          14px;  --lh-body:  22px;          /* 16 → 14 */
+    --fs-index:         calc(22px + 24 * var(--fluid));   /* 24 → 22 */
+    --lh-index:         calc(30px + 22 * var(--fluid));
+    --fs-label:         22px;  --lh-label: 30px;          /* 24 → 22 */
+    --fs-section-title: calc(26px + 16 * var(--fluid));   /* 28 → 26 */
+    --lh-section-title: calc(32px + 16 * var(--fluid));
+    --fs-intro-title:   calc(26px + 16 * var(--fluid));
+    --lh-intro-title:   calc(32px + 16 * var(--fluid));
+    --fs-lead:          calc(16px +  2 * var(--fluid));   /* 18 → 16 */
+    --lh-lead:          calc(26px +  4 * var(--fluid));
+    --fs-prose:         14px;  --lh-prose: 22px;          /* 16 → 14 */
+    --fs-action-title:  calc(22px +  4 * var(--fluid));   /* 24 → 22 */
+  }
+  /* copy set at a fixed 16/24 on the site steps down with the ramps */
+  .forces__prose p, .insight__block p, .actions__prose p, .layer__subtitle,
+  .action-card__body, .closing__thanks-text, .chart__rows--stacked .chart__row-label{
+    font-size:14px; line-height:22px;
+  }
+  .actions__lead, .actions__prose p.actions__lead{font-size:18px; line-height:28px}   /* 20 → 18 */
+  /* subheadings set at a fixed 24/32 */
+  .force-card__title, .insight__aside-label, .callout__label,
+  .chart__title, .table caption, .chart__rows--stacked .chart__row-value{
+    font-size:22px; line-height:30px;
+  }
+  .figure__caption b{font-size:16px; line-height:24px}                /* 18 → 16; the credit stays 12/18 */
+  h3.insight__title{font-size:22px; line-height:30px}
+  .action-card__title{line-height:30px}
+  .force-card__body, .insight__aside-body, .callout__body, .stat__note{
+    font-size:12px; line-height:18px;                               /* 14 → 12 */
+  }
+  .nav__link{font-size:12px; line-height:18px}
+
+  /* ---------- tables fit the screen ---------- */
+  .table-wrap{overflow-x:visible}
+  .table{
+    width:100%;
+    table-layout:auto;
+    font-size:12px;
+    line-height:16px;
+    letter-spacing:-.012em;
+  }
+  .table thead th{
+    padding:8px 6px;
+    font-size:10px;
+    line-height:14px;
+    letter-spacing:.06em;
+    white-space:normal;                       /* headers wrap instead of pushing the table wide */
+  }
+  .table tbody td, .table tbody th[scope="row"], .table tfoot td, .table tfoot th{
+    padding:8px 6px;
+  }
+  .table tbody .is-num, .table tfoot .is-num{white-space:nowrap}   /* a figure never breaks; its header may wrap */
+  .table .nb{white-space:normal}              /* in a phone-width cell a compound may break at its hyphen */
+}

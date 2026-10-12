@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand components — The Private Markets Forum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../Brand%20Foundations/brand.css">
+<style>
+  /* demo-only scaffolding, not part of the system */
+  .demo{padding:var(--pad-top) var(--pad-inline) var(--pad-bottom)}
+  .demo--white{background:var(--c-white)}
+  .demo--cream{background:var(--c-cream)}
+  .demo--navy{background:radial-gradient(130% 130% at 50% 0%,var(--c-navy) 0%,var(--c-navy) 62.8%,var(--c-blue) 100%)}
+  .demo__inner{display:flex;flex-direction:column;gap:44px;max-width:var(--content-max);margin-inline:auto}
+  .demo__h{font-family:var(--font-display);font-size:var(--fs-intro-title);line-height:var(--lh-intro-title);letter-spacing:-.03em;color:var(--c-navy)}
+  .demo--navy .demo__h{color:var(--c-white)}
+  .demo__sub{font-family:var(--font-body);font-size:12px;line-height:18px;letter-spacing:var(--track-caps);text-transform:uppercase;color:var(--c-slate)}
+  .demo--navy .demo__sub{color:rgba(255,255,255,.6)}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .sw{display:flex;flex-direction:column;gap:6px}
+  .sw__chip{height:72px;border:1px solid rgba(70,72,80,.15)}
+  .sw__name{font-family:var(--font-body);font-size:12px;line-height:18px;color:var(--c-navy)}
+  .sw__hex{font-family:var(--font-body);font-size:12px;line-height:18px;color:var(--c-slate);font-variant-numeric:tabular-nums}
+  .plates{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .plate{height:120px;border:1px solid rgba(70,72,80,.15)}
+  .plate--white{background:var(--c-white)}
+  .plate--cream{background:var(--c-cream)}
+  .plate--radial{background:radial-gradient(130% 130% at 50% 0%,var(--c-navy) 0%,var(--c-navy) 62.8%,var(--c-blue) 100%)}
+  .plate--edge{background:linear-gradient(180deg,var(--c-white) 0%,var(--c-ice) 2%,var(--c-blue) 4%,var(--c-navy) 6%,var(--c-navy) 94%,var(--c-blue) 96%,var(--c-ice) 98%,var(--c-white) 100%)}
+  .specimen{display:flex;flex-direction:column;gap:8px}
+  .specimen__meta{font-family:var(--font-body);font-size:12px;line-height:18px;color:var(--c-slate)}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="pmf-logo" viewBox="0 0 191 34">
+    <path d="M36.684 30.1912C37.0959 30.1915 37.4379 30.5291 37.3574 30.9331C37.0127 32.6619 35.4866 33.9645 33.6566 33.9649H9.43554C7.60527 33.9649 6.07878 32.6621 5.73405 30.9331C5.65351 30.5289 5.99602 30.1912 6.40818 30.1912H36.684ZM3.03319 5.73405C3.43717 5.65389 3.77436 5.99547 3.77436 6.40745V27.5582C3.77421 27.97 3.43703 28.3116 3.03319 28.2315C1.30424 27.887 0.000246846 26.361 0 24.5308V9.43481C8.55901e-05 7.60448 1.30413 6.07862 3.03319 5.73405ZM39.317 6.40745C39.317 5.99529 39.6547 5.6535 40.0589 5.73405C41.7877 6.07886 43.0906 7.6047 43.0907 9.43481V24.5308C43.0904 26.3608 41.7876 27.8868 40.0589 28.2315C39.6548 28.3121 39.3172 27.9702 39.317 27.5582V6.40745ZM33.6566 0C35.4867 0.000327397 37.0128 1.30359 37.3574 3.03246C37.4377 3.43639 37.0958 3.77412 36.684 3.77436H6.40818C5.99608 3.77436 5.65362 3.4366 5.73405 3.03246C6.07863 1.30334 7.60513 2.66903e-08 9.43554 0H33.6566Z" fill="currentColor"/>
+    <path d="M187.627 31.9077V27.614C187.627 26.2131 187.499 25.2488 185.935 25.2488C184.879 25.2488 183.842 25.7582 182.896 27.2501C182.896 27.3774 182.896 27.4866 182.896 27.614V31.9077C182.896 32.6536 183.351 32.9811 183.988 32.9811H184.297V33.6179H179.967V32.9811H180.258C180.913 32.9811 181.35 32.6536 181.35 31.9077V27.614C181.35 26.2131 181.223 25.2488 179.658 25.2488C178.603 25.2488 177.566 25.7582 176.601 27.2865V31.9077C176.601 32.6536 177.038 32.9811 177.693 32.9811H178.002V33.6179H173.654V32.9811H173.963C174.6 32.9811 175.055 32.6536 175.055 31.9077V26.2313C175.055 25.4853 174.6 25.1578 173.963 25.1578H173.654V24.5211H176.601V26.5587C177.475 25.2488 178.694 24.3391 180.258 24.3391C181.859 24.3391 182.605 25.0851 182.824 26.5405C183.697 25.2852 185.007 24.3391 186.553 24.3391C188.5 24.3391 189.173 25.4489 189.173 27.614V31.9077C189.173 32.6536 189.628 32.9811 190.265 32.9811H190.574V33.6179H186.244V32.9811H186.553C187.19 32.9811 187.627 32.6536 187.627 31.9077Z" fill="currentColor"/>
+    <path d="M168.413 24.5211H171.343V31.9077C171.343 32.6536 171.779 32.9811 172.434 32.9811H172.744V33.6179H169.796V31.5802C168.923 32.8719 167.813 33.7816 166.194 33.7816C164.52 33.7816 163.483 32.781 163.483 30.7797V26.2313C163.483 25.4853 163.028 25.1579 162.391 25.1579H162.082V24.5211H165.029V30.7797C165.029 32.126 165.466 32.8719 166.74 32.8719C167.831 32.8719 168.832 32.3807 169.796 30.8525V26.0675C169.742 25.4308 169.305 25.1579 168.705 25.1579H168.413V24.5211Z" fill="currentColor"/>
+    <path d="M159.06 25.6854C159.06 25.4125 159.151 25.176 159.315 24.9759C157.859 24.9759 157.168 26.0129 156.531 27.1955V31.9076C156.531 32.6536 156.968 32.981 157.623 32.981H158.66V33.6178H153.584V32.981H153.893C154.53 32.981 154.985 32.6536 154.985 31.9076V26.2312C154.985 25.4853 154.53 25.1578 153.893 25.1578H153.584V24.521H156.531V27.1955V26.4677C157.405 24.8849 158.514 24.1572 159.406 24.1572C160.679 24.1572 161.244 24.8485 161.244 25.6854C161.244 26.2858 160.752 26.777 160.152 26.777C159.551 26.777 159.06 26.2858 159.06 25.6854Z" fill="currentColor"/>
+    <path d="M148.001 24.2118C150.767 24.2118 152.641 26.1404 152.641 29.1059C152.641 32.0715 150.767 34 148.001 34C145.218 34 143.362 32.0715 143.362 29.1059C143.362 26.1404 145.218 24.2118 148.001 24.2118ZM145.09 29.1059C145.09 31.6166 146.2 33.3632 148.001 33.3632C149.803 33.3632 150.912 31.6166 150.912 29.1059C150.912 26.577 149.803 24.8486 148.001 24.8486C146.2 24.8486 145.09 26.577 145.09 29.1059Z" fill="currentColor"/>
+    <path d="M134.666 27.1774V31.9077C134.666 32.6536 135.121 32.9811 135.757 32.9811H136.667V33.6179H131.009V32.9811H131.918C132.555 32.9811 132.992 32.6536 132.992 31.9077V21.9558C132.992 21.2099 132.555 20.8824 131.918 20.8824H131.009V20.2456H142.744L142.926 25.1215H142.198C142.016 21.9558 141.015 21.1553 138.432 21.1553H134.666V26.2677H137.14C138.068 26.2677 138.541 25.831 138.541 24.703V23.7388H139.269V29.6881H138.541V28.7238C138.541 27.614 138.068 27.1774 137.14 27.1774H134.666Z" fill="currentColor"/>
+    <path d="M126.029 27.4138C125.556 25.9765 124.719 24.703 122.973 24.703C122.063 24.703 121.226 25.267 121.226 26.2312C121.226 28.9603 127.266 28.2325 127.266 31.2709C127.266 33.1266 125.465 33.9817 123.919 33.9817C122.281 33.9817 120.99 33.072 120.99 33.072L120.153 33.9089H119.698V30.252H120.153L120.189 30.3794C120.626 31.7075 121.863 33.4359 123.81 33.4359C125.029 33.4359 125.811 32.7081 125.811 31.7257C125.811 29.1786 119.771 30.1792 119.771 26.4495C119.771 24.9031 121.153 24.1572 122.736 24.1572C124.374 24.1572 125.393 24.8485 125.393 24.8485L126.084 24.2481H126.502V27.523H126.066L126.029 27.4138Z" fill="currentColor"/>
+    <path d="M118.937 30.9617C118.937 32.6355 118.136 33.8909 116.535 33.8909C114.898 33.8909 114.024 32.6901 114.024 31.3256V25.2489H112.332V24.5212C114.006 24.5212 114.916 22.6108 114.916 21.2281H115.571V24.5212H118.937V25.2489H115.571V31.3256C115.571 32.5081 115.898 33.1631 116.972 33.1631C118.045 33.1631 118.482 32.0351 118.482 30.9617H118.937Z" fill="currentColor"/>
+    <path d="M111.637 28.9603H105.105C105.16 30.9434 105.742 33.072 108.126 33.072C109.344 33.072 110.382 32.4898 111.109 31.6711L111.51 32.0896C110.673 32.981 109.545 33.7998 107.816 33.7998C104.832 33.7998 103.377 31.1799 103.377 28.6692C103.377 26.2312 104.905 24.1572 107.834 24.1572C110.654 24.1572 111.637 26.6315 111.637 28.9603ZM107.834 24.8849C106.051 24.8849 105.233 26.5769 105.124 28.2325H109.254C109.708 28.2325 109.781 27.9778 109.781 27.6321C109.781 26.3222 109.344 24.8849 107.834 24.8849Z" fill="currentColor"/>
+    <path d="M98.9707 26.2859L97.0785 27.9961L100.153 31.7804C100.717 32.4717 101.481 33.0175 102.136 33.0175H102.427V33.6179H97.8609V32.9811H98.1702C98.6614 32.9811 98.8797 32.5263 98.5158 32.0533L96.0051 28.9786L94.8225 30.052V31.9077C94.8225 32.6537 95.2774 32.9811 95.9141 32.9811H96.2234V33.6179H91.8752V32.9811H92.1844C92.8394 32.9811 93.2761 32.6537 93.2761 31.9077V21.9376C93.2761 21.1553 92.4574 21.0643 91.7842 21.0643V20.4276L94.5496 19.9181H94.8225V29.0877L97.9518 26.2313C98.7523 25.5036 98.6614 25.1579 97.6971 25.1579H97.0603V24.5211H101.736V25.1579H101.409C100.408 25.1579 99.9531 25.3762 98.9707 26.2859Z" fill="currentColor"/>
+    <path d="M88.9447 25.6854C88.9447 25.4125 89.0357 25.176 89.1994 24.9759C87.7439 24.9759 87.0526 26.0129 86.4158 27.1955V31.9076C86.4158 32.6536 86.8524 32.981 87.5074 32.981H88.5445V33.6178H83.4684V32.981H83.7777C84.4145 32.981 84.8693 32.6536 84.8693 31.9076V26.2312C84.8693 25.4853 84.4145 25.1578 83.7777 25.1578H83.4684V24.521H86.4158V27.1955V26.4677C87.2891 24.8849 88.3989 24.1572 89.2904 24.1572C90.5639 24.1572 91.1279 24.8485 91.1279 25.6854C91.1279 26.2858 90.6367 26.777 90.0363 26.777C89.4359 26.777 88.9447 26.2858 88.9447 25.6854Z" fill="currentColor"/>
+    <path d="M74.207 26.2676C74.2252 24.703 76.2265 24.1572 77.4637 24.1572C79.3922 24.1572 81.0842 25.0123 81.0842 26.9044V32.035C81.0842 32.6172 81.2116 32.9992 81.721 32.9992C82.0667 32.9992 82.2668 32.8901 82.4851 32.6899L82.7762 33.0902C82.4305 33.4723 81.9029 33.7998 81.248 33.7998C80.4656 33.7998 79.7561 33.2176 79.5741 32.3625C79.0465 33.0174 78.1187 33.7998 76.7723 33.7998C74.8256 33.7998 73.5339 32.6718 73.5339 31.1799C73.5339 29.1422 75.3168 28.4326 77.5546 28.4326C78.1914 28.4326 78.8646 28.4872 79.5378 28.5964V27.1773C79.5378 25.74 79.1921 24.7939 77.4091 24.7939C76.5176 24.7939 75.99 24.9759 75.6807 25.2488C76.0992 25.3943 76.3903 25.7946 76.3903 26.2676C76.3903 26.868 75.899 27.3592 75.2986 27.3592C74.6983 27.3592 74.207 26.868 74.207 26.2676ZM75.2623 31.2163C75.2623 32.1805 75.9354 32.9629 77.0816 32.9629C78.2824 32.9629 79.0829 32.3625 79.5378 31.8167V29.1422C79.0647 29.0694 78.6281 29.033 78.2278 29.033C76.3903 29.033 75.2623 29.779 75.2623 31.2163Z" fill="currentColor"/>
+    <path d="M68.7476 31.9078V21.2827H68.6202L64.5448 33.8909V33.8181L64.5266 33.8909H63.6352L59.6144 21.2827H59.5598V31.7076C59.6326 32.6901 60.2329 32.9812 61.0335 32.9812H61.5611V33.618H56.667V32.9812H57.2128C58.0497 32.9812 58.6501 32.6537 58.6501 31.5439V21.9559C58.6501 21.2099 58.2135 20.8824 57.5767 20.8824H56.667V20.2457H61.088L64.5266 31.0163L68.0016 20.2457H68.7476L69.7664 20.2275H72.4227V20.8824H71.4948C70.8944 20.8824 70.4759 21.1553 70.4214 21.7921V32.0715C70.4759 32.7083 70.8944 32.9812 71.4948 32.9812H72.4227V33.618H66.7463V32.9812H67.6559C68.3109 32.9812 68.7476 32.6537 68.7476 31.9078Z" fill="currentColor"/>
+    <path d="M156.831 9.04213H150.299C150.354 11.0252 150.936 13.1539 153.32 13.1539C154.538 13.1539 155.576 12.5717 156.303 11.753L156.704 12.1714C155.867 13.0629 154.739 13.8816 153.01 13.8816C150.026 13.8816 148.571 11.2617 148.571 8.75103C148.571 6.31309 150.099 4.23901 153.028 4.23901C155.848 4.23901 156.831 6.71335 156.831 9.04213ZM153.028 4.96676C151.245 4.96676 150.427 6.65876 150.318 8.31438H154.448C154.902 8.31438 154.975 8.05967 154.975 7.71399C154.975 6.40405 154.538 4.96676 153.028 4.96676Z" fill="currentColor"/>
+    <path d="M147.846 11.0436C147.846 12.7174 147.045 13.9727 145.444 13.9727C143.807 13.9727 142.934 12.772 142.934 11.4074V5.33077H141.242V4.60302C142.915 4.60302 143.825 2.69269 143.825 1.30998H144.48V4.60302H147.846V5.33077H144.48V11.4074C144.48 12.59 144.807 13.245 145.881 13.245C146.954 13.245 147.391 12.117 147.391 11.0436H147.846Z" fill="currentColor"/>
+    <path d="M132.199 6.34947C132.217 4.78482 134.218 4.23901 135.455 4.23901C137.384 4.23901 139.076 5.09411 139.076 6.98625V12.1168C139.076 12.699 139.203 13.0811 139.713 13.0811C140.058 13.0811 140.258 12.9719 140.477 12.7718L140.768 13.1721C140.422 13.5541 139.894 13.8816 139.24 13.8816C138.457 13.8816 137.748 13.2994 137.566 12.4443C137.038 13.0993 136.11 13.8816 134.764 13.8816C132.817 13.8816 131.525 12.7536 131.525 11.2617C131.525 9.22406 133.308 8.51451 135.546 8.51451C136.183 8.51451 136.856 8.56909 137.529 8.67825V7.25915C137.529 5.82186 137.184 4.87579 135.401 4.87579C134.509 4.87579 133.982 5.05773 133.672 5.33063C134.091 5.47618 134.382 5.87644 134.382 6.34947C134.382 6.94986 133.891 7.44109 133.29 7.44109C132.69 7.44109 132.199 6.94986 132.199 6.34947ZM133.254 11.2981C133.254 12.2624 133.927 13.0447 135.073 13.0447C136.274 13.0447 137.074 12.4443 137.529 11.8985V9.22406C137.056 9.15129 136.62 9.1149 136.219 9.1149C134.382 9.1149 133.254 9.86084 133.254 11.2981Z" fill="currentColor"/>
+    <path d="M131.027 5.23972H130.572C129.79 5.23972 129.517 5.78553 129.281 6.31315L126.06 13.6816L125.151 13.6997L122.222 6.31315C121.839 5.36708 121.548 5.23972 120.766 5.23972H120.311V4.60295H125.151V5.23972H124.514C123.695 5.23972 123.495 5.5854 123.75 6.22218L126.042 11.9714L128.462 6.36773C128.717 5.76734 128.698 5.23972 127.862 5.23972H127.225V4.60295H131.027V5.23972Z" fill="currentColor"/>
+    <path d="M119.926 13.6998H115.577V13.063H115.887C116.524 13.063 116.978 12.7355 116.978 11.9896V6.31321C116.978 5.56727 116.524 5.23978 115.887 5.23978H115.577V4.60301H118.525V11.9896C118.525 12.7355 118.962 13.063 119.616 13.063H119.926V13.6998ZM116.56 1.43732C116.56 0.836931 117.051 0.345703 117.652 0.345703C118.252 0.345703 118.743 0.836931 118.743 1.43732C118.743 2.03771 118.252 2.52894 117.652 2.52894C117.051 2.52894 116.56 2.03771 116.56 1.43732Z" fill="currentColor"/>
+    <path d="M112.483 5.76728C112.483 5.49437 112.574 5.25786 112.738 5.05773C111.283 5.05773 110.591 6.09476 109.955 7.27735V11.9895C109.955 12.7354 110.391 13.0629 111.046 13.0629H112.083V13.6997H107.007V13.0629H107.316C107.953 13.0629 108.408 12.7354 108.408 11.9895V6.31309C108.408 5.56715 107.953 5.23966 107.316 5.23966H107.007V4.60289H109.955V7.27735V6.5496C110.828 4.96676 111.938 4.23901 112.829 4.23901C114.103 4.23901 114.667 4.93037 114.667 5.76728C114.667 6.36767 114.175 6.85889 113.575 6.85889C112.975 6.85889 112.483 6.36767 112.483 5.76728Z" fill="currentColor"/>
+    <path d="M97.6188 1.23715V6.87717H100.039C103.041 6.87717 103.987 5.60362 103.987 4.05716C103.987 2.31058 102.695 1.23715 100.039 1.23715H97.6188ZM93.9619 0.327474H100.748C104.532 0.327474 105.952 2.07406 105.952 4.07536C105.952 6.14943 104.532 7.78685 100.839 7.78685H97.6188V11.9896C97.6188 12.7355 98.0737 13.063 98.7105 13.063H99.6201V13.6998H93.9619V13.063H94.8716C95.5084 13.063 95.945 12.7355 95.945 11.9896V2.03767C95.945 1.29173 95.5084 0.964249 94.8716 0.964249H93.9619V0.327474Z" fill="currentColor"/>
+    <path d="M90.2882 9.04213H83.7567C83.8113 11.0252 84.3935 13.1539 86.7769 13.1539C87.9958 13.1539 89.0329 12.5717 89.7606 11.753L90.1609 12.1714C89.324 13.0629 88.196 13.8816 86.4676 13.8816C83.4838 13.8816 82.0283 11.2617 82.0283 8.75103C82.0283 6.31309 83.5566 4.23901 86.4858 4.23901C89.3058 4.23901 90.2882 6.71335 90.2882 9.04213ZM86.4858 4.96676C84.7028 4.96676 83.8841 6.65876 83.7749 8.31438H87.9049C88.3597 8.31438 88.4325 8.05967 88.4325 7.71399C88.4325 6.40405 87.9958 4.96676 86.4858 4.96676Z" fill="currentColor"/>
+    <path d="M79.7717 7.6959V11.9896C79.7717 12.7355 80.2265 13.063 80.8633 13.063H81.1726V13.6998H76.8425V13.063H77.1336C77.7886 13.063 78.2252 12.7355 78.2252 11.9896V7.6959C78.2252 6.29499 78.0978 5.33073 76.5332 5.33073C75.478 5.33073 74.4409 5.84015 73.4767 7.36841V11.9896C73.4767 12.7355 73.9133 13.063 74.5683 13.063H74.8776V13.6998H70.5293V13.063H70.8386C71.4754 13.063 71.9302 12.7355 71.9302 11.9896V2.01949C71.9302 1.23716 71.2025 1.1462 70.5293 1.1462V0.509421L73.2038 0H73.4767V6.64067C74.35 5.33073 75.5689 4.42105 77.1336 4.42105C79.0985 4.42105 79.7717 5.53086 79.7717 7.6959Z" fill="currentColor"/>
+    <path d="M62.2342 11.9896V1.23715H61.1608C58.5773 1.23715 57.5767 2.20141 57.3947 5.3671H56.667L57.0491 0.327474H69.0932L69.4753 5.3671H68.7657C68.5838 2.20141 67.565 1.23715 64.9815 1.23715H63.9081V12.1533C63.9626 12.7901 64.3993 13.063 64.9997 13.063H65.9093V13.6998H60.2329V13.063H61.1426C61.7976 13.063 62.2342 12.7355 62.2342 11.9896Z" fill="currentColor"/>
+    </symbol></svg>
+
+<header class="nav" id="site-nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="#top" aria-label="The Private Markets Forum — back to top">
+      <svg viewBox="0 0 191 34" fill="none" aria-hidden="true"><use href="#pmf-logo"/></svg>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a class="nav__link" href="#colour">Colour</a>
+      <a class="nav__link" href="#background">Backgrounds</a>
+      <a class="nav__link" href="#type">Type</a>
+      <a class="nav__link" href="#elements">Elements</a>
+      <a class="nav__link" href="#tables">Tables</a>
+      <a class="nav__link" href="#charts">Charts</a>
+    </nav>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
+      <span class="nav__bar"></span><span class="nav__bar"></span><span class="nav__bar"></span>
+    </button>
+  </div>
+  <div class="nav__panel" id="nav-panel">
+    <div class="nav__panel-inner">
+      <nav class="nav__links nav__links--stacked" aria-label="Sections">
+        <a class="nav__link" href="#colour">Colour</a>
+        <a class="nav__link" href="#background">Backgrounds</a>
+        <a class="nav__link" href="#type">Type</a>
+        <a class="nav__link" href="#elements">Elements</a>
+        <a class="nav__link" href="#tables">Tables</a>
+        <a class="nav__link" href="#charts">Charts</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 1. COLOUR ============ -->
+<section class="demo demo--white" id="colour">
+  <div class="demo__inner">
+    <p class="demo__sub">01 — Foundation</p>
+    <h1 class="demo__h">Colour</h1>
+
+    <div class="swatches">
+      <div class="sw"><div class="sw__chip" style="background:#090C2A"></div><span class="sw__name">Navy — ink, plates, table head</span><span class="sw__hex">#090C2A</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#0D1DCC"></div><span class="sw__name">Blue — accent, hover, gradient edge</span><span class="sw__hex">#0D1DCC</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#C8DFF3"></div><span class="sw__name">Ice — pills, totals row</span><span class="sw__hex">#C8DFF3</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#F6F4F2"></div><span class="sw__name">Cream — secondary surface, zebra</span><span class="sw__hex">#F6F4F2</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#464850"></div><span class="sw__name">Slate — force cards, rules</span><span class="sw__hex">#464850</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#FFFFFF"></div><span class="sw__name">White — primary surface</span><span class="sw__hex">#FFFFFF</span></div>
+    </div>
+
+    <p class="demo__sub">Data series — light surfaces (validated, all-pairs)</p>
+    <div class="swatches">
+      <div class="sw"><div class="sw__chip" style="background:#133EEC"></div><span class="sw__name">Series 1</span><span class="sw__hex">#133EEC</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#0091CE"></div><span class="sw__name">Series 2</span><span class="sw__hex">#0091CE</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#005886"></div><span class="sw__name">Series 3</span><span class="sw__hex">#005886</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#464850"></div><span class="sw__name">Other (4th+)</span><span class="sw__hex">#464850</span></div>
+    </div>
+
+    <p class="demo__sub">Sequential ramp — magnitude, one hue</p>
+    <div class="swatches">
+      <div class="sw"><div class="sw__chip" style="background:#E3EBFC"></div><span class="sw__hex">#E3EBFC</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#B9C9F6"></div><span class="sw__hex">#B9C9F6</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#8AA3EE"></div><span class="sw__hex">#8AA3EE</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#5578E4"></div><span class="sw__hex">#5578E4</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#2B4CD9"></div><span class="sw__hex">#2B4CD9</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#0D1DCC"></div><span class="sw__hex">#0D1DCC</span></div>
+      <div class="sw"><div class="sw__chip" style="background:#090C2A"></div><span class="sw__hex">#090C2A</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. BACKGROUNDS ============ -->
+<section class="demo demo--cream" id="background">
+  <div class="demo__inner">
+    <p class="demo__sub">02 — Foundation</p>
+    <h1 class="demo__h">Backgrounds</h1>
+    <div class="plates">
+      <div><div class="plate plate--white"></div><p class="specimen__meta">White — narrative / general idea</p></div>
+      <div><div class="plate plate--cream"></div><p class="specimen__meta">Cream — framing / supporting</p></div>
+      <div><div class="plate plate--radial"></div><p class="specimen__meta">Radial navy — argument &amp; insight</p></div>
+      <div><div class="plate plate--edge"></div><p class="specimen__meta">Edge-lit — layer divider</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. TYPE ============ -->
+<section class="demo demo--white" id="type">
+  <div class="demo__inner">
+    <p class="demo__sub">03 — Foundation</p>
+    <h1 class="demo__h">Text styles</h1>
+    <div class="specimen"><h2 class="hero__title" style="color:var(--c-navy);text-align:left;max-width:none">Display / hero — Zodiak 40→64</h2><span class="specimen__meta">--fs-title · --lh-title · -2% · capitalize</span></div>
+    <div class="specimen"><h2 class="intro__title">Section title — Zodiak 32→48</h2><span class="specimen__meta">--fs-intro-title · --lh-intro-title · -3%</span></div>
+    <div class="specimen"><p class="intro__lead">Standfirst — Inter 18→20 / 28→32. Sets up the section in one paragraph.</p><span class="specimen__meta">--fs-lead · --lh-lead</span></div>
+    <div class="specimen"><p style="font-size:16px;line-height:24px;letter-spacing:-.016em;color:var(--c-navy)">Body — Inter 16/24 fixed. The default for every prose block below the standfirst.</p><span class="specimen__meta">16/24 · -.016em</span></div>
+    <div class="specimen"><p style="font-size:14px;line-height:20px;letter-spacing:-.018em;color:var(--c-navy)">Small — Inter 14/20. Card bodies, captions, credits, table cells.</p><span class="specimen__meta">14/20 · -.018em</span></div>
+    <div class="specimen"><span class="pill pill--ice pill--md">Eyebrow pill 12/18</span><span class="specimen__meta">Inter Semi Bold · .2em · uppercase</span></div>
+    <div class="specimen"><span class="stack__label" style="color:var(--c-navy)">Label — Zodiak 24/32</span><span class="specimen__meta">--fs-label · --lh-label · -2%</span></div>
+  </div>
+</section>
+
+<!-- ============ 4. ELEMENTS ============ -->
+<section class="demo demo--cream" id="elements">
+  <div class="demo__inner">
+    <p class="demo__sub">04 — Elements</p>
+    <h1 class="demo__h">Elements</h1>
+
+    <p class="demo__sub">Pills</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <span class="pill pill--ice pill--md">Executive summary</span>
+      <span class="pill pill--cream pill--md">London · 25 June 2026</span>
+      <span class="pill pill--blue pill--md">Inaugural summit</span>
+    </div>
+
+    <p class="demo__sub">Layer boxes — focus + muted</p>
+    <ol class="stack__list" style="--c-rule:rgba(9,12,42,.6)">
+      <li class="stack__item stack__item--pending" style="color:var(--c-navy)"><span class="stack__index" style="color:var(--c-navy)">I</span><span class="stack__label" style="color:var(--c-navy)">Base — not yet built</span></li>
+      <li class="stack__item" style="color:var(--c-navy)"><span class="stack__index" style="color:var(--c-navy)">II</span><span class="stack__label" style="color:var(--c-navy)">Semantic</span></li>
+      <li class="stack__item stack__item--muted" style="color:var(--c-navy)"><span class="stack__index" style="color:var(--c-navy)">III</span><span class="stack__label" style="color:var(--c-navy)">Control</span></li>
+      <li class="stack__item stack__item--muted" style="color:var(--c-navy)"><span class="stack__index" style="color:var(--c-navy)">IV</span><span class="stack__label" style="color:var(--c-navy)">Presentation</span></li>
+    </ol>
+
+    <p class="demo__sub">Callout — the box for points raised inside a layer</p>
+    <div class="callout callout--auto" style="max-width:598px">
+      <span class="callout__label">What to consider</span>
+      <p class="callout__body">Before accelerating AI or automation initiatives, ask whether the underlying data foundation can actually support them.</p>
+    </div>
+
+    <p class="demo__sub">Numbered card + force card</p>
+    <div class="grid2">
+      <article class="insight" style="max-width:none">
+        <header class="insight__header">
+          <span class="insight__number">01</span>
+          <h2 class="insight__title" style="font-size:28px;line-height:34px">Insight card header</h2>
+        </header>
+        <div class="insight__block"><span class="pill pill--ice pill--md">What's happening</span><p>Two eyebrow-led blocks, then the callout.</p></div>
+      </article>
+      <div class="force-card" style="min-height:0">
+        <div class="force-card__head"><span class="force-card__index">Force 1</span><h3 class="force-card__title">Force card</h3></div>
+        <p class="force-card__body">Slate plate, index over title, body pinned to the foot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. TABLES ============ -->
+<section class="demo demo--white" id="tables">
+  <div class="demo__inner">
+    <p class="demo__sub">05 — Data</p>
+    <h1 class="demo__h">Tables</h1>
+    <div class="table-wrap">
+      <table class="table">
+        <caption>Adoption by layer — sample data</caption>
+        <thead>
+          <tr><th scope="col">Layer</th><th scope="col">Name</th><th scope="col">State</th><th scope="col" class="is-num">Firms live</th></tr>
+        </thead>
+        <tbody><tr><th scope="row">I</th><td>Base</td><td>Not yet built</td><td class="is-num">—</td></tr><tr><th scope="row">II</th><td>Semantic</td><td>Emerging</td><td class="is-num">31%</td></tr><tr><th scope="row">III</th><td>Control</td><td>In production</td><td class="is-num">58%</td></tr><tr><th scope="row">IV</th><td>Presentation</td><td>Mature</td><td class="is-num">74%</td></tr></tbody>
+        <tfoot><tr><td colspan="3">All layers</td><td class="is-num">41%</td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="demo demo--navy on-dark">
+  <div class="demo__inner">
+    <p class="demo__sub">The same table on a navy plate — the body keeps its white plate, the caption inks white</p>
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Layer</th><th scope="col">Name</th><th scope="col">State</th><th scope="col" class="is-num">Firms live</th></tr>
+        </thead>
+        <tbody><tr><th scope="row">I</th><td>Base</td><td>Not yet built</td><td class="is-num">—</td></tr><tr><th scope="row">II</th><td>Semantic</td><td>Emerging</td><td class="is-num">31%</td></tr><tr><th scope="row">III</th><td>Control</td><td>In production</td><td class="is-num">58%</td></tr><tr><th scope="row">IV</th><td>Presentation</td><td>Mature</td><td class="is-num">74%</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. CHARTS ============ -->
+<section class="demo demo--white" id="charts">
+  <div class="demo__inner">
+    <p class="demo__sub">06 — Data</p>
+    <h1 class="demo__h">Charts</h1>
+
+    <div class="chart">
+      <div class="chart__head">
+        <h2 class="chart__title">Firms with a formal data programme</h2>
+        <p class="chart__note">Single series — no legend box; the title names it. Sample data.</p>
+      </div>
+      <div class="chart__plot" style="--plot-h:220px"><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:31" tabindex="0" data-tip="<b>2022</b> · 31%"><span class="chart__bar-value">31%</span></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:38" tabindex="0" data-tip="<b>2023</b> · 38%"><span class="chart__bar-value">38%</span></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:47" tabindex="0" data-tip="<b>2024</b> · 47%"><span class="chart__bar-value">47%</span></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:58" tabindex="0" data-tip="<b>2025</b> · 58%"><span class="chart__bar-value">58%</span></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:71" tabindex="0" data-tip="<b>2026</b> · 71%"><span class="chart__bar-value">71%</span></div></div></div></div>
+      <div class="chart__xrow"><div class="chart__x">2022</div><div class="chart__x">2023</div><div class="chart__x">2024</div><div class="chart__x">2025</div><div class="chart__x">2026</div></div>
+    </div>
+
+    <div class="chart">
+      <div class="chart__head">
+        <h2 class="chart__title">Where operating strain shows first</h2>
+        <p class="chart__note">Ranked magnitude — one hue, values direct-labelled. Sample data.</p>
+      </div>
+      <div class="chart__rows"><div class="chart__row"><span class="chart__row-label">Data quality</span><div class="chart__track"><div class="chart__fill" style="--v:74" tabindex="0" data-tip="<b>Data quality</b> · 74% of firms"></div></div><span class="chart__row-value">74%</span></div><div class="chart__row"><span class="chart__row-label">Reporting speed</span><div class="chart__track"><div class="chart__fill" style="--v:61" tabindex="0" data-tip="<b>Reporting speed</b> · 61% of firms"></div></div><span class="chart__row-value">61%</span></div><div class="chart__row"><span class="chart__row-label">Onboarding</span><div class="chart__track"><div class="chart__fill" style="--v:52" tabindex="0" data-tip="<b>Onboarding</b> · 52% of firms"></div></div><span class="chart__row-value">52%</span></div><div class="chart__row"><span class="chart__row-label">Reconciliation</span><div class="chart__track"><div class="chart__fill" style="--v:44" tabindex="0" data-tip="<b>Reconciliation</b> · 44% of firms"></div></div><span class="chart__row-value">44%</span></div><div class="chart__row"><span class="chart__row-label">Liquidity ops</span><div class="chart__track"><div class="chart__fill" style="--v:29" tabindex="0" data-tip="<b>Liquidity ops</b> · 29% of firms"></div></div><span class="chart__row-value">29%</span></div></div>
+    </div>
+
+    <div class="chart">
+      <div class="chart__head">
+        <h2 class="chart__title">Share reporting a formal data programme, by channel</h2>
+        <p class="chart__note">Three series — legend plus end-of-line labels. Sample data.</p>
+      </div>
+      <div class="chart__legend">
+        <span class="chart__key"><span class="chart__swatch chart__swatch--line" style="--key:var(--data-1)"></span>Institutional</span>
+        <span class="chart__key"><span class="chart__swatch chart__swatch--line" style="--key:var(--data-2)"></span>Wealth</span>
+        <span class="chart__key"><span class="chart__swatch chart__swatch--line" style="--key:var(--data-3)"></span>Insurance</span>
+      </div>
+      <svg class="chart__svg" viewBox="0 0 720 260" role="img" aria-label="Share of firms reporting a formal data programme, by investor channel, 2021–2026"><line class="chart__gridline" x1="44" y1="230.0" x2="704" y2="230.0"/><text class="chart__axis-label" x="0" y="234.0">0</text><line class="chart__gridline" x1="44" y1="177.0" x2="704" y2="177.0"/><text class="chart__axis-label" x="0" y="181.0">20</text><line class="chart__gridline" x1="44" y1="124.0" x2="704" y2="124.0"/><text class="chart__axis-label" x="0" y="128.0">40</text><line class="chart__gridline" x1="44" y1="71.0" x2="704" y2="71.0"/><text class="chart__axis-label" x="0" y="75.0">60</text><line class="chart__gridline" x1="44" y1="18.0" x2="704" y2="18.0"/><text class="chart__axis-label" x="0" y="22.0">80</text><text class="chart__axis-label" x="44.0" y="254" text-anchor="middle">2021</text><text class="chart__axis-label" x="176.0" y="254" text-anchor="middle">2022</text><text class="chart__axis-label" x="308.0" y="254" text-anchor="middle">2023</text><text class="chart__axis-label" x="440.0" y="254" text-anchor="middle">2024</text><text class="chart__axis-label" x="572.0" y="254" text-anchor="middle">2025</text><text class="chart__axis-label" x="704.0" y="254" text-anchor="middle">2026</text><polyline class="chart__line" style="--key:var(--data-1)" points="44.0,65.7 176.0,57.8 308.0,49.8 440.0,39.2 572.0,33.9 704.0,23.3"/><circle class="chart__dot" style="--key:var(--data-1)" cx="44.0" cy="65.7" tabindex="0" data-tip="<b>Institutional</b> · 2021: 62%"/><circle class="chart__dot" style="--key:var(--data-1)" cx="176.0" cy="57.8" tabindex="0" data-tip="<b>Institutional</b> · 2022: 65%"/><circle class="chart__dot" style="--key:var(--data-1)" cx="308.0" cy="49.8" tabindex="0" data-tip="<b>Institutional</b> · 2023: 68%"/><circle class="chart__dot" style="--key:var(--data-1)" cx="440.0" cy="39.2" tabindex="0" data-tip="<b>Institutional</b> · 2024: 72%"/><circle class="chart__dot" style="--key:var(--data-1)" cx="572.0" cy="33.9" tabindex="0" data-tip="<b>Institutional</b> · 2025: 74%"/><circle class="chart__dot" style="--key:var(--data-1)" cx="704.0" cy="23.3" tabindex="0" data-tip="<b>Institutional</b> · 2026: 78%"/><text class="chart__label" x="704.0" y="11.3" text-anchor="end">Institutional</text><polyline class="chart__line" style="--key:var(--data-2)" points="44.0,198.2 176.0,182.3 308.0,158.4 440.0,129.3 572.0,92.2 704.0,47.1"/><circle class="chart__dot" style="--key:var(--data-2)" cx="44.0" cy="198.2" tabindex="0" data-tip="<b>Wealth</b> · 2021: 12%"/><circle class="chart__dot" style="--key:var(--data-2)" cx="176.0" cy="182.3" tabindex="0" data-tip="<b>Wealth</b> · 2022: 18%"/><circle class="chart__dot" style="--key:var(--data-2)" cx="308.0" cy="158.4" tabindex="0" data-tip="<b>Wealth</b> · 2023: 27%"/><circle class="chart__dot" style="--key:var(--data-2)" cx="440.0" cy="129.3" tabindex="0" data-tip="<b>Wealth</b> · 2024: 38%"/><circle class="chart__dot" style="--key:var(--data-2)" cx="572.0" cy="92.2" tabindex="0" data-tip="<b>Wealth</b> · 2025: 52%"/><circle class="chart__dot" style="--key:var(--data-2)" cx="704.0" cy="47.1" tabindex="0" data-tip="<b>Wealth</b> · 2026: 69%"/><text class="chart__label" x="704.0" y="35.1" text-anchor="end">Wealth</text><polyline class="chart__line" style="--key:var(--data-3)" points="44.0,150.5 176.0,145.2 308.0,142.6 440.0,134.6 572.0,121.4 704.0,113.4"/><circle class="chart__dot" style="--key:var(--data-3)" cx="44.0" cy="150.5" tabindex="0" data-tip="<b>Insurance</b> · 2021: 30%"/><circle class="chart__dot" style="--key:var(--data-3)" cx="176.0" cy="145.2" tabindex="0" data-tip="<b>Insurance</b> · 2022: 32%"/><circle class="chart__dot" style="--key:var(--data-3)" cx="308.0" cy="142.6" tabindex="0" data-tip="<b>Insurance</b> · 2023: 33%"/><circle class="chart__dot" style="--key:var(--data-3)" cx="440.0" cy="134.6" tabindex="0" data-tip="<b>Insurance</b> · 2024: 36%"/><circle class="chart__dot" style="--key:var(--data-3)" cx="572.0" cy="121.4" tabindex="0" data-tip="<b>Insurance</b> · 2025: 41%"/><circle class="chart__dot" style="--key:var(--data-3)" cx="704.0" cy="113.4" tabindex="0" data-tip="<b>Insurance</b> · 2026: 44%"/><text class="chart__label" x="704.0" y="101.4" text-anchor="end">Insurance</text></svg>
+      <p class="chart__source">Source: illustrative only.</p>
+    </div>
+
+    <div class="chart">
+      <div class="chart__head">
+        <h2 class="chart__title">Investor base by channel</h2>
+        <p class="chart__note">Stacked — 2px gap between segments. Sample data.</p>
+      </div>
+      <div class="chart__legend">
+        <span class="chart__key"><span class="chart__swatch" style="--key:var(--data-1)"></span>Institutional</span>
+        <span class="chart__key"><span class="chart__swatch" style="--key:var(--data-2)"></span>Wealth</span>
+        <span class="chart__key"><span class="chart__swatch" style="--key:var(--data-3)"></span>Insurance</span>
+      </div>
+      <div class="chart__plot" style="--plot-h:220px"><div class="chart__col"><div class="chart__bars"><div class="chart__stack"><div class="chart__seg" style="--v:28;--key:var(--data-1)" tabindex="0" data-tip="<b>Institutional</b> · 2024: 28%"></div><div class="chart__seg" style="--v:14;--key:var(--data-2)" tabindex="0" data-tip="<b>Wealth</b> · 2024: 14%"></div><div class="chart__seg" style="--v:9;--key:var(--data-3)" tabindex="0" data-tip="<b>Insurance</b> · 2024: 9%"></div></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__stack"><div class="chart__seg" style="--v:33;--key:var(--data-1)" tabindex="0" data-tip="<b>Institutional</b> · 2025: 33%"></div><div class="chart__seg" style="--v:21;--key:var(--data-2)" tabindex="0" data-tip="<b>Wealth</b> · 2025: 21%"></div><div class="chart__seg" style="--v:11;--key:var(--data-3)" tabindex="0" data-tip="<b>Insurance</b> · 2025: 11%"></div></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__stack"><div class="chart__seg" style="--v:36;--key:var(--data-1)" tabindex="0" data-tip="<b>Institutional</b> · 2026: 36%"></div><div class="chart__seg" style="--v:30;--key:var(--data-2)" tabindex="0" data-tip="<b>Wealth</b> · 2026: 30%"></div><div class="chart__seg" style="--v:14;--key:var(--data-3)" tabindex="0" data-tip="<b>Insurance</b> · 2026: 14%"></div></div></div></div></div>
+      <div class="chart__xrow"><div class="chart__x">2024</div><div class="chart__x">2025</div><div class="chart__x">2026</div></div>
+    </div>
+
+    <p class="demo__sub">Stat tiles — when the answer is one number</p>
+    <div class="stat-row">
+      <div class="stat"><span class="stat__value">$10T</span><span class="stat__label">Wealth opportunity</span><p class="stat__note">Cited across the day.</p></div>
+      <div class="stat"><span class="stat__value">4</span><span class="stat__label">Layers</span><p class="stat__note">Base, semantic, control, presentation.</p></div>
+      <div class="stat"><span class="stat__value">16</span><span class="stat__label">Sponsors</span><p class="stat__note">Supporting the summit.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="demo demo--navy on-dark">
+  <div class="demo__inner">
+    <p class="demo__sub">The same chart on the insight plate — series re-stepped for the navy surface</p>
+    <div class="chart">
+      <div class="chart__head"><h2 class="chart__title">Firms with a formal data programme</h2></div>
+      <div class="chart__plot" style="--plot-h:200px"><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:31" tabindex="0" data-tip="<b>2022</b> · 31%"><span class="chart__bar-value">31%</span></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:38" tabindex="0" data-tip="<b>2023</b> · 38%"><span class="chart__bar-value">38%</span></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:47" tabindex="0" data-tip="<b>2024</b> · 47%"><span class="chart__bar-value">47%</span></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:58" tabindex="0" data-tip="<b>2025</b> · 58%"><span class="chart__bar-value">58%</span></div></div></div><div class="chart__col"><div class="chart__bars"><div class="chart__bar" style="--v:71" tabindex="0" data-tip="<b>2026</b> · 71%"><span class="chart__bar-value">71%</span></div></div></div></div>
+      <div class="chart__xrow"><div class="chart__x">2022</div><div class="chart__x">2023</div><div class="chart__x">2024</div><div class="chart__x">2025</div><div class="chart__x">2026</div></div>
+    </div>
+    <div class="stat-row" style="margin-top:44px">
+      <div class="stat"><span class="stat__value">71%</span><span class="stat__label">By 2026</span></div>
+      <div class="stat"><span class="stat__value">2.3×</span><span class="stat__label">Since 2022</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="closing">
+  <svg class="closing__logo" viewBox="0 0 191 34" fill="none" role="img" aria-label="The Private Markets Forum"><use href="#pmf-logo"/></svg>
+  <div class="closing__thanks">
+    <p class="closing__note">Component reference — all figures on this page are sample data.</p>
+  </div>
+</footer>
+
+<script src="../Brand%20Foundations/brand.js"></script>
+</body>
+</html>
